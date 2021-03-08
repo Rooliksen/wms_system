@@ -1,0 +1,30 @@
+{% extends "wms/base.html" %}
+
+{% block page_header %}
+  <h4>Контрагенты</h4>
+{% endblock page_header %}
+
+
+{% block content %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Наименование</th>
+      <th scope="col">Дата добавления</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for contractor in contractors %}
+    <tr>
+      <td>{{ contractor.name }}</td>
+      <td>{{ contractor.pub_date }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td>Не добавлено ни одного контрагента. Добавьте первого контрагента.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  <a class="btn btn-primary" href="">Добавить нового контрагента</a>
+{% endblock content %}

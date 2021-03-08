@@ -1,0 +1,46 @@
+{% extends "wms/base.html" %}
+
+{% block page_header %}
+  <h4>Площадки хранения</h4>
+{% endblock page_header %}
+
+
+{% block content %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Контрагент</th>
+      <th scope="col">Адрес</th>
+      <th scope="col">Хранение EUR, руб/сут</th>
+      <th scope="col">Хранение FIN, руб/сут</th>
+      <th scope="col">Хранение V, м3/сут</th>
+      <th scope="col">Прием EUR, руб</th>
+      <th scope="col">Отгрузка EUR, руб</th>
+      <th scope="col">Прием FIN</th>
+      <th scope="col">Отгрузка FIN</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for storage in storages %}
+      <tr>
+        <td>{{ storage.contractor }}</td>
+        <td>{{ storage.address }}</td>
+        <td>{{ storage.rate_pallet }}</td>
+        <td>{{ storage.rate_oversize_pallet }}</td>
+        <td>{{ storage.rate_volume }}</td>
+        <td>{{ storage.rate_in }}</td>
+        <td>{{ storage.rate_out }}</td>
+        <td>{{ storage.rate_oversize_in }}</td>
+        <td>{{ storage.rate_oversize_out }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>Не добавлено ни одного склада. Добавьте первый адрес.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div>
+  <a class="btn btn-primary" href="">Добавить новый склад</a>
+</div>
+{% endblock content %}

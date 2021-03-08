@@ -1,0 +1,32 @@
+{% extends "wms/base.html" %}
+
+{% block page_header %}
+  <h4>Клиенты</h4>
+{% endblock page_header %}
+
+
+{% block content %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Наименование</th>
+      <th scope="col">Дата добавления</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for client in clients %}
+    <tr>
+      <td>{{ client.name }}</td>
+      <td>{{ client.pub_date }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td>Не добавлено ни одного клиента. Добавьте первого клиента.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div>
+  <a class="btn btn-primary" href="">Добавить нового клиента</a>
+</div>
+{% endblock content %}
