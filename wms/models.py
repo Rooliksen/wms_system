@@ -20,21 +20,16 @@ class Contractor(models.Model):
     def __str__(self):
         return self.name
 
-class Size(models.Model):
+class Size(models.TextChoices):
     # Габарит, размер
-    name = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published', auto_now_add=True)
+    EUR = 'EUR', 'Габарит EUR'
+    FIN = 'FIN', 'НЕГабарит FIN'
 
-    def __str__(self):
-        return self.name
-
-class Status(models.Model):
-    # Статус
-    name = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published', auto_now_add=True)
-
-    def __str__(self):
-        return self.name
+class Status(models.TextChoices):
+    # Статус груза
+    in_store = 'in_store', 'Принят'
+    out = 'out', 'Отгружен'
+    in_reserve = 'in_reserve', 'В резерве'
 
 class Customer(models.Model):
     # Пользователь
@@ -86,16 +81,24 @@ class Storage(models.Model):
 
 class Atm(models.Model):
     # Груз, банкомат
-    status = models.ForeignKey(Status, on_delete=models.SET_NULL, null=True)
+    status = models.CharField(
+        max_length=10,
+        choices=Status.choices,
+        default=Status.in_reserve,
+    )
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
     storage = models.ForeignKey(Storage, on_delete=models.SET_NULL, null=True)
-    date_in = models.DateTimeField('Дата приема')
-    date_out = models.DateTimeField('Дата отгрузки')
+    date_in = models.DateField('Дата приема', null=True)
+    date_out = models.DateField('Дата отгрузки', null=True)
     name = models.CharField(max_length=200)
     serial_num = models.CharField(max_length=200)
-    atm_id = models.CharField(max_length=200)
-    size = models.ForeignKey(Size, on_delete=models.SET_NULL, null=True)
-    commentary = models.CharField(max_length=200)
+    atm_id = models.CharField(max_length=200, null=True)
+    size = models.CharField(
+        max_length=10,
+        choices=Size.choices,
+        default=Size.EUR,
+    )
+    commentary = models.CharField(max_length=200, null=True)
 
     def __str__(self):
         return self.serial_num
