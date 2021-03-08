@@ -1,0 +1,70 @@
+{% extends "wms/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block page_header %}
+
+<h4>Добавление нового груза</h4>
+
+{% endblock page_header %}
+
+{% block content %}
+
+<form method="post" novalidate>
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.status|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.client|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.storage|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.date_in|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.date_out|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.name|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.serial_num|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.atm_id|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.size|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.commentary|as_crispy_field }}
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success mb-3">Сохранить новый склад</button>
+</form>
+
+{% endblock content %}

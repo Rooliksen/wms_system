@@ -1,0 +1,45 @@
+{% extends "wms/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block page_header %}
+
+<h4>Добавление нового пользователя</h4>
+
+{% endblock page_header %}
+
+{% block content %}
+
+<form method="post" novalidate>
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.user|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.name|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.post|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.phone|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.email|as_crispy_field }}
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success mb-3">Сохранить нового пользователя</button>
+</form>
+
+{% endblock content %}

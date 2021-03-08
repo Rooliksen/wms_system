@@ -1,0 +1,65 @@
+{% extends "wms/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block page_header %}
+
+<h4>Добавление нового пользователя</h4>
+
+{% endblock page_header %}
+
+{% block content %}
+
+<form method="post" novalidate>
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.contractor|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.address|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.rate_pallet|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.rate_oversize_pallet|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.rate_volume|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.rate_in|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.rate_out|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.rate_oversize_in|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.rate_oversize_out|as_crispy_field }}
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success mb-3">Сохранить новый склад</button>
+</form>
+
+{% endblock content %}
