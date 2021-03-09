@@ -17,7 +17,7 @@
     {% for contractor in contractors %}
     <tr>
       <td>{{ contractor.name }}</td>
-      <td>{{ contractor.pub_date }}</td>
+      <td>{{ contractor.pub_date|date:'d.m.Y H:m' }}</td>
     </tr>
     {% empty %}
     <tr>

@@ -1,0 +1,47 @@
+{% extends "wms/base.html" %}
+
+{% block page_header %}
+  <h4>Грузы</h4>
+{% endblock page_header %}
+
+
+{% block content %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">№ заявки клиента</th>
+      <th scope="col">Клиент</th>
+      <th scope="col">Груз</th>
+      <th scope="col">Статус</th>
+      <th scope="col">Дата приема</th>
+      <th scope="col">Дата отгрузки</th>
+      <th scope="col">Пользователь</th>
+      <th scope="col">Тип операции</th>
+      <th scope="col">Дата создания</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for client_order in client_orders %}
+      <tr>
+        <td>{{ client_order.logistic_order }}</td>
+        <td>{{ client_order.client }}</td>
+        <td>{{ client_order.atm }}</td>
+        <td>{{ client_order.status }}</td>
+        <td>{{ client_order.date_in|date:'d.m.Y' }}</td>
+        <td>{{ client_order.date_out|date:'d.m.Y' }}</td>
+        <td>{{ client_order.customer }}</td>
+        <td>{{ client_order.operation_client }}</td>
+        <td>{{ client_order.date_created|date:'d.m.Y H:m'  }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>Не добавлено ни одной заявки. Добавьте первую заявку.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div>
+  <a class="btn btn-primary mb-3" href="">Добавить новую заявку.</a>
+</div>
+
+{% endblock content %}

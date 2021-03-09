@@ -28,4 +28,6 @@ urlpatterns = [
     path('atms/', views.atms, name='atms'),
     # Страница для добавления нового пользователя
     path('new_atm/', views.new_atm, name='new_atm'),
+    # Страница со списком всех заявок от клиента
+    path('client_orders/', views.client_orders, name='client_orders'),
 ]

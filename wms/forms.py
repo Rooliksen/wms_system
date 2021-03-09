@@ -53,8 +53,14 @@ class StorageForm(forms.ModelForm):
             }
 
 class AtmForm(forms.ModelForm):
-    date_in = forms.DateField(required=False, input_formats=['%d.%m.%Y','%d/%m/%Y'], label="Дата приема")
-    date_out = forms.DateField(required=False, input_formats=['%d.%m.%Y','%d/%m/%Y'], label="Дата отгрузки")
+    date_in = forms.DateField(
+        required=False,
+        input_formats=['%d.%m.%Y','%d/%m/%Y'],
+        label="Дата приема")
+    date_out = forms.DateField(
+        required=False,
+        input_formats=['%d.%m.%Y','%d/%m/%Y'],
+        label="Дата отгрузки")
     class Meta:
         model = Atm
         fields = [

@@ -27,8 +27,8 @@
         <td>{{ atm.status }}</td>
         <td>{{ atm.client }}</td>
         <td>{{ atm.storage }}</td>
-        <td>{{ atm.date_in }}</td>
-        <td>{{ atm.date_out }}</td>
+        <td>{{ atm.date_in|date:'d.m.Y' }}</td>
+        <td>{{ atm.date_out|date:'d.m.Y' }}</td>
         <td>{{ atm.name }}</td>
         <td>{{ atm.serial_num }}</td>
         <td>{{ atm.atm_id }}</td>

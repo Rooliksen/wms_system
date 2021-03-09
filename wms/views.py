@@ -120,3 +120,9 @@ def new_atm(request):
     # Вывести пустую или недействительную форму.
     context = {'form': form}
     return render(request, 'wms/new_atm.html', context)
+
+def client_orders(request):
+    # Выводит список контрагентов
+    client_orders = OrderClient.objects.all().order_by('date_in')
+    context = {'client_orders': client_orders}
+    return render(request, 'wms/client_orders.html', context)
