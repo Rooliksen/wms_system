@@ -92,13 +92,13 @@ class Atm(models.Model):
     date_out = models.DateField('Дата отгрузки', null=True)
     name = models.CharField(max_length=200)
     serial_num = models.CharField(max_length=200)
-    atm_id = models.CharField(max_length=200, null=True)
+    atm_id = models.CharField(max_length=200, blank=True, null=True)
     size = models.CharField(
         max_length=10,
         choices=Size.choices,
         default=Size.EUR,
     )
-    commentary = models.CharField(max_length=200, null=True)
+    commentary = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.serial_num
