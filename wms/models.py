@@ -103,22 +103,22 @@ class Atm(models.Model):
     def __str__(self):
         return self.serial_num
 
-class OrderClientStatus(models.TextChoices):
+class OrderStatus(models.TextChoices):
     # Статус заявки от клиента
     in_process = 'В работе', 'В работе'
     done = 'Закрыта', 'Закрыта'
     canceled = 'Отменена', 'Отменена'
     draft = 'Черновик', 'Черновик'
 
-class OrderClient(models.Model):
+class Order(models.Model):
     # Заявка от Клиента
     logistic_order = models.CharField(max_length=200)
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, blank=True, null=True)
     atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, blank=True, null=True)
     status = models.CharField(
         max_length=10,
-        choices=OrderClientStatus.choices,
-        default=OrderClientStatus.draft,
+        choices=OrderStatus.choices,
+        default=OrderStatus.draft,
     )
     date_in = models.DateField('Дата приема', blank=True, null=True)
     date_out = models.DateField('Дата отгрузки', blank=True, null=True)

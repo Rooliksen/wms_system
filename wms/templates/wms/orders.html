@@ -21,17 +21,17 @@
     </tr>
   </thead>
   <tbody>
-    {% for client_order in client_orders %}
+    {% for order in orders %}
       <tr>
-        <td>{{ client_order.logistic_order }}</td>
-        <td>{{ client_order.client }}</td>
-        <td>{{ client_order.atm }}</td>
-        <td>{{ client_order.status }}</td>
-        <td>{{ client_order.date_in|date:'d.m.Y' }}</td>
-        <td>{{ client_order.date_out|date:'d.m.Y' }}</td>
-        <td>{{ client_order.customer }}</td>
-        <td>{{ client_order.operation_client }}</td>
-        <td>{{ client_order.date_created|date:'d.m.Y H:m'  }}</td>
+        <td>{{ order.logistic_order }}</td>
+        <td>{{ order.client }}</td>
+        <td>{{ order.atm }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.date_in|date:'d.m.Y' }}</td>
+        <td>{{ order.date_out|date:'d.m.Y' }}</td>
+        <td>{{ order.customer }}</td>
+        <td>{{ order.operation_client }}</td>
+        <td>{{ order.date_created|date:'d.m.Y H:m'  }}</td>
       </tr>
     {% empty %}
       <tr>
