@@ -16,7 +16,9 @@
   <tbody>
     {% for contractor in contractors %}
     <tr>
-      <td>{{ contractor.name }}</td>
+      <td>
+        <a href="{% url 'wms:contractor' contractor.id %}">{{ contractor.name }}</a>
+      </td>
       <td>{{ contractor.pub_date|date:'d.m.Y H:m' }}</td>
     </tr>
     {% empty %}

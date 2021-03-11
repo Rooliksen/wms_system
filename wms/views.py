@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
+from .models import Contractor
 from .forms import *
 
 def index(request):
@@ -41,6 +42,14 @@ def contractors(request):
     contractors = Contractor.objects.all().order_by('pub_date')
     context = {'contractors': contractors}
     return render(request, 'wms/contractors.html', context)
+
+def contractor(request, contractor_id):
+    # Выводит одну тему и все её записи
+    contractor = Contractor.objects.get(id=contractor_id)
+    storages = Storage.objects.get(id=contractor_id)
+    atms = storages.atm_set.order_by('-date_in')
+    context = {'contractor': contractor, 'storages': storages, 'atms': atms}
+    return render(request, 'wms/contractor.html', context)
 
 def new_contractor(request):
     # Создание нового клиента

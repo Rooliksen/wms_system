@@ -1,0 +1,48 @@
+{% extends "wms/base.html" %}
+
+{% block page_header %}
+  <h4>{{ contractor }}</h4>
+{% endblock page_header %}
+
+
+{% block content %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Статус</th>
+      <th scope="col">Клиент</th>
+      <th scope="col">Склад</th>
+      <th scope="col">Дата приема</th>
+      <th scope="col">Дата отгрузки</th>
+      <th scope="col">Наименование</th>
+      <th scope="col">Серийный номер</th>
+      <th scope="col">ID груза</th>
+      <th scope="col">Размер</th>
+      <th scope="col">Комментарий</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for atm in atms %}
+      <tr>
+        <td>{{ atm.status }}</td>
+        <td>{{ atm.client }}</td>
+        <td>{{ atm.storage }}</td>
+        <td>{{ atm.date_in|date:'d.m.Y' }}</td>
+        <td>{{ atm.date_out|date:'d.m.Y' }}</td>
+        <td>{{ atm.name }}</td>
+        <td>{{ atm.serial_num }}</td>
+        <td>{{ atm.atm_id }}</td>
+        <td>{{ atm.size }}</td>
+        <td>{{ atm.commentary }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>Не добавлено ни одного груза. Добавьте первый груз.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div>
+  <a class="btn btn-primary mb-3" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
+</div>
+{% endblock content %}
