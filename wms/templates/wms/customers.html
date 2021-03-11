@@ -19,7 +19,9 @@
   <tbody>
     {% for customer in customers %}
       <tr>
-        <td>{{ customer.name }}</td>
+        <td>
+          <a href="{% url 'wms:customer' customer.id %}">{{ customer.name }}</a>
+        </td>
         <td>{{ customer.post }}</td>
         <td>{{ customer.phone }}</td>
         <td>{{ customer.email }}</td>

@@ -74,6 +74,13 @@ def customers(request):
     context = {'customers': customers}
     return render(request, 'wms/customers.html', context)
 
+def customer(request, customer_id):
+    # Выводит одну тему и все её записи
+    customer = Customer.objects.get(id=customer_id)
+    orders = customer.order_set.order_by('-date_in')
+    context = {'customer': customer, 'orders': orders}
+    return render(request, 'wms/customer.html', context)
+
 def new_customer(request):
     # Создание нового клиента
     if request.method != 'POST':
