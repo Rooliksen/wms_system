@@ -10,6 +10,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     # Страница со списком всех клиентов
     path('clients/', views.clients, name='clients'),
+    # Страница с подробной информацией по отдельной теме
+    path('clients/<int:client_id>/', views.client, name='client'),
     # Страница для добавления нового клиента
     path('new_client/', views.new_client, name='new_client'),
     # Страница со списком всех контрагентов

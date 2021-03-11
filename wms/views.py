@@ -12,6 +12,13 @@ def clients(request):
     context = {'clients': clients}
     return render(request, 'wms/clients.html', context)
 
+def client(request, client_id):
+    # Выводит одну тему и все её записи
+    client = Client.objects.get(id=client_id)
+    atms = client.atm_set.order_by('-date_in')
+    context = {'client': client, 'atms': atms}
+    return render(request, 'wms/client.html', context)
+
 def new_client(request):
     # Создание нового клиента
     if request.method != 'POST':

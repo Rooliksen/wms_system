@@ -16,7 +16,9 @@
   <tbody>
     {% for client in clients %}
     <tr>
-      <td>{{ client.name }}</td>
+      <td>
+        <a href="{% url 'wms:client' client.id %}">{{ client.name }}</a>
+      </td>
       <td>{{ client.pub_date|date:'d.m.Y H:m' }}</td>
     </tr>
     {% empty %}
