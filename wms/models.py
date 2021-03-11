@@ -114,6 +114,7 @@ class Order(models.Model):
     # Заявка от Клиента
     logistic_order = models.CharField(max_length=200)
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, blank=True, null=True)
     status = models.CharField(
         max_length=10,
@@ -122,7 +123,6 @@ class Order(models.Model):
     )
     date_in = models.DateField('Дата приема', blank=True, null=True)
     date_out = models.DateField('Дата отгрузки', blank=True, null=True)
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     operation_client = models.ForeignKey(OperationClient, on_delete=models.SET_NULL, blank=True, null=True)
     date_created = models.DateTimeField('date published', auto_now_add=True)
     
@@ -133,6 +133,7 @@ class OrderContractor(models.Model):
     # Заявка для Контрагента
     storage_order = models.CharField(max_length=200)
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     date_in = models.DateTimeField('Дата приема')
     date_out = models.DateTimeField('Дата отгрузки')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
