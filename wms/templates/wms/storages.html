@@ -24,7 +24,9 @@
     {% for storage in storages %}
       <tr>
         <td>{{ storage.contractor }}</td>
-        <td>{{ storage.address }}</td>
+        <td>
+          <a href="{% url 'wms:storage' storage.id %}">{{ storage.address }}</a>
+        </td>
         <td>{{ storage.rate_pallet }}</td>
         <td>{{ storage.rate_oversize_pallet }}</td>
         <td>{{ storage.rate_volume }}</td>

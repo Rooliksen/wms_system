@@ -31,6 +31,8 @@ urlpatterns = [
 
     # Страница со списком всех складов
     path('storages/', views.storages, name='storages'),
+    # Страница с подробной информацией по отдельному складу, показывает все связанные грузы
+    path('storages/<int:storage_id>/', views.storage, name='storage'),
     # Страница для добавления нового пользователя
     path('new_storage/', views.new_storage, name='new_storage'),
 

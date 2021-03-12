@@ -104,6 +104,13 @@ def storages(request):
     context = {'storages': storages}
     return render(request, 'wms/storages.html', context)
 
+def storage(request, storage_id):
+    # Выводит одну тему и все её записи
+    storage = Storage.objects.get(id=storage_id)
+    atms = storage.atm_set.order_by('-date_in')
+    context = {'storage': storage, 'atms': atms}
+    return render(request, 'wms/storage.html', context)
+
 def new_storage(request):
     # Создание нового клиента
     if request.method != 'POST':
