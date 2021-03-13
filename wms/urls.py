@@ -38,6 +38,8 @@ urlpatterns = [
 
     # Страница со списком всех грузов
     path('atms/', views.atms, name='atms'),
+    # Страница с подробной информацией по отдельному грузу, показывает все связанные заявки
+    path('atms/<int:atm_id>/', views.atm, name='atm'),
     # Страница для добавления нового пользователя
     path('new_atm/', views.new_atm, name='new_atm'),
 

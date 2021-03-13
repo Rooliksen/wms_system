@@ -1,7 +1,12 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4>Заявки</h4>
+  {% for order in orders %}
+  <div id="breadcrumbs" class="row">
+    <a href="{% url 'wms:orders' %}">Заявки</a><a>&nbsp;>&nbsp;</a>
+    <a href="{% url 'wms:atm' atm.id %}">Груз {{ atm.name }} s/n {{ atm.serial_num }}</a>
+  </div>
+  {% endfor %}
 {% endblock page_header %}
 
 
@@ -43,5 +48,4 @@
 <div>
   <a class="btn btn-primary mb-3" href="">Добавить новую заявку.</a>
 </div>
-
 {% endblock content %}

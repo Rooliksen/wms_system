@@ -134,6 +134,13 @@ def atms(request):
     context = {'atms': atms}
     return render(request, 'wms/atms.html', context)
 
+def atm(request, atm_id):
+    # Выводит одну тему и все её записи
+    atm = Atm.objects.get(id=atm_id)
+    orders = atm.order_set.order_by('-date_in')
+    context = {'atm': atm, 'orders': orders}
+    return render(request, 'wms/atm.html', context)
+
 def new_atm(request):
     # Создание нового клиента
     if request.method != 'POST':

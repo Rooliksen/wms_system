@@ -30,7 +30,9 @@
         <td>{{ atm.date_in|date:'d.m.Y' }}</td>
         <td>{{ atm.date_out|date:'d.m.Y' }}</td>
         <td>{{ atm.name }}</td>
-        <td>{{ atm.serial_num }}</td>
+        <td>
+          <a href="{% url 'wms:atm' atm.id %}">{{ atm.serial_num }}</a>
+        </td>
         <td>{{ atm.atm_id }}</td>
         <td>{{ atm.size }}</td>
         <td>{{ atm.commentary }}</td>
