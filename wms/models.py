@@ -79,8 +79,40 @@ class Storage(models.Model):
     def __str__(self):
         return self.address
 
+class OrderStatus(models.TextChoices):
+    # Статус заявки от клиента
+    in_process = 'В работе', 'В работе'
+    done = 'Закрыта', 'Закрыта'
+    canceled = 'Отменена', 'Отменена'
+    draft = 'Черновик', 'Черновик'
+
+class Order(models.Model):
+    # Заявка от Клиента
+    logistic_order = models.CharField(max_length=200)
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    storage = models.ForeignKey(Storage, on_delete=models.SET_NULL, null=True)
+    status = models.CharField(
+        max_length=10,
+        choices=OrderStatus.choices,
+        default=OrderStatus.draft,
+    )
+    date_in = models.DateField('Дата приема', blank=True, null=True)
+    date_out = models.DateField('Дата отгрузки', blank=True, null=True)
+    operation_client = models.ForeignKey(OperationClient, on_delete=models.SET_NULL, blank=True, null=True)
+    operation_contractor =  models.ForeignKey(OperationContractor, on_delete=models.SET_NULL, null=True)
+    driver = models.CharField(max_length=200, blank=True, null=True)
+    driver_car = models.CharField(max_length=200, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    storage_order = models.CharField(max_length=200, blank=True, null=True)
+    date_created = models.DateTimeField('date published', auto_now_add=True)
+    
+    def __str__(self):
+        return self.logistic_order
+
 class Atm(models.Model):
     # Груз, банкомат
+    orders = models.ManyToManyField(Order, blank=True)
     status = models.CharField(
         max_length=10,
         choices=Status.choices,
@@ -102,35 +134,3 @@ class Atm(models.Model):
 
     def __str__(self):
         return self.serial_num
-
-class OrderStatus(models.TextChoices):
-    # Статус заявки от клиента
-    in_process = 'В работе', 'В работе'
-    done = 'Закрыта', 'Закрыта'
-    canceled = 'Отменена', 'Отменена'
-    draft = 'Черновик', 'Черновик'
-
-class Order(models.Model):
-    # Заявка от Клиента
-    logistic_order = models.CharField(max_length=200)
-    client = models.ForeignKey(Client, on_delete=models.SET_NULL, blank=True, null=True)
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, blank=True, null=True)
-    storage = models.ForeignKey(Storage, on_delete=models.SET_NULL, null=True)
-    status = models.CharField(
-        max_length=10,
-        choices=OrderStatus.choices,
-        default=OrderStatus.draft,
-    )
-    date_in = models.DateField('Дата приема', blank=True, null=True)
-    date_out = models.DateField('Дата отгрузки', blank=True, null=True)
-    operation_client = models.ForeignKey(OperationClient, on_delete=models.SET_NULL, blank=True, null=True)
-    operation_contractor =  models.ForeignKey(OperationContractor, on_delete=models.SET_NULL, null=True)
-    driver = models.CharField(max_length=200, blank=True, null=True)
-    driver_car = models.CharField(max_length=200, blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    storage_order = models.CharField(max_length=200, blank=True, null=True)
-    date_created = models.DateTimeField('date published', auto_now_add=True)
-    
-    def __str__(self):
-        return self.logistic_order
