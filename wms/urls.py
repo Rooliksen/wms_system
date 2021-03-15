@@ -47,4 +47,9 @@ urlpatterns = [
     path('orders/', views.orders, name='orders'),
     # Страница для добавления новой заявки
     path('new_order/', views.new_order, name='new_order'),
+
+    # Страница со списком всех операций
+    path('operations/', views.operations, name='operations'),
+    # Страница для добавления новой операции
+    path('new_operation/', views.new_operation, name='new_operation'),
 ]

@@ -26,6 +26,18 @@ class CustomerForm(forms.ModelForm):
             'email': 'Email',
             }
 
+class OperationForm(forms.ModelForm):
+    class Meta:
+        model = Operation
+        fields = ['client', 'contractor', 'name', 'cost_client', 'cost_contractor']
+        labels = {
+            'client': 'Клиент',
+            'contractor': 'Контрагент',
+            'name': 'Наименование операции',
+            'cost_client': 'Стоимость',
+            'cost_contractor': 'Себестоимость',
+            }
+
 class StorageForm(forms.ModelForm):
     class Meta:
         model = Storage

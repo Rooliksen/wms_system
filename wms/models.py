@@ -91,7 +91,7 @@ class Order(models.Model):
     )
     date_in = models.DateField('Дата приема', blank=True, null=True)
     date_out = models.DateField('Дата отгрузки', blank=True, null=True)
-    operation = models.ForeignKey(Operation, on_delete=models.SET_NULL, blank=True, null=True)
+    operation = models.ManyToManyField(Operation, blank=True)
     driver = models.CharField(max_length=200, blank=True, null=True)
     driver_car = models.CharField(max_length=200, blank=True, null=True)
     storage_order = models.CharField(max_length=200, blank=True, null=True)

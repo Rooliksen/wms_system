@@ -180,3 +180,26 @@ def new_order(request):
     # Вывести пустую или недействительную форму.
     context = {'form': form}
     return render(request, 'wms/new_order.html', context)
+
+def operations(request):
+    # Выводит список операций
+    operations = Operation.objects.all().order_by('date_created')
+    context = {'operations': operations}
+    return render(request, 'wms/operations.html', context)
+
+def new_operation(request):
+    # Создание новой операции
+    if request.method != 'POST':
+        # Данные не отправлялись; создается пустая форма.
+        form = OperationForm()
+    else:
+        # Отправлены данные POST; обработать данные.
+        form = OperationForm(data=request.POST)
+        if form.is_valid():
+            new_operation = form.save(commit=False)
+            new_operation.save()
+            return redirect('wms:operations')
+
+    # Вывести пустую или недействительную форму.
+    context = {'form': form}
+    return render(request, 'wms/new_operation.html', context)
