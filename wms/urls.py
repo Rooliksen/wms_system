@@ -24,7 +24,7 @@ urlpatterns = [
 
     # Страница со списком всех пользователей
     path('customers/', views.customers, name='customers'),
-    # Страница с подробной информацией по отдельному контрагенту, показывает все связанные грузы
+    # Страница с подробной информацией по отдельному пользователю, показывает все связанные грузы
     path('customers/<int:customer_id>/', views.customer, name='customer'),
     # Страница для добавления нового пользователя
     path('new_customer/', views.new_customer, name='new_customer'),
@@ -33,16 +33,18 @@ urlpatterns = [
     path('storages/', views.storages, name='storages'),
     # Страница с подробной информацией по отдельному складу, показывает все связанные грузы
     path('storages/<int:storage_id>/', views.storage, name='storage'),
-    # Страница для добавления нового пользователя
+    # Страница для добавления нового склада
     path('new_storage/', views.new_storage, name='new_storage'),
 
     # Страница со списком всех грузов
     path('atms/', views.atms, name='atms'),
     # Страница с подробной информацией по отдельному грузу, показывает все связанные заявки
     path('atms/<int:atm_id>/', views.atm, name='atm'),
-    # Страница для добавления нового пользователя
+    # Страница для добавления нового груза
     path('new_atm/', views.new_atm, name='new_atm'),
 
     # Страница со списком всех заявок от клиента
     path('orders/', views.orders, name='orders'),
+    # Страница для добавления новой заявки
+    path('new_order/', views.new_order, name='new_order'),
 ]

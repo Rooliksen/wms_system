@@ -64,6 +64,7 @@ class AtmForm(forms.ModelForm):
     class Meta:
         model = Atm
         fields = [
+            'orders',
             'status',
             'client',
             'storage',
@@ -76,6 +77,7 @@ class AtmForm(forms.ModelForm):
             'commentary',
             ]
         labels = {
+            'orders': 'Заявки',
             'status': 'Статус',
             'client': 'Клиент',
             'storage': 'Склад',
@@ -87,3 +89,42 @@ class AtmForm(forms.ModelForm):
             'size': 'Размер',
             'commentary': 'Комментарий',
             }
+
+class OrderForm(forms.ModelForm):
+    date_in = forms.DateField(
+        required=False,
+        input_formats=['%d.%m.%Y','%d/%m/%Y'],
+        label="Дата приема")
+    date_out = forms.DateField(
+        required=False,
+        input_formats=['%d.%m.%Y','%d/%m/%Y'],
+        label="Дата отгрузки")
+    class Meta:
+        model = Order
+        fields = [
+            'logistic_order',
+            'client',
+            'customer',
+            'storage',
+            'status',
+            'date_in',
+            'date_out',
+            'operation',
+            'driver',
+            'driver_car',
+            'storage_order',
+            ]
+        labels = {
+            'logistic_order': 'Номер заявки клиента',
+            'client': 'Клиент',
+            'customer': 'Пользователь',
+            'storage': 'Склад',
+            'status': 'Статус',
+            'date_in': 'Дата приема',
+            'date_out': 'Дата отгрузки',
+            'operation': 'Вид операции',
+            'driver': 'ФИО водителя',
+            'driver_car': 'Марка и госномер авто',
+            'storage_order': 'Номер заявки склада',
+            }
+            

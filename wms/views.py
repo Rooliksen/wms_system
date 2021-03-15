@@ -14,7 +14,7 @@ def clients(request):
     return render(request, 'wms/clients.html', context)
 
 def client(request, client_id):
-    # Выводит одну тему и все её записи
+    # Выводит одного клиента и все связанные с ним грузы
     client = Client.objects.get(id=client_id)
     atms = client.atm_set.order_by('-date_in')
     context = {'client': client, 'atms': atms}
@@ -44,7 +44,7 @@ def contractors(request):
     return render(request, 'wms/contractors.html', context)
 
 def contractor(request, contractor_id):
-    # Выводит одну тему и все её записи
+    # Выводит одного контрагента и все связанные с ним грузы
     contractor = Contractor.objects.get(id=contractor_id)
     storages = Storage.objects.get(id=contractor_id)
     atms = storages.atm_set.order_by('-date_in')
@@ -52,7 +52,7 @@ def contractor(request, contractor_id):
     return render(request, 'wms/contractor.html', context)
 
 def new_contractor(request):
-    # Создание нового клиента
+    # Создание нового контрагента
     if request.method != 'POST':
         # Данные не отправлялись; создается пустая форма.
         form = ContractorForm()
@@ -69,20 +69,20 @@ def new_contractor(request):
     return render(request, 'wms/new_contractor.html', context)
 
 def customers(request):
-    # Выводит список контрагентов
+    # Выводит список пользователей
     customers = Customer.objects.all().order_by('date_created')
     context = {'customers': customers}
     return render(request, 'wms/customers.html', context)
 
 def customer(request, customer_id):
-    # Выводит одну тему и все её записи
+    # Выводит одного пользователя и все связанные с ним заявки
     customer = Customer.objects.get(id=customer_id)
     orders = customer.order_set.order_by('-date_in')
     context = {'customer': customer, 'orders': orders}
     return render(request, 'wms/customer.html', context)
 
 def new_customer(request):
-    # Создание нового клиента
+    # Создание нового пользователя
     if request.method != 'POST':
         # Данные не отправлялись; создается пустая форма.
         form = CustomerForm()
@@ -99,20 +99,20 @@ def new_customer(request):
     return render(request, 'wms/new_customer.html', context)
 
 def storages(request):
-    # Выводит список контрагентов
+    # Выводит список складов
     storages = Storage.objects.all().order_by('address')
     context = {'storages': storages}
     return render(request, 'wms/storages.html', context)
 
 def storage(request, storage_id):
-    # Выводит одну тему и все её записи
+    # Выводит один склад и связанные с ним грузы
     storage = Storage.objects.get(id=storage_id)
     atms = storage.atm_set.order_by('-date_in')
     context = {'storage': storage, 'atms': atms}
     return render(request, 'wms/storage.html', context)
 
 def new_storage(request):
-    # Создание нового клиента
+    # Создание нового склада
     if request.method != 'POST':
         # Данные не отправлялись; создается пустая форма.
         form = StorageForm()
@@ -129,20 +129,20 @@ def new_storage(request):
     return render(request, 'wms/new_storage.html', context)
 
 def atms(request):
-    # Выводит список контрагентов
+    # Выводит список грузов
     atms = Atm.objects.all().order_by('date_in')
     context = {'atms': atms}
     return render(request, 'wms/atms.html', context)
 
 def atm(request, atm_id):
-    # Выводит одну тему и все её записи
+    # Выводит один груз и все связанные с ним заявки
     atm = Atm.objects.get(id=atm_id)
     orders = atm.order_set.order_by('-date_in')
     context = {'atm': atm, 'orders': orders}
     return render(request, 'wms/atm.html', context)
 
 def new_atm(request):
-    # Создание нового клиента
+    # Создание нового груза
     if request.method != 'POST':
         # Данные не отправлялись; создается пустая форма.
         form = AtmForm()
@@ -159,7 +159,24 @@ def new_atm(request):
     return render(request, 'wms/new_atm.html', context)
 
 def orders(request):
-    # Выводит список контрагентов
+    # Выводит список заявок
     orders = Order.objects.all().order_by('date_in')
     context = {'orders': orders}
     return render(request, 'wms/orders.html', context)
+
+def new_order(request):
+    # Создание новой заявки
+    if request.method != 'POST':
+        # Данные не отправлялись; создается пустая форма.
+        form = OrderForm()
+    else:
+        # Отправлены данные POST; обработать данные.
+        form = OrderForm(data=request.POST)
+        if form.is_valid():
+            new_order = form.save(commit=False)
+            new_order.save()
+            return redirect('wms:orders')
+
+    # Вывести пустую или недействительную форму.
+    context = {'form': form}
+    return render(request, 'wms/new_order.html', context)

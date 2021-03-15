@@ -44,21 +44,13 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-class OperationContractor(models.Model):
-    # Операции с контрагентом, услуги по договору ОПЕРАТОР-КОНТРАГЕНТ
+class Operation(models.Model):
+    # Операции c грузом, отдельно стоимость по тарифу клиента и контрагента
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
     contractor = models.ForeignKey(Contractor, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200)
-    cost = models.DecimalField(max_digits=9999, decimal_places=2, null=True)
-    date_created = models.DateTimeField('date published', auto_now_add=True)
-
-    def __str__(self):
-        return self.name
-
-class OperationClient(models.Model):
-    # Операции с клиентом, услуги по договору КЛИЕНТ-ОПЕРАТОР
-    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=200)
-    cost = models.DecimalField(max_digits=9999, decimal_places=2, null=True)
+    cost_client = models.DecimalField(max_digits=9999, decimal_places=2, null=True)
+    cost_contractor = models.DecimalField(max_digits=9999, decimal_places=2, null=True)
     date_created = models.DateTimeField('date published', auto_now_add=True)
 
     def __str__(self):
@@ -99,11 +91,9 @@ class Order(models.Model):
     )
     date_in = models.DateField('Дата приема', blank=True, null=True)
     date_out = models.DateField('Дата отгрузки', blank=True, null=True)
-    operation_client = models.ForeignKey(OperationClient, on_delete=models.SET_NULL, blank=True, null=True)
-    operation_contractor =  models.ForeignKey(OperationContractor, on_delete=models.SET_NULL, null=True)
+    operation = models.ForeignKey(Operation, on_delete=models.SET_NULL, blank=True, null=True)
     driver = models.CharField(max_length=200, blank=True, null=True)
     driver_car = models.CharField(max_length=200, blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     storage_order = models.CharField(max_length=200, blank=True, null=True)
     date_created = models.DateTimeField('date published', auto_now_add=True)
     
