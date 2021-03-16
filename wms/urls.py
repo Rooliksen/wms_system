@@ -63,9 +63,4 @@ urlpatterns = [
     path('update_order/<int:order_id>/', views.update_order, name='update_order'),
     # Удаление конкретной заявки
     path('delete_order/<int:order_id>/', views.delete_order, name='delete_order'),
-
-    # Страница со списком всех операций
-    path('operations/', views.operations, name='operations'),
-    # Страница для добавления новой операции
-    path('new_operation/', views.new_operation, name='new_operation'),
 ]

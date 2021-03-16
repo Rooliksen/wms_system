@@ -111,6 +111,7 @@ class OrderForm(forms.ModelForm):
             'driver',
             'driver_car',
             'storage_order',
+            'atm',
             'photo_1',
             'photo_2',
             'photo_3',
@@ -128,9 +129,10 @@ class OrderForm(forms.ModelForm):
             'driver': 'ФИО водителя',
             'driver_car': 'Марка и госномер авто',
             'storage_order': 'Номер заявки склада',
+            'atm': 'Груз',
             'photo_1': 'Фото № 1',
-            'photo_2': 'Фото № 1',
-            'photo_3': 'Фото № 1',
-            'photo_4': 'Фото № 1',
+            'photo_2': 'Фото № 2',
+            'photo_3': 'Фото № 3',
+            'photo_4': 'Фото № 4',
             }
             

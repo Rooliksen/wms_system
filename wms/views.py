@@ -26,7 +26,7 @@ def new_client(request):
         form = ClientForm()
     else:
         # Отправлены данные POST; обработать данные.
-        form = ClientForm(data=request.POST)
+        form = ClientForm(request.POST)
         if form.is_valid():
             new_client = form.save(commit=False)
             new_client.save()
@@ -41,7 +41,7 @@ def update_client(request, client_id):
     client = Client.objects.get(id=client_id)
     form = ClientForm(instance=client)
     if request.method == 'POST':
-        form = ClientForm(data=request.POST, instance=client)
+        form = ClientForm(request.POST, instance=client)
         if form.is_valid():
             form.save()
             return redirect('wms:clients')
@@ -70,7 +70,7 @@ def new_contractor(request):
         form = ContractorForm()
     else:
         # Отправлены данные POST; обработать данные.
-        form = ContractorForm(data=request.POST)
+        form = ContractorForm(request.POST)
         if form.is_valid():
             new_contractor = form.save(commit=False)
             new_contractor.save()
@@ -85,7 +85,7 @@ def update_contractor(request, contractor_id):
     contractor = Contractor.objects.get(id=contractor_id)
     form = ContractorForm(instance=contractor)
     if request.method == 'POST':
-        form = ContractorForm(data=request.POST, instance=contractor)
+        form = ContractorForm(request.POST, instance=contractor)
         if form.is_valid():
             form.save()
             return redirect('wms:contractors')
@@ -112,7 +112,7 @@ def new_customer(request):
         form = CustomerForm()
     else:
         # Отправлены данные POST; обработать данные.
-        form = CustomerForm(data=request.POST)
+        form = CustomerForm(request.POST)
         if form.is_valid():
             new_customer = form.save(commit=False)
             new_customer.save()
@@ -127,7 +127,7 @@ def update_customer(request, customer_id):
     customer = Customer.objects.get(id=customer_id)
     form = CustomerForm(instance=customer)
     if request.method == 'POST':
-        form = CustomerForm(data=request.POST, instance=customer)
+        form = CustomerForm(request.POST, instance=customer)
         if form.is_valid():
             form.save()
             return redirect('wms:customers')
@@ -154,7 +154,7 @@ def new_storage(request):
         form = StorageForm()
     else:
         # Отправлены данные POST; обработать данные.
-        form = StorageForm(data=request.POST)
+        form = StorageForm(request.POST)
         if form.is_valid():
             new_storage = form.save(commit=False)
             new_storage.save()
@@ -169,7 +169,7 @@ def update_storage(request, storage_id):
     storage = Storage.objects.get(id=storage_id)
     form = StorageForm(instance=storage)
     if request.method == 'POST':
-        form = StorageForm(data=request.POST, instance=storage)
+        form = StorageForm(request.POST, instance=storage)
         if form.is_valid():
             form.save()
             return redirect('wms:storages')
@@ -196,7 +196,7 @@ def new_atm(request):
         form = AtmForm()
     else:
         # Отправлены данные POST; обработать данные.
-        form = AtmForm(data=request.POST)
+        form = AtmForm(request.POST)
         if form.is_valid():
             new_atm = form.save(commit=False)
             new_atm.save()
@@ -211,7 +211,7 @@ def update_atm(request, atm_id):
     atm = Atm.objects.get(id=atm_id)
     form = AtmForm(instance=atm)
     if request.method == 'POST':
-        form = AtmForm(data=request.POST, instance=atm)
+        form = AtmForm(request.POST, instance=atm)
         if form.is_valid():
             form.save()
             return redirect('wms:atms')
@@ -240,7 +240,7 @@ def new_order(request):
         form = OrderForm()
     else:
         # Отправлены данные POST; обработать данные.
-        form = OrderForm(data=request.POST)
+        form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
             new_order = form.save(commit=False)
             new_order.save()
@@ -255,7 +255,7 @@ def update_order(request, order_id):
     order = Order.objects.get(id=order_id)
     form = OrderForm(instance=order)
     if request.method == 'POST':
-        form = OrderForm(data=request.POST, instance=order)
+        form = OrderForm(request.POST, request.FILES, instance=order)
         if form.is_valid():
             form.save()
             return redirect('wms:orders')
@@ -270,26 +270,3 @@ def delete_order(request, order_id):
         return redirect('wms:orders')
     context = {'item': order}
     return render(request, 'wms/delete_order.html', context)
-
-def operations(request):
-    # Выводит список операций
-    operations = Operation.objects.all().order_by('date_created')
-    context = {'operations': operations}
-    return render(request, 'wms/operations.html', context)
-
-def new_operation(request):
-    # Создание новой операции
-    if request.method != 'POST':
-        # Данные не отправлялись; создается пустая форма.
-        form = OperationForm()
-    else:
-        # Отправлены данные POST; обработать данные.
-        form = OperationForm(data=request.POST)
-        if form.is_valid():
-            new_operation = form.save(commit=False)
-            new_operation.save()
-            return redirect('wms:operations')
-
-    # Вывести пустую или недействительную форму.
-    context = {'form': form}
-    return render(request, 'wms/new_operation.html', context)
