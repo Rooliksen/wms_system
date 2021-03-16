@@ -2,10 +2,8 @@
 
 {% block page_header %}
   {% for order in orders %}
-  <div id="breadcrumbs" class="row">
-    <a href="{% url 'wms:orders' %}">Заявки</a><a>&nbsp;>&nbsp;</a>
-    <a href="{% url 'wms:atm' atm.id %}">Груз {{ atm.name }} s/n {{ atm.serial_num }}</a>
-  </div>
+    <a href="{% url 'wms:atms' %}">Грузы</a><a>&nbsp;>&nbsp;</a>
+    <a href="{% url 'wms:atm' atm.id %}">Груз: наименование {{ atm.name }} s/n {{ atm.serial_num }}</a>
   {% endfor %}
 {% endblock page_header %}
 
