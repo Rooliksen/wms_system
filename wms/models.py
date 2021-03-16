@@ -44,17 +44,6 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-class Operation(models.Model):
-    # Операции c грузом, отдельно стоимость по тарифу клиента и контрагента
-    contractor = models.ForeignKey(Contractor, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=200)
-    cost_client = models.DecimalField(max_digits=9999, decimal_places=2, null=True)
-    cost_contractor = models.DecimalField(max_digits=9999, decimal_places=2, null=True)
-    date_created = models.DateTimeField('date published', auto_now_add=True)
-
-    def __str__(self):
-        return self.name
-
 class Storage(models.Model):
     # Склад, текущее местонахождение
     contractor = models.ForeignKey(Contractor, on_delete=models.SET_NULL, null=True)
@@ -90,7 +79,6 @@ class Order(models.Model):
     )
     date_in = models.DateField('Дата приема', blank=True, null=True)
     date_out = models.DateField('Дата отгрузки', blank=True, null=True)
-    operation = models.ManyToManyField(Operation, blank=True)
     driver = models.CharField(max_length=200, blank=True, null=True)
     driver_car = models.CharField(max_length=200, blank=True, null=True)
     storage_order = models.CharField(max_length=200, blank=True, null=True)

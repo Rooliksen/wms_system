@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .models import Contractor
 from .forms import *
 
 def index(request):
@@ -37,6 +36,19 @@ def new_client(request):
     context = {'form': form}
     return render(request, 'wms/new_client.html', context)
 
+def update_client(request, client_id):
+    # Обновление данных по клиенту
+    client = Client.objects.get(id=client_id)
+    form = ClientForm(instance=client)
+    if request.method == 'POST':
+        form = ClientForm(data=request.POST, instance=client)
+        if form.is_valid():
+            form.save()
+            return redirect('wms:clients')
+
+    context = {'form': form}
+    return render(request, 'wms/update_client.html', context)
+
 def contractors(request):
     # Выводит список контрагентов
     contractors = Contractor.objects.all().order_by('pub_date')
@@ -68,6 +80,18 @@ def new_contractor(request):
     context = {'form': form}
     return render(request, 'wms/new_contractor.html', context)
 
+def update_contractor(request, contractor_id):
+    # Обновление данных по контрагенту
+    contractor = Contractor.objects.get(id=contractor_id)
+    form = ContractorForm(instance=contractor)
+    if request.method == 'POST':
+        form = ContractorForm(data=request.POST, instance=contractor)
+        if form.is_valid():
+            form.save()
+            return redirect('wms:contractors')
+    context = {'form': form}
+    return render(request, 'wms/update_contractor.html', context)
+
 def customers(request):
     # Выводит список пользователей
     customers = Customer.objects.all().order_by('date_created')
@@ -97,6 +121,18 @@ def new_customer(request):
     # Вывести пустую или недействительную форму.
     context = {'form': form}
     return render(request, 'wms/new_customer.html', context)
+
+def update_customer(request, customer_id):
+    # Обновление данных по контрагенту
+    customer = Customer.objects.get(id=customer_id)
+    form = CustomerForm(instance=customer)
+    if request.method == 'POST':
+        form = CustomerForm(data=request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect('wms:customers')
+    context = {'form': form}
+    return render(request, 'wms/update_customer.html', context)
 
 def storages(request):
     # Выводит список складов
@@ -128,6 +164,18 @@ def new_storage(request):
     context = {'form': form}
     return render(request, 'wms/new_storage.html', context)
 
+def update_storage(request, storage_id):
+    # Обновление данных по контрагенту
+    storage = Storage.objects.get(id=storage_id)
+    form = StorageForm(instance=storage)
+    if request.method == 'POST':
+        form = StorageForm(data=request.POST, instance=storage)
+        if form.is_valid():
+            form.save()
+            return redirect('wms:storages')
+    context = {'form': form}
+    return render(request, 'wms/update_storage.html', context)
+
 def atms(request):
     # Выводит список грузов
     atms = Atm.objects.all().order_by('date_in')
@@ -158,6 +206,18 @@ def new_atm(request):
     context = {'form': form}
     return render(request, 'wms/new_atm.html', context)
 
+def update_atm(request, atm_id):
+    # Обновление данных по контрагенту
+    atm = Atm.objects.get(id=atm_id)
+    form = AtmForm(instance=atm)
+    if request.method == 'POST':
+        form = AtmForm(data=request.POST, instance=atm)
+        if form.is_valid():
+            form.save()
+            return redirect('wms:atms')
+    context = {'form': form}
+    return render(request, 'wms/update_atm.html', context)
+
 def orders(request):
     # Выводит список заявок
     orders = Order.objects.all().order_by('date_in')
@@ -180,6 +240,18 @@ def new_order(request):
     # Вывести пустую или недействительную форму.
     context = {'form': form}
     return render(request, 'wms/new_order.html', context)
+
+def update_order(request, order_id):
+    # Обновление данных по контрагенту
+    order = Order.objects.get(id=order_id)
+    form = OrderForm(instance=order)
+    if request.method == 'POST':
+        form = OrderForm(data=request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('wms:orders')
+    context = {'form': form}
+    return render(request, 'wms/update_order.html', context)
 
 def operations(request):
     # Выводит список операций

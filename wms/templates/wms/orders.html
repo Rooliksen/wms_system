@@ -16,7 +16,6 @@
       <th scope="col">Дата приема</th>
       <th scope="col">Дата отгрузки</th>
       <th scope="col">Пользователь</th>
-      <th scope="col">Тип операции</th>
       <th scope="col">Дата создания</th>
     </tr>
   </thead>
@@ -30,8 +29,10 @@
         <td>{{ order.date_in|date:'d.m.Y' }}</td>
         <td>{{ order.date_out|date:'d.m.Y' }}</td>
         <td>{{ order.customer }}</td>
-        <td>{{ order.operation_client }}</td>
-        <td>{{ order.date_created|date:'d.m.Y H:m'  }}</td>
+        <td>{{ order.date_created|date:'d.m.Y H:m' }}</td>
+        <td>
+          <a class="btn btn-sm btn-info" href="{% url 'wms:update_order' order.id %}">Изменить</a>
+        </td>
       </tr>
     {% empty %}
       <tr>

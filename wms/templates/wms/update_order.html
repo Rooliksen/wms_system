@@ -4,7 +4,7 @@
 
 {% block page_header %}
 
-<h4>Добавление нового груза</h4>
+<h4>Редактирование заявки</h4>
 
 {% endblock page_header %}
 
@@ -15,12 +15,7 @@
   <div class="row">
     <div class="col-12">
       <div class="mb-3">
-      {{ form.orders|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.status|as_crispy_field }}
+      {{ form.logistic_order|as_crispy_field }}
       </div>
     </div>
     <div class="col-12">
@@ -30,7 +25,17 @@
     </div>
     <div class="col-12">
       <div class="mb-3">
+      {{ form.customer|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
       {{ form.storage|as_crispy_field }}
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+      {{ form.status|as_crispy_field }}
       </div>
     </div>
     <div class="col-12">
@@ -45,31 +50,21 @@
     </div>
     <div class="col-12">
       <div class="mb-3">
-      {{ form.name|as_crispy_field }}
+      {{ form.driver|as_crispy_field }}
       </div>
     </div>
     <div class="col-12">
       <div class="mb-3">
-      {{ form.serial_num|as_crispy_field }}
+      {{ form.driver_car|as_crispy_field }}
       </div>
     </div>
     <div class="col-12">
       <div class="mb-3">
-      {{ form.atm_id|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.size|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.commentary|as_crispy_field }}
+      {{ form.storage_order|as_crispy_field }}
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-success mb-3">Сохранить груз</button>
+  <button type="submit" class="btn btn-success mb-3">Сохранить данные по заявке</button>
 </form>
 
 {% endblock content %}

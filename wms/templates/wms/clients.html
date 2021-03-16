@@ -20,6 +20,9 @@
         <a href="{% url 'wms:client' client.id %}">{{ client.name }}</a>
       </td>
       <td>{{ client.pub_date|date:'d.m.Y H:m' }}</td>
+      <td>
+        <a class="btn btn-sm btn-info" href="{% url 'wms:update_client' client.id %}">Изменить</a>
+      </td>
     </tr>
     {% empty %}
     <tr>

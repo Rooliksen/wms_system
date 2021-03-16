@@ -26,17 +26,6 @@ class CustomerForm(forms.ModelForm):
             'email': 'Email',
             }
 
-class OperationForm(forms.ModelForm):
-    class Meta:
-        model = Operation
-        fields = ['contractor', 'name', 'cost_client', 'cost_contractor']
-        labels = {
-            'contractor': 'Контрагент',
-            'name': 'Наименование операции',
-            'cost_client': 'Стоимость',
-            'cost_contractor': 'Себестоимость',
-            }
-
 class StorageForm(forms.ModelForm):
     class Meta:
         model = Storage
@@ -120,7 +109,6 @@ class OrderForm(forms.ModelForm):
             'status',
             'date_in',
             'date_out',
-            'operation',
             'driver',
             'driver_car',
             'storage_order',
@@ -133,7 +121,6 @@ class OrderForm(forms.ModelForm):
             'status': 'Статус',
             'date_in': 'Дата приема',
             'date_out': 'Дата отгрузки',
-            'operation': 'Вид операции',
             'driver': 'ФИО водителя',
             'driver_car': 'Марка и госномер авто',
             'storage_order': 'Номер заявки склада',

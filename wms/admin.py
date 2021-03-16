@@ -10,9 +10,6 @@ class ContractorAdmin(admin.ModelAdmin):
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('user', 'name', 'post', 'phone', 'email', 'date_created')
 
-class OperationAdmin(admin.ModelAdmin):
-    list_display = ('contractor', 'name', 'cost_client', 'cost_contractor', 'date_created')
-
 class OrderAdmin(admin.ModelAdmin):
     list_display = (
         'logistic_order', 'client', 'customer',
@@ -27,7 +24,6 @@ class AtmAdmin(admin.ModelAdmin):
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Contractor, ContractorAdmin)
 admin.site.register(Customer, CustomerAdmin)
-admin.site.register(Operation, OperationAdmin)
 admin.site.register(Storage)
 admin.site.register(Atm, AtmAdmin)
 admin.site.register(Order, OrderAdmin)
