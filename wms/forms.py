@@ -29,9 +29,8 @@ class CustomerForm(forms.ModelForm):
 class OperationForm(forms.ModelForm):
     class Meta:
         model = Operation
-        fields = ['client', 'contractor', 'name', 'cost_client', 'cost_contractor']
+        fields = ['contractor', 'name', 'cost_client', 'cost_contractor']
         labels = {
-            'client': 'Клиент',
             'contractor': 'Контрагент',
             'name': 'Наименование операции',
             'cost_client': 'Стоимость',

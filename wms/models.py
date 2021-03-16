@@ -46,7 +46,6 @@ class Customer(models.Model):
 
 class Operation(models.Model):
     # Операции c грузом, отдельно стоимость по тарифу клиента и контрагента
-    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
     contractor = models.ForeignKey(Contractor, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200)
     cost_client = models.DecimalField(max_digits=9999, decimal_places=2, null=True)

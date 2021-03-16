@@ -11,7 +11,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ('user', 'name', 'post', 'phone', 'email', 'date_created')
 
 class OperationAdmin(admin.ModelAdmin):
-    list_display = ('client', 'contractor', 'name', 'cost_client', 'cost_contractor', 'date_created')
+    list_display = ('contractor', 'name', 'cost_client', 'cost_contractor', 'date_created')
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = (

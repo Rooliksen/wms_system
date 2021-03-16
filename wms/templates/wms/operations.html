@@ -9,7 +9,6 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">Клиент</th>
       <th scope="col">Контрагент</th>
       <th scope="col">Наименование операции</th>
       <th scope="col">Стоимость</th>
@@ -19,7 +18,6 @@
   <tbody>
     {% for operation in operations %}
       <tr>
-        <td>{{ operation.client }}</td>
         <td>{{ operation.contractor }}</td>
         <td>{{ operation.name }}</td>
         <td>{{ operation.cost_client }}</td>
