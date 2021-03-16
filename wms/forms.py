@@ -64,7 +64,6 @@ class AtmForm(forms.ModelForm):
     class Meta:
         model = Atm
         fields = [
-            'orders',
             'status',
             'client',
             'storage',
@@ -77,7 +76,6 @@ class AtmForm(forms.ModelForm):
             'commentary',
             ]
         labels = {
-            'orders': 'Заявки',
             'status': 'Статус',
             'client': 'Клиент',
             'storage': 'Склад',
@@ -107,11 +105,16 @@ class OrderForm(forms.ModelForm):
             'customer',
             'storage',
             'status',
+            'atm',
             'date_in',
             'date_out',
             'driver',
             'driver_car',
             'storage_order',
+            'photo_1',
+            'photo_2',
+            'photo_3',
+            'photo_4',
             ]
         labels = {
             'logistic_order': 'Номер заявки клиента',
@@ -119,10 +122,15 @@ class OrderForm(forms.ModelForm):
             'customer': 'Пользователь',
             'storage': 'Склад',
             'status': 'Статус',
+            'atm': 'Банкомат',
             'date_in': 'Дата приема',
             'date_out': 'Дата отгрузки',
             'driver': 'ФИО водителя',
             'driver_car': 'Марка и госномер авто',
             'storage_order': 'Номер заявки склада',
+            'photo_1': 'Фото № 1',
+            'photo_2': 'Фото № 1',
+            'photo_3': 'Фото № 1',
+            'photo_4': 'Фото № 1',
             }
             

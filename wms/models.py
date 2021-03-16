@@ -66,30 +66,8 @@ class OrderStatus(models.TextChoices):
     canceled = 'Отменена', 'Отменена'
     draft = 'Черновик', 'Черновик'
 
-class Order(models.Model):
-    # Заявка от Клиента
-    logistic_order = models.CharField(max_length=200)
-    client = models.ForeignKey(Client, on_delete=models.SET_NULL, blank=True, null=True)
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    storage = models.ForeignKey(Storage, on_delete=models.SET_NULL, null=True)
-    status = models.CharField(
-        max_length=10,
-        choices=OrderStatus.choices,
-        default=OrderStatus.draft,
-    )
-    date_in = models.DateField('Дата приема', blank=True, null=True)
-    date_out = models.DateField('Дата отгрузки', blank=True, null=True)
-    driver = models.CharField(max_length=200, blank=True, null=True)
-    driver_car = models.CharField(max_length=200, blank=True, null=True)
-    storage_order = models.CharField(max_length=200, blank=True, null=True)
-    date_created = models.DateTimeField('date published', auto_now_add=True)
-    
-    def __str__(self):
-        return self.logistic_order
-
 class Atm(models.Model):
     # Груз, банкомат
-    orders = models.ManyToManyField(Order, blank=True)
     status = models.CharField(
         max_length=10,
         choices=Status.choices,
@@ -111,3 +89,29 @@ class Atm(models.Model):
 
     def __str__(self):
         return self.serial_num
+
+class Order(models.Model):
+    # Заявка от Клиента
+    logistic_order = models.CharField(max_length=200)
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    storage = models.ForeignKey(Storage, on_delete=models.SET_NULL, null=True)
+    status = models.CharField(
+        max_length=10,
+        choices=OrderStatus.choices,
+        default=OrderStatus.draft,
+    )
+    atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, blank=True, null=True)
+    date_in = models.DateField('Дата приема', blank=True, null=True)
+    date_out = models.DateField('Дата отгрузки', blank=True, null=True)
+    driver = models.CharField(max_length=200, blank=True, null=True)
+    driver_car = models.CharField(max_length=200, blank=True, null=True)
+    storage_order = models.CharField(max_length=200, blank=True, null=True)
+    date_created = models.DateTimeField('date published', auto_now_add=True)
+    photo_1 = models.ImageField(blank=True, null=True)
+    photo_2 = models.ImageField(blank=True, null=True)
+    photo_3 = models.ImageField(blank=True, null=True)
+    photo_4 = models.ImageField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.logistic_order
