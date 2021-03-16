@@ -123,7 +123,7 @@ def new_customer(request):
     return render(request, 'wms/new_customer.html', context)
 
 def update_customer(request, customer_id):
-    # Обновление данных по контрагенту
+    # Обновление данных по пользователю
     customer = Customer.objects.get(id=customer_id)
     form = CustomerForm(instance=customer)
     if request.method == 'POST':
@@ -165,7 +165,7 @@ def new_storage(request):
     return render(request, 'wms/new_storage.html', context)
 
 def update_storage(request, storage_id):
-    # Обновление данных по контрагенту
+    # Обновление данных по складу
     storage = Storage.objects.get(id=storage_id)
     form = StorageForm(instance=storage)
     if request.method == 'POST':
@@ -207,7 +207,7 @@ def new_atm(request):
     return render(request, 'wms/new_atm.html', context)
 
 def update_atm(request, atm_id):
-    # Обновление данных по контрагенту
+    # Обновление данных по грузу
     atm = Atm.objects.get(id=atm_id)
     form = AtmForm(instance=atm)
     if request.method == 'POST':
@@ -217,6 +217,15 @@ def update_atm(request, atm_id):
             return redirect('wms:atms')
     context = {'form': form}
     return render(request, 'wms/update_atm.html', context)
+
+def delete_atm(request, atm_id):
+    # Удаление груза
+    atm = Atm.objects.get(id=atm_id)
+    if request.method == 'POST':
+        atm.delete()
+        return redirect('wms:atms')
+    context = {'item': atm}
+    return render(request, 'wms/delete_atm.html', context)
 
 def orders(request):
     # Выводит список заявок
@@ -252,6 +261,15 @@ def update_order(request, order_id):
             return redirect('wms:orders')
     context = {'form': form}
     return render(request, 'wms/update_order.html', context)
+
+def delete_order(request, order_id):
+    # Удаление груза
+    order = Order.objects.get(id=order_id)
+    if request.method == 'POST':
+        order.delete()
+        return redirect('wms:orders')
+    context = {'item': order}
+    return render(request, 'wms/delete_order.html', context)
 
 def operations(request):
     # Выводит список операций

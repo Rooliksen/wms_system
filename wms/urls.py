@@ -52,6 +52,8 @@ urlpatterns = [
     path('new_atm/', views.new_atm, name='new_atm'),
     # Обновление данных по конкретному грузу
     path('update_atm/<int:atm_id>/', views.update_atm, name='update_atm'),
+    # Удаление конкретного груза
+    path('delete_atm/<int:atm_id>/', views.delete_atm, name='delete_atm'),
 
     # Страница со списком всех заявок от клиента
     path('orders/', views.orders, name='orders'),
@@ -59,6 +61,8 @@ urlpatterns = [
     path('new_order/', views.new_order, name='new_order'),
     # Обновление данных по конкретной заявке
     path('update_order/<int:order_id>/', views.update_order, name='update_order'),
+    # Удаление конкретной заявки
+    path('delete_order/<int:order_id>/', views.delete_order, name='delete_order'),
 
     # Страница со списком всех операций
     path('operations/', views.operations, name='operations'),

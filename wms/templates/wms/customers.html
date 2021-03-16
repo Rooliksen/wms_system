@@ -27,7 +27,7 @@
         <td>{{ customer.email }}</td>
         <td>{{ customer.user }}</td>
         <td>
-          <a class="btn btn-sm btn-info" href="{% url 'wms:update_customer' customer.id %}">Изменить</a>
+          <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_customer' customer.id %}">Изменить</a>
         </td>
       </tr>
     {% empty %}

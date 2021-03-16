@@ -21,7 +21,7 @@
       </td>
       <td>{{ contractor.pub_date|date:'d.m.Y H:m' }}</td>
       <td>
-        <a class="btn btn-sm btn-info" href="{% url 'wms:update_contractor' contractor.id %}">Изменить</a>
+        <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_contractor' contractor.id %}">Изменить</a>
       </td>
     </tr>
     {% empty %}
