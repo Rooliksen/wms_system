@@ -185,7 +185,6 @@ def atms(request):
 def atm(request, atm_id):
     # Выводит один груз и все связанные с ним заявки
     atm = Atm.objects.get(id=atm_id)
-    orders = atm.orders.order_by('-date_in')
     context = {'atm': atm, 'orders': orders}
     return render(request, 'wms/atm.html', context)
 
@@ -232,6 +231,13 @@ def orders(request):
     orders = Order.objects.all().order_by('date_in')
     context = {'orders': orders}
     return render(request, 'wms/orders.html', context)
+
+def order(request, order_id):
+    # Выводит одну тему и все её записи
+    order = Order.objects.get(id=order_id)
+    items = order.orderitem_set.order_by('-date_added')
+    context = {'order': order, 'items': items}
+    return render(request, 'wms/order.html', context)
 
 def new_order(request):
     # Создание новой заявки

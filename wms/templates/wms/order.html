@@ -1,0 +1,66 @@
+{% extends "wms/base.html" %}
+
+{% block page_header %}
+  <h4>Заявка № {{ order }}</h4>
+{% endblock page_header %}
+
+
+{% block content %}
+<ul>
+  <li scope="col"><b>Дата создания:</b> {{ order.date_created|date:'d.m.Y H:m' }}</li>
+  <li scope="col"><b>Пользователь:</b> {{ order.customer }}</li>
+  <li scope="col"><b>№ заявки клиента:</b> {{ order.logistic_order }}</li>
+  <li scope="col"><b>Клиент:</b> {{ order.client }}</li>
+  <li scope="col"><b>Статус:</b> {{ order.status }}</li>
+  <li scope="col"><b>Дата приема:</b> {{ order.date_in|date:'d.m.Y' }}</li>
+  <li scope="col"><b>Дата отгрузки:</b> {{ order.date_out|date:'d.m.Y' }}</li>
+</ul>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Статус</th>
+      <th scope="col">Клиент</th>
+      <th scope="col">Склад</th>
+      <th scope="col">Дата приема</th>
+      <th scope="col">Дата отгрузки</th>
+      <th scope="col">Наименование</th>
+      <th scope="col">Серийный номер</th>
+      <th scope="col">ID груза</th>
+      <th scope="col">Размер</th>
+      <th scope="col">Комментарий</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+      <tr>
+        <td>{{ item.atm.status }}</td>
+        <td>{{ item.atm.client }}</td>
+        <td>{{ item.atm.storage }}</td>
+        <td>{{ item.atm.date_in|date:'d.m.Y' }}</td>
+        <td>{{ item.atm.date_out|date:'d.m.Y' }}</td>
+        <td>{{ item.atm.name }}</td>
+        <td>
+          <a href="">{{ item.atm.serial_num }}</a>
+        </td>
+        <td>{{ item.atm.atm_id }}</td>
+        <td>{{ item.atm.size }}</td>
+        <td>{{ item.atm.commentary }}</td>
+        <td>
+          <a class="btn btn-sm btn-secondary" href="">Изменить</a>
+        </td>
+        <td>
+          <a class="btn btn-sm btn-danger" href="">Удалить</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>Не добавлено ни одного груза. Добавьте первый груз.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div>
+  <a class="btn btn-primary mb-3" href="">Добавить новый груз</a>
+</div>
+{% endblock content %}

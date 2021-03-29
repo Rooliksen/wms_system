@@ -57,6 +57,8 @@ urlpatterns = [
 
     # Страница со списком всех заявок от клиента
     path('orders/', views.orders, name='orders'),
+    # Страница с детальной информацией по заявке
+    path('order/<int:order_id>/', views.order, name='order'),
     # Страница для добавления новой заявки
     path('new_order/', views.new_order, name='new_order'),
     # Обновление данных по конкретной заявке

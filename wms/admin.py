@@ -21,9 +21,13 @@ class OrderAdmin(admin.ModelAdmin):
 class AtmAdmin(admin.ModelAdmin):
     list_display = ('status', 'client', 'storage', 'date_in', 'date_out', 'name', 'serial_num', 'atm_id', 'size', 'commentary')
 
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('atm', 'order', 'date_added')
+
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Contractor, ContractorAdmin)
 admin.site.register(Customer, CustomerAdmin)
+admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Storage)
 admin.site.register(Atm, AtmAdmin)
 admin.site.register(Order, OrderAdmin)

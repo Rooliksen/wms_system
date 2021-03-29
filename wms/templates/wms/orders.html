@@ -31,6 +31,9 @@
         <td>{{ order.customer }}</td>
         <td>{{ order.date_created|date:'d.m.Y H:m' }}</td>
         <td>
+          <a class="btn btn-sm btn-secondary" href="{% url 'wms:order' order.id %}">Подробнее</a>
+        </td>
+        <td>
           <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_order' order.id %}">Изменить</a>
         </td>
         <td>

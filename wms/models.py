@@ -101,7 +101,6 @@ class Order(models.Model):
         choices=OrderStatus.choices,
         default=OrderStatus.draft,
     )
-    atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, blank=True, null=True)
     date_in = models.DateField('Дата приема', blank=True, null=True)
     date_out = models.DateField('Дата отгрузки', blank=True, null=True)
     driver = models.CharField(max_length=200, blank=True, null=True)
@@ -115,3 +114,9 @@ class Order(models.Model):
     
     def __str__(self):
         return self.logistic_order
+
+class OrderItem(models.Model):
+    # Элемент заявки
+    atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    date_added = models.DateTimeField(auto_now_add=True)
