@@ -185,7 +185,8 @@ def atms(request):
 def atm(request, atm_id):
     # Выводит один груз и все связанные с ним заявки
     atm = Atm.objects.get(id=atm_id)
-    context = {'atm': atm, 'orders': orders}
+    items = OrderItem.objects.filter(atm__pk=atm_id)
+    context = {'atm': atm, 'items': items}
     return render(request, 'wms/atm.html', context)
 
 def new_atm(request):
@@ -276,3 +277,12 @@ def delete_order(request, order_id):
         return redirect('wms:orders')
     context = {'item': order}
     return render(request, 'wms/delete_order.html', context)
+
+def delete_orderitem(request, orderitem_id):
+    # Удаление элемента заявки
+    orderitem = OrderItem.objects.get(id=orderitem_id)
+    if request.method == 'POST':
+        orderitem.delete()
+        return redirect('wms:order', order_id=orderitem.order_id)
+    context = {'orderitem': orderitem, 'order_id': order}
+    return render(request, 'wms/delete_orderitem.html', context)

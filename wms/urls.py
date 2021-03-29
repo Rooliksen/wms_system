@@ -65,4 +65,6 @@ urlpatterns = [
     path('update_order/<int:order_id>/', views.update_order, name='update_order'),
     # Удаление конкретной заявки
     path('delete_order/<int:order_id>/', views.delete_order, name='delete_order'),
+    # Удаление конкретного элемента заявки
+    path('delete_orderitem/<int:orderitem_id>/', views.delete_orderitem, name='delete_orderitem'),
 ]

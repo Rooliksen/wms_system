@@ -47,10 +47,10 @@
         <td>{{ item.atm.size }}</td>
         <td>{{ item.atm.commentary }}</td>
         <td>
-          <a class="btn btn-sm btn-secondary" href="">Изменить</a>
+          <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_atm' item.atm.id %}">Изменить</a>
         </td>
         <td>
-          <a class="btn btn-sm btn-danger" href="">Удалить</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'wms:delete_orderitem' item.id %}">Удалить</a>
         </td>
       </tr>
     {% empty %}

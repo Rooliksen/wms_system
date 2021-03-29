@@ -9,6 +9,21 @@
 
 
 {% block content %}
+<ul>
+  <li scope="col"><b>Статус:</b> {{ atm.status }}</li>
+  <li scope="col"><b>Клиент:</b> {{ atm.client }}</li>
+  <li scope="col"><b>Склад:</b> {{ atm.storage }}</li>
+  <li scope="col"><b>Дата приема:</b> {{ atm.date_in|date:'d.m.Y' }}</li>
+  <li scope="col"><b>Дата отгрузки:</b> {{ atm.date_out|date:'d.m.Y' }}</li>
+  <li scope="col"><b>Наименование:</b> {{ atm.name }}</li>
+  <li scope="col"><b>Серийный номер:</b> {{ atm.serial_num }}</li>
+  <li scope="col"><b>ID груза:</b> {{ atm.atm_id }}</li>
+  <li scope="col"><b>Размер:</b> {{ atm.size }}</li>
+  <li scope="col"><b>Комментарий:</b> {{ atm.commentary }}</li>
+</ul>
+
+<h4>Все связанные с грузом заявки</h4>
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -19,22 +34,20 @@
       <th scope="col">Дата приема</th>
       <th scope="col">Дата отгрузки</th>
       <th scope="col">Пользователь</th>
-      <th scope="col">Тип операции</th>
       <th scope="col">Дата создания</th>
     </tr>
   </thead>
   <tbody>
-    {% for order in orders %}
+    {% for item in items %}
       <tr>
-        <td>{{ order.logistic_order }}</td>
-        <td>{{ order.client }}</td>
-        <td>{{ order.status }}</td>
-        <td>{{ order.date_in|date:'d.m.Y' }}</td>
-        <td>{{ order.date_out|date:'d.m.Y' }}</td>
-        <td>{{ order.customer }}</td>
-        <td>{{ order.operation_client }}</td>
-        <td>{{ order.date_created|date:'d.m.Y H:m'  }}</td>
-      </tr>
+        <td>{{ item.order.logistic_order }}</td>
+        <td>{{ item.order.client }}</td>
+        <td>{{ item.order.atm }}</td>
+        <td>{{ item.order.status }}</td>
+        <td>{{ item.order.date_in|date:'d.m.Y' }}</td>
+        <td>{{ item.order.date_out|date:'d.m.Y' }}</td>
+        <td>{{ item.order.customer }}</td>
+        <td>{{ item.order.date_created|date:'d.m.Y H:m' }}</td>
     {% empty %}
       <tr>
         <td>Не добавлено ни одной заявки. Добавьте первую заявку.</td>
@@ -42,7 +55,4 @@
     {% endfor %}
   </tbody>
 </table>
-<div>
-  <a class="btn btn-primary mb-3" href="">Добавить новую заявку.</a>
-</div>
 {% endblock content %}
