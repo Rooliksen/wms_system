@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 
 from .filters import AtmFilter
+from django.core.paginator import Paginator, EmptyPage
 
 def index(request):
     # Домашняя страница приложения WMS
@@ -238,11 +239,20 @@ def orders(request):
 def order(request, order_id):
     # Выводит одну тему и все её записи
     order = Order.objects.get(id=order_id)
-    items = order.orderitem_set.order_by('-date_added')
     atms = Atm.objects.all().order_by('date_in')
+    items = order.orderitem_set.order_by('-date_added')
     myFilter = AtmFilter(request.GET, queryset=atms)
     atms = myFilter.qs
-    context = {'order_id': order_id, 'order': order,'orders': orders, 'items': items, 'atms': atms, 'myFilter': myFilter}
+
+    atms_paginator = Paginator(atms, 5)
+
+    atms_page_number = request.GET.get('page')
+
+    atms_page_obj = atms_paginator.get_page(atms_page_number)
+
+    context = {'order_id': order_id, 'order': order,
+        'orders': orders, 'items': items, 'atms': atms,
+        'myFilter': myFilter, 'atms_page_obj': atms_page_obj}
     return render(request, 'wms/order.html', context)
 
 def new_order_item(request, atm_id, **kwargs):
