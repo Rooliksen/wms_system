@@ -40,7 +40,9 @@
   <tbody>
     {% for item in items %}
       <tr>
-        <td>{{ item.order.logistic_order }}</td>
+        <td>
+          <a href="{% url 'wms:order' item.order.id %}">{{ item.atm.serial_num }}</a>
+        </td>
         <td>{{ item.order.client }}</td>
         <td>{{ item.order.atm }}</td>
         <td>{{ item.order.status }}</td>

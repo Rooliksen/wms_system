@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
+
+from .filters import AtmFilter
 
 def index(request):
     # Домашняя страница приложения WMS
@@ -237,8 +239,23 @@ def order(request, order_id):
     # Выводит одну тему и все её записи
     order = Order.objects.get(id=order_id)
     items = order.orderitem_set.order_by('-date_added')
-    context = {'order': order, 'items': items}
+    atms = Atm.objects.all().order_by('date_in')
+    myFilter = AtmFilter(request.GET, queryset=atms)
+    atms = myFilter.qs
+    context = {'order_id': order_id, 'order': order,'orders': orders, 'items': items, 'atms': atms, 'myFilter': myFilter}
     return render(request, 'wms/order.html', context)
+
+def new_order_item(request, atm_id, **kwargs):
+    # Создание нового элемента заявки
+    order_id = kwargs['order_id']
+    atm = Atm.objects.get(id=atm_id)
+    order = Order.objects.get(id=order_id)
+    order_item, created = OrderItem.objects.get_or_create(
+        atm=atm,
+        order=order,
+    )
+    context = {'order_item': order_item}
+    return redirect('wms:order', order_id=order_id)
 
 def new_order(request):
     # Создание новой заявки
@@ -286,3 +303,18 @@ def delete_orderitem(request, orderitem_id):
         return redirect('wms:order', order_id=orderitem.order_id)
     context = {'orderitem': orderitem, 'order_id': order}
     return render(request, 'wms/delete_orderitem.html', context)
+
+def delete_orderitem_from_list(request, orderitem_id):
+    # Удаление элемента заявки
+    orderitem = OrderItem.objects.get(id=orderitem_id)
+    orderitem.delete()
+    return redirect('wms:order', order_id=orderitem.order_id)
+    context = {'orderitem': orderitem, 'order_id': order}
+    return render(request, 'wms/delete_orderitem.html', context)
+
+def dashboard(request):
+    # Выводит одну тему и все её записи
+    order = Order.objects.get(id=order_id)
+    items = order.orderitem_set.order_by('-date_added')
+    context = {'order': order, 'items': items}
+    return render(request, 'wms/dashboard.html', context)

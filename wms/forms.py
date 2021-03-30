@@ -131,4 +131,10 @@ class OrderForm(forms.ModelForm):
             'photo_3': 'Фото № 3',
             'photo_4': 'Фото № 4',
             }
+
+class OrderItemForm(forms.ModelForm):
+    class Meta:
+        model = OrderItem
+        fields = []
+        labels = {'name': 'Наименование', 'order': 'Заявка'}
             

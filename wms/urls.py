@@ -67,4 +67,11 @@ urlpatterns = [
     path('delete_order/<int:order_id>/', views.delete_order, name='delete_order'),
     # Удаление конкретного элемента заявки
     path('delete_orderitem/<int:orderitem_id>/', views.delete_orderitem, name='delete_orderitem'),
+    # Удаление конкретного элемента заявки из листа на странице заявки
+    path('delete_orderitem_from_list/<int:orderitem_id>/', views.delete_orderitem_from_list, name='delete_orderitem_from_list'),
+    
+    # Рабочая панель
+    path('dashboard/', views.dashboard, name='dashboard'),
+    # Добавление нового элемента таблицы
+    path('new_order_item/<int:order_id>/<int:atm_id>/', views.new_order_item, name='new_order_item'),
 ]
