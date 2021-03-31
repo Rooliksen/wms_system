@@ -6,19 +6,20 @@
 
 
 {% block content %}
-<table class="table table-bordered">
+<table class="table table-hover table-sm table-bordered">
   <thead>
     <tr>
       <th scope="col">Статус</th>
       <th scope="col">Клиент</th>
       <th scope="col">Склад</th>
-      <th scope="col">Дата приема</th>
-      <th scope="col">Дата отгрузки</th>
       <th scope="col">Наименование</th>
       <th scope="col">Серийный номер</th>
       <th scope="col">ID груза</th>
       <th scope="col">Размер</th>
       <th scope="col">Комментарий</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -27,20 +28,27 @@
         <td>{{ atm.status }}</td>
         <td>{{ atm.client }}</td>
         <td>{{ atm.storage }}</td>
-        <td>{{ atm.date_in|date:'d.m.Y' }}</td>
-        <td>{{ atm.date_out|date:'d.m.Y' }}</td>
         <td>{{ atm.name }}</td>
-        <td>
-          <a href="{% url 'wms:atm' atm.id %}">{{ atm.serial_num }}</a>
-        </td>
+        <td>{{ atm.serial_num }}</td>
+        {% if atm.atm_id == None %}
+        <td></td>
+        {% else %}
         <td>{{ atm.atm_id }}</td>
+        {% endif %}
         <td>{{ atm.size }}</td>
+        {% if atm.commentary == None %}
+        <td></td>
+        {% else %}
         <td>{{ atm.commentary }}</td>
+        {% endif %}
         <td>
-          <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_atm' atm.id %}">Изменить</a>
+          <a class="btn btn-sm btn-outline-primary" href="{% url 'wms:atm' atm.id %}">Подробнее</a>
         </td>
         <td>
-          <a class="btn btn-sm btn-danger" href="{% url 'wms:delete_atm' atm.id %}">Удалить</a>
+          <a class="btn btn-sm btn-outline-secondary" href="{% url 'wms:update_atm' atm.id %}">Изменить</a>
+        </td>
+        <td>
+          <a class="btn btn-sm btn-outline-danger" href="{% url 'wms:delete_atm' atm.id %}">Удалить</a>
         </td>
       </tr>
     {% empty %}
@@ -51,7 +59,7 @@
   </tbody>
 </table>
 <div>
-  <a class="btn btn-primary mb-3" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
+  <a class="btn btn-outline-secondary" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
 </div>
-
+<br>
 {% endblock content %}

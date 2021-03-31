@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<table class="table table-bordered">
+<table class="table table-hover table-sm table-bordered">
   <thead>
     <tr>
       <th scope="col">№ заявки клиента</th>
@@ -17,6 +17,9 @@
       <th scope="col">Дата отгрузки</th>
       <th scope="col">Пользователь</th>
       <th scope="col">Дата создания</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -31,13 +34,13 @@
         <td>{{ order.customer }}</td>
         <td>{{ order.date_created|date:'d.m.Y H:m' }}</td>
         <td>
-          <a class="btn btn-sm btn-secondary" href="{% url 'wms:order' order.id %}">Подробнее</a>
+          <a class="btn btn-sm btn-outline-primary" href="{% url 'wms:order' order.id %}">Подробнее</a>
         </td>
         <td>
-          <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_order' order.id %}">Изменить</a>
+          <a class="btn btn-sm btn-outline-secondary" href="{% url 'wms:update_order' order.id %}">Изменить</a>
         </td>
         <td>
-          <a class="btn btn-sm btn-danger" href="{% url 'wms:delete_order' order.id %}">Удалить</a>
+          <a class="btn btn-sm btn-outline-danger" href="{% url 'wms:delete_order' order.id %}">Удалить</a>
         </td>
       </tr>
     {% empty %}
@@ -48,7 +51,7 @@
   </tbody>
 </table>
 <div>
-  <a class="btn btn-primary mb-3" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
+  <a class="btn btn-outline-secondary" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
 </div>
 
 {% endblock content %}

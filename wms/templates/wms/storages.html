@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<table class="table table-bordered">
+<table class="table table-hover table-sm table-bordered">
   <thead>
     <tr>
       <th scope="col">Контрагент</th>
@@ -18,15 +18,15 @@
       <th scope="col">Отгрузка EUR, руб</th>
       <th scope="col">Прием FIN</th>
       <th scope="col">Отгрузка FIN</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     {% for storage in storages %}
       <tr>
         <td>{{ storage.contractor }}</td>
-        <td>
-          <a href="{% url 'wms:storage' storage.id %}">{{ storage.address }}</a>
-        </td>
+        <td>{{ storage.address }}</td>
         <td>{{ storage.rate_pallet }}</td>
         <td>{{ storage.rate_oversize_pallet }}</td>
         <td>{{ storage.rate_volume }}</td>
@@ -35,7 +35,10 @@
         <td>{{ storage.rate_oversize_in }}</td>
         <td>{{ storage.rate_oversize_out }}</td>
         <td>
-          <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_storage' storage.id %}">Изменить</a>
+          <a class="btn btn-sm btn-outline-primary" href="{% url 'wms:storage' storage.id %}">Подробнее</a>
+        </td>
+        <td>
+          <a class="btn btn-sm btn-outline-secondary" href="{% url 'wms:update_storage' storage.id %}">Изменить</a>
         </td>
       </tr>
     {% empty %}
@@ -46,6 +49,7 @@
   </tbody>
 </table>
 <div>
-  <a class="btn btn-primary mb-3" href="{% url 'wms:new_storage' %}">Добавить новый склад</a>
+  <a class="btn btn-outline-secondary" href="{% url 'wms:new_storage' %}">Добавить новый склад</a>
 </div>
+<br>
 {% endblock content %}
