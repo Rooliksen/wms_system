@@ -241,7 +241,7 @@ def order(request, order_id):
     # Выводит одну тему и все её записи
     order = Order.objects.get(id=order_id)
     atms = Atm.objects.all().order_by('date_in')
-    items = order.orderitem_set.order_by('-date_added')
+    items = OrderItem.objects.filter(order=order)
     myFilter = AtmFilter(request.GET, queryset=atms)
     atms = myFilter.qs
 

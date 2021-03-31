@@ -40,9 +40,14 @@
   <tbody>
     {% for item in items %}
       <tr>
+        {% if item.order.id != None %}
         <td>
           <a href="{% url 'wms:order' item.order.id %}">{{ item.order.logistic_order }}</a>
         </td>
+        {% else %}
+        <td>{{ item.order.logistic_order }}</td>
+        {% endif %}
+        
         <td>{{ item.order.client }}</td>
         <td>{{ item.order.atm }}</td>
         <td>{{ item.order.status }}</td>
