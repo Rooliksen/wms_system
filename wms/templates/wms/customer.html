@@ -23,7 +23,9 @@
   <tbody>
     {% for order in orders %}
       <tr>
-        <td>{{ order.logistic_order }}</td>
+        <td>
+          <a href="{% url 'wms:order' order.id %}">{{ order.logistic_order }}</a>
+        </td>
         <td>{{ order.client }}</td>
         <td>{{ order.atm }}</td>
         <td>{{ order.status }}</td>

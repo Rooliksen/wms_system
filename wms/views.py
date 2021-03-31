@@ -188,7 +188,8 @@ def atms(request):
 def atm(request, atm_id):
     # Выводит один груз и все связанные с ним заявки
     atm = Atm.objects.get(id=atm_id)
-    items = OrderItem.objects.filter(atm__pk=atm_id)
+    items = OrderItem.objects.filter(atm=atm)
+
     context = {'atm': atm, 'items': items}
     return render(request, 'wms/atm.html', context)
 

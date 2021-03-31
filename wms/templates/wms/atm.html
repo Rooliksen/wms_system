@@ -24,7 +24,7 @@
 
 <h4>Все связанные с грузом заявки</h4>
 
-<table class="table table-bordered">
+<table class="table table-hover table-sm">
   <thead>
     <tr>
       <th scope="col">№ заявки клиента</th>
@@ -41,7 +41,7 @@
     {% for item in items %}
       <tr>
         <td>
-          <a href="{% url 'wms:order' item.order.id %}">{{ item.atm.serial_num }}</a>
+          <a href="{% url 'wms:order' item.order.id %}">{{ item.order.logistic_order }}</a>
         </td>
         <td>{{ item.order.client }}</td>
         <td>{{ item.order.atm }}</td>
