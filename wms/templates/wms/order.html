@@ -41,7 +41,7 @@
               <td>{{ item.atm.client }}</td>
               <td>{{ item.atm.name }}</td>
               <td>
-                <a href="{% url 'wms:atm' item.atm.id %}">{{ item.atm.serial_num }}</a>
+                <a class="text-decoration-none" href="{% url 'wms:atm' item.atm.id %}">{{ item.atm.serial_num }}</a>
               </td>
               {% if item.atm.atm_id == None %}
               <td></td>
@@ -71,7 +71,7 @@
       <div class="col">
         <div class="card card-body">
 
-          <form method="get">
+          <form method="get" class="form-select">
             <a>Серийный номер: </a>{{myFilter.form.serial_num}}
             <a>Склад: </a>{{myFilter.form.storage}}
 
@@ -106,7 +106,7 @@
             <td>{{ atm.date_out|date:'d.m.Y' }}</td>
             <td>{{ atm.name }}</td>
             <td>
-              <a href="{% url 'wms:atm' atm.id %}">{{ atm.serial_num }}</a>
+              <a class="text-decoration-none" href="{% url 'wms:atm' atm.id %}">{{ atm.serial_num }}</a>
             </td>
             <td>
               <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_atm' atm.id %}">Изменить</a>

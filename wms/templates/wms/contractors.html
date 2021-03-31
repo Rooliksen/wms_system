@@ -6,18 +6,19 @@
 
 
 {% block content %}
-<table class="table table-bordered">
-  <thead>
+<table class="table table-hover table-bordered">
+  <thead class="thead-light">
     <tr>
       <th scope="col">Наименование</th>
       <th scope="col">Дата добавления</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     {% for contractor in contractors %}
     <tr>
       <td>
-        <a href="{% url 'wms:contractor' contractor.id %}">{{ contractor.name }}</a>
+        <a class="text-decoration-none" href="{% url 'wms:contractor' contractor.id %}">{{ contractor.name }}</a>
       </td>
       <td>{{ contractor.pub_date|date:'d.m.Y H:m' }}</td>
       <td>
@@ -31,5 +32,8 @@
     {% endfor %}
   </tbody>
 </table>
-  <a class="btn btn-primary mb-3" href="{% url 'wms:new_contractor' %}">Добавить нового контрагента</a>
+<div>
+  <a class="btn btn-outline-secondary" href="{% url 'wms:new_contractor' %}">Добавить нового контрагента</a>
+</div>
+<br>
 {% endblock content %}

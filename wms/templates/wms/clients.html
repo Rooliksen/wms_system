@@ -7,7 +7,7 @@
 
 {% block content %}
 <table class="table table-hover table-sm table-bordered">
-  <thead>
+  <thead class="thead-light">
     <tr>
       <th scope="col">Наименование</th>
       <th scope="col">Дата добавления</th>
@@ -18,7 +18,7 @@
     {% for client in clients %}
     <tr>
       <td>
-        <a href="{% url 'wms:client' client.id %}">{{ client.name }}</a>
+        <a class="text-decoration-none" href="{% url 'wms:client' client.id %}">{{ client.name }}</a>
       </td>
       <td>{{ client.pub_date|date:'d.m.Y H:m' }}</td>
       <td>
