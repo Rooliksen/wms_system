@@ -1,2 +1,3 @@
 /db.sqlite3
 /wms/migrations
+/static/images
