@@ -6,50 +6,50 @@
 
 
 {% block content %}
-<table class="table table-hover table-sm table-bordered">
+<table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
   <thead class="thead-light">
     <tr>
-      <th scope="col">Контрагент</th>
-      <th scope="col">Адрес</th>
-      <th scope="col">Хранение EUR, руб/сут</th>
-      <th scope="col">Хранение FIN, руб/сут</th>
-      <th scope="col">Хранение V, м3/сут</th>
-      <th scope="col">Прием EUR, руб</th>
-      <th scope="col">Отгрузка EUR, руб</th>
-      <th scope="col">Прием FIN</th>
-      <th scope="col">Отгрузка FIN</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th>Контрагент</th>
+      <th>Адрес</th>
+      <th>Хранение EUR, руб/сут</th>
+      <th>Хранение FIN, руб/сут</th>
+      <th>Хранение V, м3/сут</th>
+      <th>Прием EUR, руб</th>
+      <th>Отгрузка EUR, руб</th>
+      <th>Прием FIN</th>
+      <th>Отгрузка FIN</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     {% for storage in storages %}
       <tr>
-        <td>{{ storage.contractor }}</td>
-        <td>{{ storage.address }}</td>
-        <td>{{ storage.rate_pallet }}</td>
-        <td>{{ storage.rate_oversize_pallet }}</td>
-        <td>{{ storage.rate_volume }}</td>
-        <td>{{ storage.rate_in }}</td>
-        <td>{{ storage.rate_out }}</td>
-        <td>{{ storage.rate_oversize_in }}</td>
-        <td>{{ storage.rate_oversize_out }}</td>
-        <td>
-          <a class="btn btn-sm btn-outline-primary" href="{% url 'wms:storage' storage.id %}">Подробнее</a>
+        <td class="col-1">{{ storage.contractor }}</td>
+        <td class="col-1">{{ storage.address }}</td>
+        <td class="col-1">{{ storage.rate_pallet }}</td>
+        <td class="col-1">{{ storage.rate_oversize_pallet }}</td>
+        <td class="col-1">{{ storage.rate_volume }}</td>
+        <td class="col-1">{{ storage.rate_in }}</td>
+        <td class="col-1">{{ storage.rate_out }}</td>
+        <td class="col-1">{{ storage.rate_oversize_in }}</td>
+        <td class="col-1">{{ storage.rate_oversize_out }}</td>
+        <td class="col-1">
+          <a class="link-primary" href="{% url 'wms:storage' storage.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
         </td>
-        <td>
-          <a class="btn btn-sm btn-outline-secondary" href="{% url 'wms:update_storage' storage.id %}">Изменить</a>
+        <td class="col-1">
+          <a class="link-secondary" href="{% url 'wms:update_storage' storage.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
         </td>
       </tr>
     {% empty %}
-      <tr>
+      <tr class="col-12">
         <td>Не добавлено ни одного склада. Добавьте первый адрес.</td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
 <div>
-  <a class="btn btn-outline-secondary" href="{% url 'wms:new_storage' %}">Добавить новый склад</a>
+  <a class="btn btn-outline-primary" href="{% url 'wms:new_storage' %}">Добавить новый склад</a>
 </div>
 <br>
 {% endblock content %}

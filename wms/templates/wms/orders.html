@@ -6,52 +6,50 @@
 
 
 {% block content %}
-<table class="table table-hover table-sm table-bordered">
+<table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
   <thead class="thead-light">
     <tr>
-      <th scope="col">№ заявки клиента</th>
-      <th scope="col">Клиент</th>
-      <th scope="col">Груз</th>
-      <th scope="col">Статус</th>
-      <th scope="col">Дата приема</th>
-      <th scope="col">Дата отгрузки</th>
-      <th scope="col">Пользователь</th>
-      <th scope="col">Дата создания</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th>№ заявки</th>
+      <th>Создана</th>
+      <th>Клиент</th>
+      <th>Дата приема</th>
+      <th>Дата отгрузки</th>
+      <th>Пользователь</th>
+      <th>Статус</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     {% for order in orders %}
       <tr>
-        <td>{{ order.logistic_order }}</td>
-        <td>{{ order.client }}</td>
-        <td>{{ order.atm }}</td>
-        <td>{{ order.status }}</td>
-        <td>{{ order.date_in|date:'d.m.Y' }}</td>
-        <td>{{ order.date_out|date:'d.m.Y' }}</td>
-        <td>{{ order.customer }}</td>
-        <td>{{ order.date_created|date:'d.m.Y H:m' }}</td>
-        <td>
-          <a class="btn btn-sm btn-outline-primary" href="{% url 'wms:order' order.id %}">Подробнее</a>
+        <td class="col-1">{{ order.logistic_order }}</td>
+        <td class="col-1">{{ order.date_created|date:'d.m.Y H:m' }}</td>
+        <td class="col-1">{{ order.client }}</td>
+        <td class="col-1">{{ order.date_in|date:'d.m.Y' }}</td>
+        <td class="col-1">{{ order.date_out|date:'d.m.Y' }}</td>
+        <td class="col-1">{{ order.customer }}</td>
+        <td class="col-1">{{ order.status }}</td>
+        <td class="col-1">
+          <a class="link-primary" href="{% url 'wms:order' order.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
         </td>
-        <td>
-          <a class="btn btn-sm btn-outline-secondary" href="{% url 'wms:update_order' order.id %}">Изменить</a>
+        <td class="col-1">
+          <a class="link-secondary" href="{% url 'wms:update_order' order.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
         </td>
-        <td>
-          <a class="btn btn-sm btn-outline-danger" href="{% url 'wms:delete_order' order.id %}">Удалить</a>
+        <td class="col-1">
+          <a class="link-danger" href="{% url 'wms:delete_order' order.id %}"><i class="bi bi-trash" title="Удалить"></i></a>
         </td>
       </tr>
     {% empty %}
-      <tr>
+      <tr class="col-12">
         <td>Не добавлено ни одной заявки. Добавьте первую заявку.</td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
 <div>
-  <a class="btn btn-outline-secondary" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
+  <a class="btn btn-outline-primary" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
 </div>
 
 {% endblock content %}

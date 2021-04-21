@@ -6,12 +6,9 @@
 
 
 {% block content %}
-<div class="container">
+
   <div class="row">
-    <div class="col-sm">
-      <div class="row">
-        <h4>Подробная информация по заявке:</h4>
-      </div>
+    <div class="col mt-2">
       <a scope="col"><b>Дата создания:</b> {{ order.date_created|date:'d.m.Y H:m' }}</a><br>
       <a scope="col"><b>Пользователь:</b> {{ order.customer }}</a><br>
       <a scope="col"><b>№ заявки клиента:</b> {{ order.logistic_order }}</a><br>
@@ -20,117 +17,115 @@
       <a scope="col"><b>Дата приема:</b> {{ order.date_in|date:'d.m.Y' }}</a><br>
       <a scope="col"><b>Дата отгрузки:</b> {{ order.date_out|date:'d.m.Y' }}</a><br>
     </div>
-    <div class="col-sm">
-      <div class="row">
-        <h4>Позиции в текущей заявке</h4>
+  </div>
+    <div class="row">
+      <div class="col">
+        <table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
+          <h4 class="mt-3">Список позиций</h4>
+          <thead class="thead-light">
+            <tr>
+              <th>Клиент</th>
+              <th>Наименование</th>
+              <th>S/N</th>
+              <th>ID</th>
+              <th><i class="bi bi-list-nested"></i></th>
+              <th><i class="bi bi-box-arrow-right"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+              <tr class="text-center">
+                <td class="col-2 text-center">{{ item.atm.client }}</td>
+                <td class="col-2 text-center">{{ item.atm.name }}</td>
+                <td class="col-2 text-center">
+                  <a class="text-decoration-none" href="{% url 'wms:atm' item.atm.id %}">{{ item.atm.serial_num }}</a>
+                </td>
+                {% if item.atm.atm_id == None %}
+                <td class="col-2 text-center"></td>
+                {% else %}
+                <td class="col-2 text-center">{{ item.atm.atm_id }}</td>
+                {% endif %}
+                <td class="col-1 text-center">
+                  <a class="link-secondary" href="{% url 'wms:update_atm' item.atm.id %}"><i class="bi bi-pencil-square"></i></a>
+                </td>
+                <td class="col-1 text-center">
+                  <a class="link-warning" href="{% url 'wms:delete_orderitem_from_list' item.id %}"><i class="bi bi-x-circle"></i></a>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td>Не добавлено ни одного груза. Добавьте первый груз.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-      <table class="table table-hover table-sm table-bordered">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h4>Поиск груза по базе для добавления</h4>
+      <form method="get">
+        <div class="input-group mb-3">
+          {{myFilter.form.serial_num}}
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon1">Поиск</button>
+        </div>
+        <div class="input-group mb-3">
+          {{myFilter.form.storage}}
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon1">Поиск</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-hover table-sm table-bordered table-responsive text-center">
         <thead class="thead-light">
           <tr>
-            <th scope="col">Клиент</th>
-            <th scope="col">Наименование</th>
-            <th scope="col">S/N</th>
-            <th scope="col">ID</th>
-            <th scope="col">Изменение</th>
-            <th scope="col">Удаление</th>
+            <th>Статус</th>
+            <th>Клиент</th>
+            <th>Склад</th>
+            <th>Наименование</th>
+            <th>S/N</th>
+            <th><i class="bi bi-list-nested"></i></th>
+            <th><i class="bi bi-box-arrow-right"></i></th>
           </tr>
         </thead>
         <tbody>
-          {% for item in items %}
-            <tr>
-              <td>{{ item.atm.client }}</td>
-              <td>{{ item.atm.name }}</td>
-              <td>
-                <a class="text-decoration-none" href="{% url 'wms:atm' item.atm.id %}">{{ item.atm.serial_num }}</a>
+          {% for atm in atms_page_obj %}
+            <tr class="text-center">
+              <td class="col-2">{{ atm.status }}</td>
+              <td class="col-2">{{ atm.client }}</td>
+              <td class="col-2">{{ atm.storage }}</td>
+              <td class="col-2">{{ atm.name }}</td>
+              <td class="col-2">
+                <a class="text-decoration-none" href="{% url 'wms:atm' atm.id %}">{{ atm.serial_num }}</a>
               </td>
-              {% if item.atm.atm_id == None %}
-              <td></td>
-              {% else %}
-              <td>{{ item.atm.atm_id }}</td>
-              {% endif %}
-              <td>
-                <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_atm' item.atm.id %}">Изменить</a>
+              <td class="col-1">
+                <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}"><i class="bi bi-pencil-square"></i></a>
               </td>
-              <td>
-                <a class="btn btn-sm btn-secondary" href="{% url 'wms:delete_orderitem_from_list' item.id %}">Удалить</a>
+              <td class="col-1">
+                <a class="link-success" href="{% url 'wms:new_order_item' order_id atm.id %}"><i class="bi bi-plus-circle"></i></a>
               </td>
             </tr>
           {% empty %}
             <tr>
-              <td>Не добавлено ни одного груза. Добавьте первый груз.</td>
+              <td>Ничего не найдено.</td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
   </div>
-    <div class="row">
-      <h4>Список всех грузов для добавления в заявку</h4>
-    </div>
-    <div class="row">
-      <div class="col">
-        <div class="card card-body">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+  {% if atms_page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ atms_page_obj.previous_page_number }}">Предыдущая</a></li>
+  {% endif %}
+  {% if atms_page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ atms_page_obj.next_page_number }}">Следующая</a></li>
+  {% endif %}
+    </ul>
+  </nav>
 
-          <form method="get" class="form-select">
-            <a>Серийный номер: </a>{{myFilter.form.serial_num}}
-            <a>Склад: </a>{{myFilter.form.storage}}
-
-            <button class="btn btn-primary" type="submit">Search</button>
-          </form>
-
-        </div>
-      </div>
-      
-    </div>
-    <table class="table table-hover table-sm table-bordered">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Статус</th>
-          <th scope="col">Клиент</th>
-          <th scope="col">Склад</th>
-          <th scope="col">Дата приема</th>
-          <th scope="col">Дата отгрузки</th>
-          <th scope="col">Наименование</th>
-          <th scope="col">S/N</th>
-          <th scope="col">Изменение</th>
-          <th scope="col">Добавление</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for atm in atms_page_obj %}
-          <tr>
-            <td>{{ atm.status }}</td>
-            <td>{{ atm.client }}</td>
-            <td>{{ atm.storage }}</td>
-            <td>{{ atm.date_in|date:'d.m.Y' }}</td>
-            <td>{{ atm.date_out|date:'d.m.Y' }}</td>
-            <td>{{ atm.name }}</td>
-            <td>
-              <a class="text-decoration-none" href="{% url 'wms:atm' atm.id %}">{{ atm.serial_num }}</a>
-            </td>
-            <td>
-              <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_atm' atm.id %}">Изменить</a>
-            </td>
-            <td>
-              <a class="btn btn-sm btn-secondary" href="{% url 'wms:new_order_item' order_id atm.id %}">Добавить</a>
-            </td>
-          </tr>
-        {% empty %}
-          <tr>
-            <td>Ничего не найдено.</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-    {% if atms_page_obj.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page={{ atms_page_obj.previous_page_number }}">Предыдущая</a></li>
-    {% endif %}
-    {% if atms_page_obj.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ atms_page_obj.next_page_number }}">Следующая</a></li>
-    {% endif %}
-      </ul>
-    </nav>
-</div>
 {% endblock content %}

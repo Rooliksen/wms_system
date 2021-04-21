@@ -6,33 +6,33 @@
 
 
 {% block content %}
-<table class="table table-hover table-bordered">
+<table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
   <thead class="thead-light">
     <tr>
-      <th scope="col">Имя</th>
-      <th scope="col">Должность</th>
-      <th scope="col">Телефон</th>
-      <th scope="col">Email</th>
-      <th scope="col">Аккаунт</th>
-      <th scope="col"></th>
+      <th>Имя</th>
+      <th>Должность</th>
+      <th>Телефон</th>
+      <th>Email</th>
+      <th>Аккаунт</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     {% for customer in customers %}
       <tr>
-        <td>
+        <td class="col-2">
           <a class="text-decoration-none" href="{% url 'wms:customer' customer.id %}">{{ customer.name }}</a>
         </td>
-        <td>{{ customer.post }}</td>
-        <td>{{ customer.phone }}</td>
-        <td>{{ customer.email }}</td>
-        <td>{{ customer.user }}</td>
-        <td>
-          <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_customer' customer.id %}">Изменить</a>
+        <td class="col-2">{{ customer.post }}</td>
+        <td class="col-2">{{ customer.phone }}</td>
+        <td class="col-2">{{ customer.email }}</td>
+        <td class="col-2">{{ customer.user }}</td>
+        <td class="col-2">
+          <a class="link-secondary" href="{% url 'wms:update_customer' customer.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
         </td>
       </tr>
     {% empty %}
-      <tr>
+      <tr class="col-12">
         <td>Не добавлено ни одного пользователя. Добавьте первого пользователя.</td>
       </tr>
     {% endfor %}

@@ -1,15 +1,26 @@
 {% extends "wms/base.html" %}
-{% load bootstrap4 %}
+
+{% block page_header %}
+  <h4>Регистрация</h4>
+{% endblock page_header %}
 
 {% block content %}
 
   <form method="post" action="{% url 'users:register' %}" class="form">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-    <button name="submit" class="btn btn-primary">Вход</button>
-    {% endbuttons %}
-    <input type="hidden" name="next" value="{% url 'wms:index' %}" />
+    <div>
+      {% csrf_token %}
+      {% for field in form %}
+      <p>
+          {{ field.label_tag }}<br>
+          {{ field }}
+          {% if field.help_text %}
+              <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+          {% endfor %}
+      </p>
+      {% endfor %}
+    <button class="btn btn-outline-success" type="submit">Регистрация</button>
   </form>
-
 {% endblock content %}

@@ -6,27 +6,27 @@
 
 
 {% block content %}
-<table class="table table-hover table-sm table-bordered">
+<table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
   <thead class="thead-light">
     <tr>
-      <th scope="col">Наименование</th>
-      <th scope="col">Дата добавления</th>
-      <th scope="col"></th>
+      <th>Наименование</th>
+      <th>Дата добавления</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     {% for client in clients %}
     <tr>
-      <td>
+      <td class="col-5">
         <a class="text-decoration-none" href="{% url 'wms:client' client.id %}">{{ client.name }}</a>
       </td>
-      <td>{{ client.pub_date|date:'d.m.Y H:m' }}</td>
-      <td>
-        <a class="btn btn-sm btn-secondary" href="{% url 'wms:update_client' client.id %}">Изменить</a>
+      <td class="col-6">{{ client.pub_date|date:'d.m.Y H:m' }}</td>
+      <td class="col-1">
+        <a class="link-secondary" href="{% url 'wms:update_client' client.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
       </td>
     </tr>
     {% empty %}
-    <tr>
+    <tr class="col-12">
       <td>Не добавлено ни одного клиента. Добавьте первого клиента.</td>
     </tr>
     {% endfor %}

@@ -7,12 +7,18 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = ['name']
         labels = {'name': 'Наименование'}
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control col-sm-3'}),
+        }
 
 class ContractorForm(forms.ModelForm):
     class Meta:
         model = Contractor
         fields = ['name']
         labels = {'name': 'Наименование'}
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control col-sm-3'}),
+        }
 
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -24,6 +30,13 @@ class CustomerForm(forms.ModelForm):
             'post': 'Должность',
             'phone': 'Телефон',
             'email': 'Email',
+            }
+        widgets = {
+            'user': forms.Select(attrs={'class': 'form-select col-sm-3'}),
+            'name': forms.TextInput(attrs={'class': 'form-control col-sm-3'}),
+            'post': forms.TextInput(attrs={'class': 'form-control col-sm-3'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control col-sm-3'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control col-sm-3'})
             }
 
 class StorageForm(forms.ModelForm):

@@ -1,7 +1,5 @@
 {% extends "wms/base.html" %}
 
-{% load crispy_forms_tags %}
-
 {% block page_header %}
 
 <h4>Редактирование пользователя</h4>
@@ -13,30 +11,17 @@
 <form method="post" novalidate autocomplete="off">
   {% csrf_token %}
   <div class="row">
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.user|as_crispy_field }}
-      </div>
+    <div class="col-sm-3">{{ form.user }}</div>
+    <div class="col-sm-3">{{ form.name }}</div>
+  </div>
+    <div class="col-sm-3">
+      {{ form.post }}
     </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.name|as_crispy_field }}
-      </div>
+    <div class="col-sm-3">
+      {{ form.phone }}
     </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.post|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.phone|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.email|as_crispy_field }}
-      </div>
+    <div class="col-sm-3">
+      {{ form.email }}
     </div>
   </div>
   <button type="submit" class="btn btn-success mb-3">Сохранить данные пользователя</button>
