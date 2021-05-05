@@ -10,36 +10,41 @@
 
 {% block content %}
 
-<form method="post" novalidate autocomplete="off">
+<form method="post" autocomplete="off">
   {% csrf_token %}
   <div class="row">
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.user|as_crispy_field }}
+        <div class="mb-2">{{ form.user.label }}</div>
+      {{ form.user }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.name|as_crispy_field }}
+        <div class="mb-2">{{ form.name.label }}</div>
+      {{ form.name }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.post|as_crispy_field }}
+        <div class="mb-2">{{ form.post.label }}</div>
+      {{ form.post }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.phone|as_crispy_field }}
+        <div class="mb-2">{{ form.phone.label }}</div>
+      {{ form.phone }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.email|as_crispy_field }}
+        <div class="mb-2">{{ form.email.label }}</div>
+      {{ form.email }}
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-success mb-3">Сохранить нового пользователя</button>
+  <button type="submit" class="btn btn-outline-success mb-3">Сохранить нового пользователя</button>
 </form>
 
 {% endblock content %}

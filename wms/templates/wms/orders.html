@@ -6,38 +6,49 @@
 
 
 {% block content %}
+<div class="d-flex flex-row-reverse">
+  <a class="btn btn-outline-secondary mb-2" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
+</div>
 <table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
   <thead class="thead-light">
     <tr>
       <th>№ заявки</th>
-      <th>Создана</th>
+      <th>Время создания</th>
       <th>Клиент</th>
       <th>Дата приема</th>
       <th>Дата отгрузки</th>
       <th>Пользователь</th>
       <th>Статус</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Подробнее</th>
+      <th>Изменить</th>
+      <th>Удалить</th>
     </tr>
   </thead>
   <tbody>
     {% for order in orders %}
-      <tr>
+      <tr class="text-left">
         <td class="col-1">{{ order.logistic_order }}</td>
         <td class="col-1">{{ order.date_created|date:'d.m.Y H:m' }}</td>
-        <td class="col-1">{{ order.client }}</td>
+        {% if order.client == None %}
+        <td class="col-1 text-break"></td>
+        {% else %}
+        <td class="col-1 text-break">{{ order.client }}</td>
+        {% endif %}
         <td class="col-1">{{ order.date_in|date:'d.m.Y' }}</td>
         <td class="col-1">{{ order.date_out|date:'d.m.Y' }}</td>
-        <td class="col-1">{{ order.customer }}</td>
-        <td class="col-1">{{ order.status }}</td>
-        <td class="col-1">
+        {% if order.customer == None %}
+        <td class="col-1 text-break"></td>
+        {% else %}
+        <td class="col-1 text-break">{{ order.customer }}</td>
+        {% endif %}
+        <td class="col-1 text-center">{{ order.status }}</td>
+        <td class="col-1 text-center">
           <a class="link-primary" href="{% url 'wms:order' order.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
         </td>
-        <td class="col-1">
+        <td class="col-1 text-center">
           <a class="link-secondary" href="{% url 'wms:update_order' order.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
         </td>
-        <td class="col-1">
+        <td class="col-1 text-center">
           <a class="link-danger" href="{% url 'wms:delete_order' order.id %}"><i class="bi bi-trash" title="Удалить"></i></a>
         </td>
       </tr>
@@ -48,8 +59,5 @@
     {% endfor %}
   </tbody>
 </table>
-<div>
-  <a class="btn btn-outline-primary" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
-</div>
 
 {% endblock content %}

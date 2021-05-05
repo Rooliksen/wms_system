@@ -6,17 +6,17 @@
 
 
 {% block content %}
+<div class="d-flex flex-row-reverse">
+  <a class="btn btn-outline-secondary mb-2" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
+</div>
 <table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
   <thead class="thead-light">
     <tr>
-      <th>Статус</th>
-      <th>Клиент</th>
       <th>Склад</th>
+      <th>Клиент</th>
       <th>Наименование</th>
       <th>Серийный номер</th>
-      <th>ID груза</th>
-      <th>Размер</th>
-      <th>Комментарий</th>
+      <th>Статус</th>
       <th></th>
       <th></th>
       <th></th>
@@ -24,30 +24,19 @@
   </thead>
   <tbody>
     {% for atm in atms %}
-      <tr>
-        <td class="col-1">{{ atm.status }}</td>
+      <tr class="text-left">
+        <td class="col-2">{{ atm.storage }}</td>
         <td class="col-1">{{ atm.client }}</td>
-        <td class="col-1">{{ atm.storage }}</td>
-        <td class="col-1">{{ atm.name }}</td>
-        <td class="col-1 text-break">{{ atm.serial_num }}</td>
-        {% if atm.atm_id == None %}
-        <td class="col-1 text-break"></td>
-        {% else %}
-        <td class="col-1 text-break">{{ atm.atm_id }}</td>
-        {% endif %}
-        <td class="col-1">{{ atm.size }}</td>
-        {% if atm.commentary == None %}
-        <td class="col-1 text-break"></td>
-        {% else %}
-        <td class="col-1 text-break">{{ atm.commentary }}</td>
-        {% endif %}
-        <td class="col-1">
+        <td class="col-3">{{ atm.name }}</td>
+        <td class="col-2 text-break">{{ atm.serial_num }}</td>
+        <td class="col-1 text-center">{{ atm.status }}</td>
+        <td class="col-1 text-center">
           <a class="link-primary" href="{% url 'wms:atm' atm.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
         </td>
-        <td class="col-1">
+        <td class="col-1 text-center">
           <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
         </td>
-        <td class="col-1">
+        <td class="col-1 text-center">
           <a class="link-danger" href="{% url 'wms:delete_atm' atm.id %}"><i class="bi bi-trash" title="Удалить"></i></a>
         </td>
       </tr>
@@ -58,8 +47,5 @@
     {% endfor %}
   </tbody>
 </table>
-<div>
-  <a class="btn btn-outline-primary" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
-</div>
 <br>
 {% endblock content %}

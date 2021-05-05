@@ -8,20 +8,38 @@
 
 {% block content %}
 
-<form method="post" novalidate autocomplete="off">
+<form method="post" autocomplete="off">
   {% csrf_token %}
   <div class="row">
-    <div class="col-sm-3">{{ form.user }}</div>
-    <div class="col-sm-3">{{ form.name }}</div>
-  </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
+      <div class="mb-3">
+        <div class="mb-2">{{ form.user.label }}</div>
+      {{ form.user }}
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="mb-3">
+        <div class="mb-2">{{ form.name.label }}</div>
+      {{ form.name }}
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="mb-3">
+        <div class="mb-2">{{ form.post.label }}</div>
       {{ form.post }}
+      </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
+      <div class="mb-3">
+        <div class="mb-2">{{ form.phone.label }}</div>
       {{ form.phone }}
+      </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
+      <div class="mb-3">
+        <div class="mb-2">{{ form.email.label }}</div>
       {{ form.email }}
+      </div>
     </div>
   </div>
   <button type="submit" class="btn btn-success mb-3">Сохранить данные пользователя</button>

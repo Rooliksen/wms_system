@@ -1,7 +1,5 @@
 {% extends "wms/base.html" %}
 
-{% load crispy_forms_tags %}
-
 {% block page_header %}
 
 <h4>Добавление нового груза</h4>
@@ -10,61 +8,59 @@
 
 {% block content %}
 
-<form method="post" novalidate autocomplete="off">
+<form method="post" autocomplete="off">
   {% csrf_token %}
   <div class="row">
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.status }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.client }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
+        <div class="mb-2">{{ form.storage.label }}</div>
       {{ form.storage }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.date_in }}
+        <div class="mb-2">{{ form.client.label }}</div>
+      {{ form.client }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.date_out }}
+        <div class="mb-2">{{ form.status.label }}</div>
+      {{ form.status }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
+        <div class="mb-2">{{ form.name.label }}</div>
       {{ form.name }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
+        <div class="mb-2">{{ form.serial_num.label }}</div>
       {{ form.serial_num }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
+        <div class="mb-2">{{ form.atm_id.label }}</div>
       {{ form.atm_id }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.size }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
+        <div class="mb-2">{{ form.commentary.label }}</div>
       {{ form.commentary }}
       </div>
     </div>
+    <div class="col-sm-4">
+      <div class="mb-3">
+        <div class="mb-2">{{ form.size.label }}</div>
+      {{ form.size }}
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-success mb-3">Сохранить груз</button>
+  <button type="submit" class="btn btn-outline-success mb-3">Сохранить груз</button>
 </form>
 
 {% endblock content %}

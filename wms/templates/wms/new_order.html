@@ -10,81 +10,72 @@
 
 {% block content %}
 
-<form method="post" enctype="multipart/form-data" novalidate autocomplete="off">
+<form method="post" enctype="multipart/form-data" autocomplete="off">
   {% csrf_token %}
   <div class="row">
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.logistic_order|as_crispy_field }}
+        <div class="mb-2">{{ form.customer.label }}</div>
+      {{ form.customer }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.client|as_crispy_field }}
+        <div class="mb-2">{{ form.client.label }}</div>
+      {{ form.client }}
       </div>
     </div>
-    <div class="col-12">
+
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.customer|as_crispy_field }}
+        <div class="mb-2">{{ form.storage.label }}</div>
+      {{ form.storage }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.storage|as_crispy_field }}
+        <div class="mb-2">{{ form.status.label }}</div>
+      {{ form.status }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.status|as_crispy_field }}
+        <div class="mb-2">{{ form.logistic_order.label }}</div>
+      {{ form.logistic_order }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.date_in|as_crispy_field }}
+        <div class="mb-2">{{ form.storage_order.label }}</div>
+      {{ form.storage_order }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.date_out|as_crispy_field }}
+        <div class="mb-2">{{ form.date_in.label }}</div>
+      {{ form.date_in }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.driver|as_crispy_field }}
+        <div class="mb-2">{{ form.date_out.label }}</div>
+      {{ form.date_out }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.driver_car|as_crispy_field }}
+        <div class="mb-2">{{ form.driver.label }}</div>
+      {{ form.driver }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.storage_order|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.photo_1|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.photo_2|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.photo_3|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.photo_4|as_crispy_field }}
+        <div class="mb-2">{{ form.driver_car.label }}</div>
+      {{ form.driver_car }}
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-success mb-3">Сохранить заявку</button>
+  <button type="submit" class="btn btn-outline-success mb-3">Сохранить заявку</button>
 </form>
 
 {% endblock content %}

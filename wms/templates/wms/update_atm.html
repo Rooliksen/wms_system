@@ -1,7 +1,5 @@
 {% extends "wms/base.html" %}
 
-{% load crispy_forms_tags %}
-
 {% block page_header %}
 
 <h4>Редактирование данных по грузу</h4>
@@ -10,57 +8,55 @@
 
 {% block content %}
 
-<form method="post" novalidate autocomplete="off">
+<form method="post" autocomplete="off">
   {% csrf_token %}
   <div class="row">
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.status|as_crispy_field }}
+        <div class="mb-2">{{ form.storage.label }}</div>
+      {{ form.storage }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.client|as_crispy_field }}
+        <div class="mb-2">{{ form.client.label }}</div>
+      {{ form.client }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.storage|as_crispy_field }}
+        <div class="mb-2">{{ form.status.label }}</div>
+      {{ form.status }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.date_in|as_crispy_field }}
+        <div class="mb-2">{{ form.name.label }}</div>
+      {{ form.name }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.date_out|as_crispy_field }}
+        <div class="mb-2">{{ form.serial_num.label }}</div>
+      {{ form.serial_num }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.name|as_crispy_field }}
+        <div class="mb-2">{{ form.atm_id.label }}</div>
+      {{ form.atm_id }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.serial_num|as_crispy_field }}
+        <div class="mb-2">{{ form.commentary.label }}</div>
+      {{ form.commentary }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.atm_id|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.size|as_crispy_field }}
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-      {{ form.commentary|as_crispy_field }}
+        <div class="mb-2">{{ form.size.label }}</div>
+      {{ form.size }}
       </div>
     </div>
   </div>

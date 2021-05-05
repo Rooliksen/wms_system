@@ -19,7 +19,7 @@ class OrderAdmin(admin.ModelAdmin):
         )
 
 class AtmAdmin(admin.ModelAdmin):
-    list_display = ('status', 'client', 'storage', 'date_in', 'date_out', 'name', 'serial_num', 'atm_id', 'size', 'commentary')
+    list_display = ('status', 'client', 'storage', 'name', 'serial_num', 'atm_id', 'size', 'commentary')
 
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = ('atm', 'order', 'date_added')

@@ -10,52 +10,61 @@
 
 {% block content %}
 
-<form method="post" novalidate autocomplete="off">
+<form method="post" autocomplete="off">
   {% csrf_token %}
   <div class="row">
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.contractor|as_crispy_field }}
+        <div class="mb-2">{{ form.contractor.label }}</div>
+      {{ form.contractor }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.address|as_crispy_field }}
+        <div class="mb-2">{{ form.address.label }}</div>
+      {{ form.address }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.rate_pallet|as_crispy_field }}
+        <div class="mb-2">{{ form.rate_pallet.label }}</div>
+      {{ form.rate_pallet }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.rate_oversize_pallet|as_crispy_field }}
+        <div class="mb-2">{{ form.rate_oversize_pallet.label }}</div>
+      {{ form.rate_oversize_pallet }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.rate_volume|as_crispy_field }}
+        <div class="mb-2">{{ form.rate_volume.label }}</div>
+      {{ form.rate_volume }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.rate_in|as_crispy_field }}
+        <div class="mb-2">{{ form.rate_in.label }}</div>
+      {{ form.rate_in }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.rate_out|as_crispy_field }}
+        <div class="mb-2">{{ form.rate_out.label }}</div>
+      {{ form.rate_out }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.rate_oversize_in|as_crispy_field }}
+        <div class="mb-2">{{ form.rate_oversize_in.label }}</div>
+      {{ form.rate_oversize_in }}
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-sm-4">
       <div class="mb-3">
-      {{ form.rate_oversize_out|as_crispy_field }}
+        <div class="mb-2">{{ form.rate_oversize_out.label }}</div>
+      {{ form.rate_oversize_out }}
       </div>
     </div>
   </div>

@@ -75,8 +75,6 @@ class Atm(models.Model):
     )
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
     storage = models.ForeignKey(Storage, on_delete=models.SET_NULL, null=True)
-    date_in = models.DateField('Дата приема', blank=True, null=True)
-    date_out = models.DateField('Дата отгрузки', blank=True, null=True)
     name = models.CharField(max_length=200)
     serial_num = models.CharField(max_length=200)
     atm_id = models.CharField(max_length=200, blank=True, null=True)
@@ -107,10 +105,6 @@ class Order(models.Model):
     driver_car = models.CharField(max_length=200, blank=True, null=True)
     storage_order = models.CharField(max_length=200, blank=True, null=True)
     date_created = models.DateTimeField('date published', auto_now_add=True)
-    photo_1 = models.ImageField(blank=True, null=True)
-    photo_2 = models.ImageField(blank=True, null=True)
-    photo_3 = models.ImageField(blank=True, null=True)
-    photo_4 = models.ImageField(blank=True, null=True)
     
     def __str__(self):
         return self.logistic_order
@@ -120,3 +114,11 @@ class OrderItem(models.Model):
     atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
+
+class OrderPhoto(models.Model):
+    # Фотография в заявке
+    atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    photo = models.ImageField(blank=True, null=True)
+
