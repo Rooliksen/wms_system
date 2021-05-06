@@ -6,28 +6,28 @@
 
 
 {% block content %}
-<div class="d-flex flex-row-reverse">
+<div class="d-flex justify-content-center">
   <a class="btn btn-success mb-2 fw-light" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
 </div>
 <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
   <thead class="table-light text-center">
     <tr>
-      <th class="align-middle fw-normal">Создана</th>
-      <th class="align-middle fw-normal">№ заявки</th>
-      <th class="align-middle fw-normal">Клиент</th>
-      <th class="align-middle fw-normal">Принято</th>
-      <th class="align-middle fw-normal">Отгружено</th>
-      <th class="align-middle fw-normal">Пользователь</th>
-      <th class="align-middle fw-normal">Статус</th>
-      <th class="align-middle fw-normal">Подробнее</th>
-      <th class="align-middle fw-normal">Изменить</th>
-      <th class="align-middle fw-normal">Удалить</th>
+      <th class="align-middle fw-bold">Создана</th>
+      <th class="align-middle fw-bold">№ заявки</th>
+      <th class="align-middle fw-bold">Клиент</th>
+      <th class="align-middle fw-bold">Принято</th>
+      <th class="align-middle fw-bold">Отгружено</th>
+      <th class="align-middle fw-bold">Пользователь</th>
+      <th class="align-middle fw-bold">Статус</th>
+      <th class="align-middle fw-bold">Подробнее</th>
+      <th class="align-middle fw-bold">Изменить</th>
+      <th class="align-middle fw-bold">Удалить</th>
     </tr>
   </thead>
   <tbody>
     {% for order in orders %}
-      <tr class="text-center fw-light">
-        <td class="col-1 align-middle">{{ order.date_created|date:'H:m d.m.Y' }}</td>
+      <tr class="text-center fw-normal">
+        <td class="col-1 align-middle">{{ order.date_created|date:'d.m.Y H:m' }}</td>
         <td class="col-1 align-middle">{{ order.logistic_order }}</td>
         {% if order.client == None %}
         <td class="col-1 align-middle"></td>
@@ -53,7 +53,7 @@
         </td>
       </tr>
     {% empty %}
-      <tr class="col-12 text-center align-middle">
+      <tr class="col-12">
         <td>Не добавлено ни одной заявки. Добавьте первую заявку.</td>
       </tr>
     {% endfor %}

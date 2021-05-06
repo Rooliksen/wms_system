@@ -1,43 +1,51 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4>Склады</h4>
+  <h4 class="text-center fw-bold">Склады</h4>
 {% endblock page_header %}
 
 
 {% block content %}
-<table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
-  <thead class="thead-light">
+<div class="d-flex justify-content-center">
+  <a class="btn btn-success mb-2 fw-light" href="{% url 'wms:new_storage' %}">Добавить новый склад</a>
+</div>
+<table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
+  <thead class="table-light text-center">
     <tr>
-      <th>Контрагент</th>
-      <th>Адрес</th>
-      <th>Хранение EUR, руб/сут</th>
-      <th>Хранение FIN, руб/сут</th>
-      <th>Хранение V, м3/сут</th>
-      <th>Прием EUR, руб</th>
-      <th>Отгрузка EUR, руб</th>
-      <th>Прием FIN</th>
-      <th>Отгрузка FIN</th>
-      <th></th>
-      <th></th>
+      <tr>
+        <th rowspan="2" class="col-2 align-middle fw-bold">Местонахождение</th>
+        <th colspan="3" class="col-3 align-middle fw-bold">Хранение</th>
+        <th colspan="2" class="col-2 align-middle fw-bold">Прием</th>
+        <th colspan="2" class="col-2 align-middle fw-bold">Отгрузка</th>
+        <th rowspan="2" class="col-1 align-middle fw-bold">Подробнее</th>
+        <th rowspan="2" class="col-1 align-middle fw-bold">Изменить</th>
+      </tr>
+      <tr>
+        <th class="align-middle fw-light">EUR</th>
+        <th class="align-middle fw-light">FIN</th>
+        <th class="align-middle fw-light">1 м<sup>3</sup></th>
+        <th class="align-middle fw-light">EUR</th>
+        <th class="align-middle fw-light">FIN</th>
+        <th class="align-middle fw-light">EUR</th>
+        <th class="align-middle fw-light">FIN</th> 
+      </tr>
     </tr>
   </thead>
   <tbody>
     {% for storage in storages %}
-      <tr>
-        <td class="col-1">{{ storage.contractor }}</td>
-        <td class="col-1">{{ storage.address }}</td>
-        <td class="col-1">{{ storage.rate_pallet }}</td>
-        <td class="col-1">{{ storage.rate_oversize_pallet }}</td>
-        <td class="col-1">{{ storage.rate_volume }}</td>
-        <td class="col-1">{{ storage.rate_in }}</td>
-        <td class="col-1">{{ storage.rate_out }}</td>
-        <td class="col-1">{{ storage.rate_oversize_in }}</td>
-        <td class="col-1">{{ storage.rate_oversize_out }}</td>
-        <td class="col-1">
+      <tr class="text-center fw-normal">
+        <td class="col-1 align-middle">{{ storage.address }}</td>
+        <td class="col-1 align-middle">{{ storage.rate_pallet }}</td>
+        <td class="col-1 align-middle">{{ storage.rate_oversize_pallet }}</td>
+        <td class="col-1 align-middle">{{ storage.rate_volume }}</td>
+        <td class="col-1 align-middle">{{ storage.rate_in }}</td>
+        <td class="col-1 align-middle">{{ storage.rate_out }}</td>
+        <td class="col-1 align-middle">{{ storage.rate_oversize_in }}</td>
+        <td class="col-1 align-middle">{{ storage.rate_oversize_out }}</td>
+        <td class="col-1 align-middle">
           <a class="link-primary" href="{% url 'wms:storage' storage.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
         </td>
-        <td class="col-1">
+        <td class="col-1 align-middle">
           <a class="link-secondary" href="{% url 'wms:update_storage' storage.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
         </td>
       </tr>
@@ -48,8 +56,5 @@
     {% endfor %}
   </tbody>
 </table>
-<div>
-  <a class="btn btn-outline-secondary" href="{% url 'wms:new_storage' %}">Добавить новый склад</a>
-</div>
-<br>
+
 {% endblock content %}

@@ -1,27 +1,30 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4>Клиенты</h4>
+  <h4 class="text-center fw-bold">Клиенты</h4>
 {% endblock page_header %}
 
 
 {% block content %}
-<table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
-  <thead class="thead-light">
+<div class="d-flex flex-row-reverse">
+  <a class="btn btn-success mb-2 fw-light" href="{% url 'wms:new_client' %}">Добавить нового клиента</a>
+</div>
+<table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
+  <thead class="table-light text-center">
     <tr>
-      <th>Наименование</th>
-      <th>Дата добавления</th>
-      <th></th>
+      <th class="col-8 align-middle fw-bold">Наименование</th>
+      <th class="col-4 align-middle fw-bold">Дата добавления</th>
+      <th class="col-1 align-middle fw-bold">Изменить</th>
     </tr>
   </thead>
   <tbody>
     {% for client in clients %}
-    <tr>
-      <td class="col-5">
+    <tr class="text-center fw-normal">
+      <td class="col-7 align-middle">
         <a class="text-decoration-none" href="{% url 'wms:client' client.id %}">{{ client.name }}</a>
       </td>
-      <td class="col-6">{{ client.pub_date|date:'d.m.Y H:m' }}</td>
-      <td class="col-1">
+      <td class="col-4 align-middle">{{ client.pub_date|date:'d.m.Y H:m' }}</td>
+      <td class="col-1 align-middle">
         <a class="link-secondary" href="{% url 'wms:update_client' client.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
       </td>
     </tr>
@@ -32,7 +35,5 @@
     {% endfor %}
   </tbody>
 </table>
-<div>
-  <a class="btn btn-outline-secondary mb-3" href="{% url 'wms:new_client' %}">Добавить нового клиента</a>
-</div>
+
 {% endblock content %}

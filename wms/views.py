@@ -19,7 +19,7 @@ def clients(request):
 def client(request, client_id):
     # Выводит одного клиента и все связанные с ним грузы
     client = Client.objects.get(id=client_id)
-    atms = client.atm_set.order_by('-date_in')
+    atms = client.atm_set.order_by('-client')
     context = {'client': client, 'atms': atms}
     return render(request, 'wms/client.html', context)
 

@@ -1,42 +1,42 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4>Грузы</h4>
+  <h4 class="text-center fw-bold">Грузы</h4>
 {% endblock page_header %}
 
 
 {% block content %}
-<div class="d-flex flex-row-reverse">
-  <a class="btn btn-outline-secondary mb-2" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
+<div class="d-flex justify-content-center">
+  <a class="btn btn-success mb-2 fw-light" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
 </div>
-<table class="table table-responsive text-center w-100 d-block d-md-table">
-  <thead class="thead-light">
+<table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
+  <thead class="table-light text-center">
     <tr>
-      <th>Склад</th>
-      <th>Клиент</th>
-      <th>Наименование</th>
-      <th>Серийный номер</th>
-      <th>Статус</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th class="align-middle fw-bold">Склад</th>
+      <th class="align-middle fw-bold">Клиент</th>
+      <th class="align-middle fw-bold">Наименование</th>
+      <th class="align-middle fw-bold">Серийный номер</th>
+      <th class="align-middle fw-bold">Статус</th>
+      <th class="align-middle fw-bold">Подробнее</th>
+      <th class="align-middle fw-bold">Изменить</th>
+      <th class="align-middle fw-bold">Удалить</th>
     </tr>
   </thead>
   <tbody>
     {% for atm in atms %}
-      <tr class="text-center">
-        <td class="col-2">{{ atm.storage }}</td>
-        <td class="col-1">{{ atm.client }}</td>
-        <td class="col-3">{{ atm.name }}</td>
-        <td class="col-2 text-break">{{ atm.serial_num }}</td>
-        <td class="col-1 text-center">{{ atm.status }}</td>
-        <td class="col-1 text-center">
+      <tr class="text-center fw-normal">
+        <td class="col-2 align-middle">{{ atm.storage }}</td>
+        <td class="col-1 align-middle">{{ atm.client }}</td>
+        <td class="col-3 align-middle">{{ atm.name }}</td>
+        <td class="col-2 text-break align-middle">{{ atm.serial_num }}</td>
+        <td class="col-1 text-center align-middle">{{ atm.status }}</td>
+        <td class="col-1 text-center align-middle">
           <a class="link-primary" href="{% url 'wms:atm' atm.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
         </td>
-        <td class="col-1 text-center">
+        <td class="col-1 text-center align-middle">
           <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
         </td>
-        <td class="col-1 text-center">
+        <td class="col-1 text-center align-middle">
           <a class="link-danger" href="{% url 'wms:delete_atm' atm.id %}"><i class="bi bi-trash" title="Удалить"></i></a>
         </td>
       </tr>
