@@ -4,78 +4,99 @@
 
 {% block page_header %}
 
-<h4>Добавление новой заявки</h4>
+<h4 class="text-center fw-normal">Добавление новой заявки</h4>
 
 {% endblock page_header %}
 
 {% block content %}
-
+<div class="container-sm fst-normal">
 <form method="post" enctype="multipart/form-data" autocomplete="off">
   {% csrf_token %}
   <div class="row">
     <div class="col-sm-4">
       <div class="mb-3">
-        <div class="mb-2">{{ form.customer.label }}</div>
-      {{ form.customer }}
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="mb-3">
-        <div class="mb-2">{{ form.client.label }}</div>
+        <div class="fw-bold mb-2">{{ form.client.label }}</div>
       {{ form.client }}
+      <div class="form-text">
+        Кому принадлежит груз?
+      </div>
       </div>
     </div>
-
     <div class="col-sm-4">
       <div class="mb-3">
-        <div class="mb-2">{{ form.storage.label }}</div>
+        <div class="fw-bold mb-2">{{ form.storage.label }}</div>
       {{ form.storage }}
+      <div class="form-text">
+        Выберите адрес для хранения груза.
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
-        <div class="mb-2">{{ form.status.label }}</div>
+        <div class="fw-bold mb-2">{{ form.status.label }}</div>
       {{ form.status }}
+      <div class="form-text">
+        Определите текущий статус заявки.
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
-        <div class="mb-2">{{ form.logistic_order.label }}</div>
-      {{ form.logistic_order }}
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="mb-3">
-        <div class="mb-2">{{ form.storage_order.label }}</div>
-      {{ form.storage_order }}
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="mb-3">
-        <div class="mb-2">{{ form.date_in.label }}</div>
+        <div class="fw-bold mb-2">{{ form.date_in.label }}</div>
       {{ form.date_in }}
+      <div class="form-text">
+        Укажите дату приема груза в формате ДД.ММ.ГГГГ или ДД/ММ/ГГГГ 
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
-        <div class="mb-2">{{ form.date_out.label }}</div>
+        <div class="fw-bold mb-2">{{ form.date_out.label }}</div>
       {{ form.date_out }}
+      <div class="form-text">
+        Поле можно оставить пустым, если у Вас заявка на прием груза.
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
-        <div class="mb-2">{{ form.driver.label }}</div>
+        <div class="fw-bold mb-2">{{ form.storage_order.label }}</div>
+      {{ form.storage_order }}
+      <div class="form-text">
+        Внутренний номер заявки для контрагента.
+      </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="mb-3">
+        <div class="fw-bold mb-2">{{ form.logistic_order.label }}</div>
+      {{ form.logistic_order }}
+      <div class="form-text">
+        Номер заявки поступившей от клиента.
+      </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="mb-3">
+        <div class="fw-bold mb-2">{{ form.driver.label }}</div>
       {{ form.driver }}
+      <div class="form-text">
+        Формат записи: Иванов Иван Иванович
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
-        <div class="mb-2">{{ form.driver_car.label }}</div>
+        <div class="fw-bold mb-2">{{ form.driver_car.label }}</div>
       {{ form.driver_car }}
+      <div class="form-text">
+        Формат записи: Форд Х888ХХ888, прицеп ХХ8888 88
+      </div>
       </div>
     </div>
   </div>
   <button type="submit" class="btn btn-outline-success mb-3">Сохранить заявку</button>
 </form>
+</div>
 
 {% endblock content %}

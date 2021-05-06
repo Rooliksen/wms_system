@@ -1,63 +1,62 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4>Заявки</h4>
+  <h4 class="text-center fw-bold">Заявки</h4>
 {% endblock page_header %}
 
 
 {% block content %}
 <div class="d-flex flex-row-reverse">
-  <a class="btn btn-outline-secondary mb-2" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
+  <a class="btn btn-success mb-2 fw-light" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
 </div>
-<table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
-  <thead class="thead-light">
+<table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
+  <thead class="table-light text-center">
     <tr>
-      <th>№ заявки</th>
-      <th>Время создания</th>
-      <th>Клиент</th>
-      <th>Дата приема</th>
-      <th>Дата отгрузки</th>
-      <th>Пользователь</th>
-      <th>Статус</th>
-      <th>Подробнее</th>
-      <th>Изменить</th>
-      <th>Удалить</th>
+      <th class="align-middle fw-normal">Создана</th>
+      <th class="align-middle fw-normal">№ заявки</th>
+      <th class="align-middle fw-normal">Клиент</th>
+      <th class="align-middle fw-normal">Принято</th>
+      <th class="align-middle fw-normal">Отгружено</th>
+      <th class="align-middle fw-normal">Пользователь</th>
+      <th class="align-middle fw-normal">Статус</th>
+      <th class="align-middle fw-normal">Подробнее</th>
+      <th class="align-middle fw-normal">Изменить</th>
+      <th class="align-middle fw-normal">Удалить</th>
     </tr>
   </thead>
   <tbody>
     {% for order in orders %}
-      <tr class="text-left">
-        <td class="col-1">{{ order.logistic_order }}</td>
-        <td class="col-1">{{ order.date_created|date:'d.m.Y H:m' }}</td>
+      <tr class="text-center fw-light">
+        <td class="col-1 align-middle">{{ order.date_created|date:'H:m d.m.Y' }}</td>
+        <td class="col-1 align-middle">{{ order.logistic_order }}</td>
         {% if order.client == None %}
-        <td class="col-1 text-break"></td>
+        <td class="col-1 align-middle"></td>
         {% else %}
-        <td class="col-1 text-break">{{ order.client }}</td>
+        <td class="col-1 align-middle">{{ order.client }}</td>
         {% endif %}
-        <td class="col-1">{{ order.date_in|date:'d.m.Y' }}</td>
-        <td class="col-1">{{ order.date_out|date:'d.m.Y' }}</td>
+        <td class="col-1 align-middle">{{ order.date_in|date:'d.m.Y' }}</td>
+        <td class="col-1 align-middle">{{ order.date_out|date:'d.m.Y' }}</td>
         {% if order.customer == None %}
-        <td class="col-1 text-break"></td>
+        <td class="col-1 text-break align-middle"></td>
         {% else %}
-        <td class="col-1 text-break">{{ order.customer }}</td>
+        <td class="col-1 text-break align-middle">{{ order.customer }}</td>
         {% endif %}
-        <td class="col-1 text-center">{{ order.status }}</td>
-        <td class="col-1 text-center">
+        <td class="col-1 text-center align-middle">{{ order.status }}</td>
+        <td class="col-1 text-center align-middle">
           <a class="link-primary" href="{% url 'wms:order' order.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
         </td>
-        <td class="col-1 text-center">
+        <td class="col-1 text-center align-middle">
           <a class="link-secondary" href="{% url 'wms:update_order' order.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
         </td>
-        <td class="col-1 text-center">
+        <td class="col-1 text-center align-middle">
           <a class="link-danger" href="{% url 'wms:delete_order' order.id %}"><i class="bi bi-trash" title="Удалить"></i></a>
         </td>
       </tr>
     {% empty %}
-      <tr class="col-12">
+      <tr class="col-12 text-center align-middle">
         <td>Не добавлено ни одной заявки. Добавьте первую заявку.</td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
-
 {% endblock content %}

@@ -9,7 +9,7 @@
 <div class="d-flex flex-row-reverse">
   <a class="btn btn-outline-secondary mb-2" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
 </div>
-<table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
+<table class="table table-responsive text-center w-100 d-block d-md-table">
   <thead class="thead-light">
     <tr>
       <th>Склад</th>
@@ -24,7 +24,7 @@
   </thead>
   <tbody>
     {% for atm in atms %}
-      <tr class="text-left">
+      <tr class="text-center">
         <td class="col-2">{{ atm.storage }}</td>
         <td class="col-1">{{ atm.client }}</td>
         <td class="col-3">{{ atm.name }}</td>

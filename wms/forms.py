@@ -1,5 +1,6 @@
 from django import forms
 
+
 from .models import *
 
 class ClientForm(forms.ModelForm):
@@ -77,6 +78,7 @@ class StorageForm(forms.ModelForm):
             }
 
 
+
 class AtmForm(forms.ModelForm):
     class Meta:
         model = Atm
@@ -120,7 +122,6 @@ class OrderForm(forms.ModelForm):
         fields = [
             'logistic_order',
             'client',
-            'customer',
             'storage',
             'status',
             'date_in',
@@ -132,7 +133,6 @@ class OrderForm(forms.ModelForm):
         labels = {
             'logistic_order': 'Номер заявки клиента',
             'client': 'Клиент',
-            'customer': 'Пользователь',
             'storage': 'Склад',
             'status': 'Статус',
             'date_in': 'Дата приема',
@@ -144,11 +144,10 @@ class OrderForm(forms.ModelForm):
         widgets = {
             'logistic_order': forms.TextInput(attrs={'class': 'form-control col-12'}),
             'client': forms.Select(attrs={'class': 'form-select col-12'}),
-            'customer': forms.Select(attrs={'class': 'form-select col-12'}),
             'storage': forms.Select(attrs={'class': 'form-select col-12'}),
             'status': forms.Select(attrs={'class': 'form-select col-12'}),
-            'date_in': forms.TextInput(attrs={'class': 'form-control col-12'}),
-            'date_out': forms.TextInput(attrs={'class': 'form-control col-12'}),
+            'date_in': forms.DateInput(attrs={'class': 'form-control col-12'}),
+            'date_out': forms.DateInput(attrs={'class': 'form-control col-12'}),
             'driver': forms.TextInput(attrs={'class': 'form-control col-12'}),
             'driver_car': forms.TextInput(attrs={'class': 'form-control col-12'}),
             'storage_order': forms.TextInput(attrs={'class': 'form-control col-12'}),

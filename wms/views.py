@@ -182,7 +182,7 @@ def update_storage(request, storage_id):
 
 def atms(request):
     # Выводит список грузов
-    atms = Atm.objects.all().order_by('date_in')
+    atms = Atm.objects.all().order_by('client')
     context = {'atms': atms}
     return render(request, 'wms/atms.html', context)
 
@@ -234,7 +234,7 @@ def delete_atm(request, atm_id):
 
 def orders(request):
     # Выводит список заявок
-    orders = Order.objects.all().order_by('date_in')
+    orders = Order.objects.all().order_by('-date_created')
     context = {'orders': orders}
     return render(request, 'wms/orders.html', context)
 
