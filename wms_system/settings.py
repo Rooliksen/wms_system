@@ -26,7 +26,7 @@ SECRET_KEY = '@v!&ycwvuf6f1@*#qs16$$t1vqguu!hmox+mv*894z0m(ouifu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wms-system-test.herokuapp.com']
 
 
 # Application definition
