@@ -4,12 +4,12 @@
 
 {% block page_header %}
 
-<h4>Редактирование заявки</h4>
+<h4 class="text-center fw-normal">Редактирование заявки</h4>
 
 {% endblock page_header %}
 
 {% block content %}
-
+<div class="container-sm fst-normal">
 <form method="post" enctype="multipart/form-data" autocomplete="off">
   {% csrf_token %}
   <div class="row">
@@ -95,7 +95,7 @@
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-success mb-3">Сохранить данные по заявке</button>
+  <button type="submit" class="btn btn-success mb-3 btn-sm">Сохранить данные по заявке</button>
 </form>
-
+</div>
 {% endblock content %}

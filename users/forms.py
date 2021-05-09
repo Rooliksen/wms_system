@@ -9,7 +9,7 @@ class CreateUserForm(UserCreationForm):
 	password1 = forms.CharField(
 		label=("Пароль"),
 		help_text=("Должен содержать не менее 8 символов, не может состоять только из цифр."),
-		widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control text-light', 'placeholder': 'Придумайте пароль'}),
+		widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control', 'placeholder': 'Придумайте пароль'}),
 	)
 	password2 = forms.CharField(
 		label=("Пароль еще раз"),
