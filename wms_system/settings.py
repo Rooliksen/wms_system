@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'wms',
     'users',
     'bootstrap4',
-    'crispy_forms',
     'widget_tweaks',
     'django_filters',
     
