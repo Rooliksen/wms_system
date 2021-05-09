@@ -1,1 +1,0 @@
-web: gunicorn wms_system.wsgi
