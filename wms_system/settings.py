@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'widget_tweaks',
     'django_filters',
+    'gunicorn',
     
     'django.contrib.admin',
     'django.contrib.auth',
