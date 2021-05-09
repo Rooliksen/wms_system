@@ -1,33 +1,34 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4 class="text-center fw-bold">Склады</h4>
+  <h4 class="text-center fw-normal">Склады</h4>
 {% endblock page_header %}
 
 
 {% block content %}
+<p class="d-flex justify-content-center form-text">Здесь представлены все имеющиеся в системе адреса складов с указанием тарифов на каждом складе.</p>
 <div class="d-flex justify-content-center">
-  <a class="btn btn-success mb-2 fw-light" href="{% url 'wms:new_storage' %}">Добавить новый склад</a>
+  <a class="btn btn-success btn-sm mb-2 fw-normal" href="{% url 'wms:new_storage' %}">Добавить новый склад</a>
 </div>
 <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
-  <thead class="table-light text-center">
+  <thead class="table-light text-center text-muted">
     <tr>
       <tr>
-        <th rowspan="2" class="col-2 align-middle fw-bold">Местонахождение</th>
-        <th colspan="3" class="col-3 align-middle fw-bold">Хранение</th>
-        <th colspan="2" class="col-2 align-middle fw-bold">Прием</th>
-        <th colspan="2" class="col-2 align-middle fw-bold">Отгрузка</th>
-        <th rowspan="2" class="col-1 align-middle fw-bold">Подробнее</th>
-        <th rowspan="2" class="col-1 align-middle fw-bold">Изменить</th>
+        <th rowspan="2" class="col-2 align-middle fw-normal">Местонахождение</th>
+        <th colspan="3" class="col-3 align-middle fw-normal">Хранение</th>
+        <th colspan="2" class="col-2 align-middle fw-normal">Прием</th>
+        <th colspan="2" class="col-2 align-middle fw-normal">Отгрузка</th>
+        <th rowspan="2" class="col-1 align-middle fw-normal">Подробнее</th>
+        <th rowspan="2" class="col-1 align-middle fw-normal">Изменить</th>
       </tr>
       <tr>
-        <th class="align-middle fw-light">EUR</th>
-        <th class="align-middle fw-light">FIN</th>
-        <th class="align-middle fw-light">1 м<sup>3</sup></th>
-        <th class="align-middle fw-light">EUR</th>
-        <th class="align-middle fw-light">FIN</th>
-        <th class="align-middle fw-light">EUR</th>
-        <th class="align-middle fw-light">FIN</th> 
+        <th class="align-middle fw-normal">EUR</th>
+        <th class="align-middle fw-normal">FIN</th>
+        <th class="align-middle fw-normal">1 м<sup>3</sup></th>
+        <th class="align-middle fw-normal">EUR</th>
+        <th class="align-middle fw-normal">FIN</th>
+        <th class="align-middle fw-normal">EUR</th>
+        <th class="align-middle fw-normal">FIN</th> 
       </tr>
     </tr>
   </thead>
@@ -43,10 +44,10 @@
         <td class="col-1 align-middle">{{ storage.rate_oversize_in }}</td>
         <td class="col-1 align-middle">{{ storage.rate_oversize_out }}</td>
         <td class="col-1 align-middle">
-          <a class="link-primary" href="{% url 'wms:storage' storage.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
+          <a class="link-primary" href="{% url 'wms:storage' storage.id %}"><i class="bi bi-info-square fs-5" title="Подробнее"></i></a>
         </td>
         <td class="col-1 align-middle">
-          <a class="link-secondary" href="{% url 'wms:update_storage' storage.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
+          <a class="link-secondary" href="{% url 'wms:update_storage' storage.id %}"><i class="bi bi-pencil-square fs-5" title="Изменить"></i></a>
         </td>
       </tr>
     {% empty %}

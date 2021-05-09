@@ -9,22 +9,22 @@ class CreateUserForm(UserCreationForm):
 	password1 = forms.CharField(
 		label=("Пароль"),
 		help_text=("Должен содержать не менее 8 символов, не может состоять только из цифр."),
-		widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control col-sm-3', 'placeholder': 'Придумайте пароль'}),
+		widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control text-light', 'placeholder': 'Придумайте пароль'}),
 	)
 	password2 = forms.CharField(
 		label=("Пароль еще раз"),
-		widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control col-sm-3', 'placeholder': 'Повторите пароль'}),
+		widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control', 'placeholder': 'Повторите пароль'}),
 	)
 	username = forms.CharField(
 		label=("Имя аккаунта"),
-		widget=forms.TextInput(attrs={'autocomplete': 'new-password', 'class': 'form-control col-sm-3', 'placeholder': 'Придумайте логин'}),
+		widget=forms.TextInput(attrs={'autocomplete': 'new-password', 'class': 'form-control', 'placeholder': 'Придумайте логин'}),
 		error_messages={'unique': 'Пользователь с таким логином уже существует', 'invalid': 'Некорректный логин. Допускается использование только букв, цифр и символов @/./+/-/_'}
 		
 	)
 
 	email = forms.CharField(
 		label=("E-mail"),
-		widget=forms.EmailInput(attrs={'class': 'form-control col-sm-3', 'placeholder': 'Введите почтовый ящик'}),
+		widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Введите почтовый ящик'}),
 		error_messages={'unique': 'Пользователь с таким почтовым ящиком уже существует', 'invalid': 'Некорректный адрес почты.'}
 		
 	)
@@ -37,21 +37,29 @@ class CreateUserForm(UserCreationForm):
 			'email': 'Формат адреса example@email.ru',
 		}
 
+class CustomUsernameField(UsernameField):
+    def to_python(self, value):
+        return unicodedata.normalize('NFKC', super().to_python(value))
+
+    def widget_attrs(self, widget):
+        return {
+            **super().widget_attrs(widget),
+            'autocapitalize': 'none',
+            'autocomplete': 'username',
+			'class': 'form-control',
+        }
+
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(
-		label=("Password"),
-		widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control col-sm-3'})
-	)
+    username = CustomUsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control'}))
     password = forms.CharField(
-        label=("Password"),
+        label=("Пароль"),
         strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form-control col-sm-3'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form-control'}),
     )
 
     error_messages = {
         'invalid_login': (
-            "Please enter a correct %(username)s and password. Note that both "
-            "fields may be case-sensitive."
+            "Некорректные логин или пароль. Проверьте введенные "
+            "данные еще раз и повторите вход."
         ),
-        'inactive': ("This account is inactive."),
     }

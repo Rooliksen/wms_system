@@ -1,27 +1,28 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4 class="text-center fw-bold">Заявки</h4>
+  <h4 class="text-center fw-normal">Заявки</h4>
 {% endblock page_header %}
 
 
 {% block content %}
+<p class="d-flex justify-content-center form-text text-center">Здесь представлен список всех имеющиеся в системе заявок. Вы можете добавить новую заявку, изменить данные по конкретной заявке или полностью удалить её из системы.</p>
 <div class="d-flex justify-content-center">
-  <a class="btn btn-success mb-2 fw-light" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
+  <a class="btn btn-success btn-sm mb-2 fw-normal" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
 </div>
-<table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
-  <thead class="table-light text-center">
+<table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light caption">
+  <thead class="table-light text-center text-muted">
     <tr>
-      <th class="align-middle fw-bold">Создана</th>
-      <th class="align-middle fw-bold">№ заявки</th>
-      <th class="align-middle fw-bold">Клиент</th>
-      <th class="align-middle fw-bold">Принято</th>
-      <th class="align-middle fw-bold">Отгружено</th>
-      <th class="align-middle fw-bold">Пользователь</th>
-      <th class="align-middle fw-bold">Статус</th>
-      <th class="align-middle fw-bold">Подробнее</th>
-      <th class="align-middle fw-bold">Изменить</th>
-      <th class="align-middle fw-bold">Удалить</th>
+      <th class="align-middle fw-normal">Создана</th>
+      <th class="align-middle fw-normal">№ заявки</th>
+      <th class="align-middle fw-normal">Клиент</th>
+      <th class="align-middle fw-normal">Принято</th>
+      <th class="align-middle fw-normal">Отгружено</th>
+      <th class="align-middle fw-normal">Пользователь</th>
+      <th class="align-middle fw-normal">Статус</th>
+      <th class="align-middle fw-normal">Подробнее</th>
+      <th class="align-middle fw-normal">Изменить</th>
+      <th class="align-middle fw-normal">Удалить</th>
     </tr>
   </thead>
   <tbody>
@@ -43,13 +44,13 @@
         {% endif %}
         <td class="col-1 text-center align-middle">{{ order.status }}</td>
         <td class="col-1 text-center align-middle">
-          <a class="link-primary" href="{% url 'wms:order' order.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
+          <a class="link-primary" href="{% url 'wms:order' order.id %}"><i class="bi bi-info-square fs-5" title="Подробнее"></i></a>
         </td>
         <td class="col-1 text-center align-middle">
-          <a class="link-secondary" href="{% url 'wms:update_order' order.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
+          <a class="link-secondary" href="{% url 'wms:update_order' order.id %}"><i class="bi bi-pencil-square fs-5" title="Изменить"></i></a>
         </td>
         <td class="col-1 text-center align-middle">
-          <a class="link-danger" href="{% url 'wms:delete_order' order.id %}"><i class="bi bi-trash" title="Удалить"></i></a>
+          <a class="link-danger" href="{% url 'wms:delete_order' order.id %}"><i class="bi bi-trash fs-5" title="Удалить"></i></a>
         </td>
       </tr>
     {% empty %}

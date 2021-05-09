@@ -1,25 +1,26 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4 class="text-center fw-bold">Грузы</h4>
+  <h4 class="text-center fw-normal">Грузы</h4>
 {% endblock page_header %}
 
 
 {% block content %}
+<p class="d-flex justify-content-center form-text">В данной таблице отображены все имеющиеся в системе грузы. Вы можете добавить новый груз, изменить данные по конкретному грузу или полностью удалить позицию из системы.</p>
 <div class="d-flex justify-content-center">
-  <a class="btn btn-success mb-2 fw-light" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
+  <a class="btn btn-success btn-sm mb-2 fw-normal" href="{% url 'wms:new_atm' %}">Добавить новый груз</a>
 </div>
 <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
-  <thead class="table-light text-center">
+  <thead class="table-light text-center text-muted">
     <tr>
-      <th class="align-middle fw-bold">Склад</th>
-      <th class="align-middle fw-bold">Клиент</th>
-      <th class="align-middle fw-bold">Наименование</th>
-      <th class="align-middle fw-bold">Серийный номер</th>
-      <th class="align-middle fw-bold">Статус</th>
-      <th class="align-middle fw-bold">Подробнее</th>
-      <th class="align-middle fw-bold">Изменить</th>
-      <th class="align-middle fw-bold">Удалить</th>
+      <th class="align-middle fw-normal">Склад</th>
+      <th class="align-middle fw-normal">Клиент</th>
+      <th class="align-middle fw-normal">Наименование</th>
+      <th class="align-middle fw-normal">Серийный номер</th>
+      <th class="align-middle fw-normal">Статус</th>
+      <th class="align-middle fw-normal">Подробнее</th>
+      <th class="align-middle fw-normal">Изменить</th>
+      <th class="align-middle fw-normal">Удалить</th>
     </tr>
   </thead>
   <tbody>
@@ -31,13 +32,13 @@
         <td class="col-2 text-break align-middle">{{ atm.serial_num }}</td>
         <td class="col-1 text-center align-middle">{{ atm.status }}</td>
         <td class="col-1 text-center align-middle">
-          <a class="link-primary" href="{% url 'wms:atm' atm.id %}"><i class="bi bi-info-square" title="Подробнее"></i></a>
+          <a class="link-primary" href="{% url 'wms:atm' atm.id %}"><i class="bi bi-info-square fs-5" title="Подробнее"></i></a>
         </td>
         <td class="col-1 text-center align-middle">
-          <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
+          <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}"><i class="bi bi-pencil-square fs-5" title="Изменить"></i></a>
         </td>
         <td class="col-1 text-center align-middle">
-          <a class="link-danger" href="{% url 'wms:delete_atm' atm.id %}"><i class="bi bi-trash" title="Удалить"></i></a>
+          <a class="link-danger" href="{% url 'wms:delete_atm' atm.id %}"><i class="bi bi-trash fs-5" title="Удалить"></i></a>
         </td>
       </tr>
     {% empty %}

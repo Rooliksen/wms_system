@@ -1,7 +1,7 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4>Заявка № {{ order }}</h4>
+  <h4 class="text-center fw-normal">Заявка</h4>
 {% endblock page_header %}
 
 
@@ -9,52 +9,74 @@
 
   <div class="row">
     <div class="col mt-2">
-      <a scope="col"><b>Дата создания:</b> {{ order.date_created|date:'d.m.Y H:m' }}</a><br>
-      <a scope="col"><b>Пользователь:</b> {{ order.customer }}</a><br>
-      <a scope="col"><b>№ заявки клиента:</b> {{ order.logistic_order }}</a><br>
-      <a scope="col"><b>Клиент:</b> {{ order.client }}</a><br>
-      <a scope="col"><b>Статус:</b> {{ order.status }}</a><br>
-      <a scope="col"><b>Дата приема:</b> {{ order.date_in|date:'d.m.Y' }}</a><br>
-      <a scope="col"><b>Дата отгрузки:</b> {{ order.date_out|date:'d.m.Y' }}</a><br>
+      <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block">
+        <tbody class="text-center fw-normal">
+          <tr>
+            <td class="text-left text-muted">№ заявки клиента:</td>
+            <td>{{ order.logistic_order }}</td>
+          </tr>
+          <tr>
+            <td class="text-left text-muted">Клиент:</td>
+            <td>{{ order.client }}</td>
+          </tr>
+          <tr>
+            <td class="text-left text-muted">Дата приема:</td>
+            <td>{{ order.date_in|date:'d.m.Y' }}</td>
+          </tr>
+          <tr>
+            <td class="text-left text-muted">Дата отгрузки:</td>
+            <td>{{ order.date_out|date:'d.m.Y' }}</td>
+          </tr>
+          <tr>
+            <td class="text-left text-muted">Статус:</td>
+            <td>{{ order.status }}</td>
+          </tr>
+          <tr>
+            <td class="text-left text-muted">Дата создания:</td>
+            <td>{{ order.date_created|date:'d.m.Y H:m' }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
     <div class="row">
       <div class="col">
-        <table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
-          <h4 class="mt-3">Список позиций</h4>
-          <thead class="thead-light">
+        <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light caption">
+          <h5 class="text-center fw-normal mt-3 mb-3">Список позиций</h5>
+          <caption class="fw-light">Это список позиций в Вашей заявке. Вы можете добавить в список любой груз из системы.</caption>
+          <thead class="table-light text-center">
             <tr>
-              <th>Клиент</th>
-              <th>Наименование</th>
-              <th>S/N</th>
-              <th>ID</th>
-              <th><i class="bi bi-list-nested"></i></th>
-              <th><i class="bi bi-box-arrow-right"></i></th>
+              <th class="col-1 align-middle fw-normal text-muted">Клиент</th>
+              <th class="col-3 align-middle fw-normal text-muted">Наименование</th>
+              <th class="col align-middle fw-normal text-muted">s/n</th>
+              <th class="col-1 align-middle fw-normal text-muted">ID</th>
+              <th class="col-1 align-middle fw-normal"></th>
+              <th class="col-1 align-middle fw-normal"></th>
             </tr>
           </thead>
           <tbody>
             {% for item in items %}
               <tr class="text-center">
-                <td class="col-2 text-center">{{ item.atm.client }}</td>
-                <td class="col-2 text-center">{{ item.atm.name }}</td>
-                <td class="col-2 text-center">
+                <td class="col-1 align-middle text-center">{{ item.atm.client }}</td>
+                <td class="col-3 align-middle text-center">{{ item.atm.name }}</td>
+                <td class="col text-center align-middle">
                   <a class="text-decoration-none" href="{% url 'wms:atm' item.atm.id %}">{{ item.atm.serial_num }}</a>
                 </td>
                 {% if item.atm.atm_id == None %}
-                <td class="col-2 text-center"></td>
+                <td class="col-1 text-center align-middle"></td>
                 {% else %}
-                <td class="col-2 text-center">{{ item.atm.atm_id }}</td>
+                <td class="col-1 text-center align-middle">{{ item.atm.atm_id }}</td>
                 {% endif %}
-                <td class="col-1 text-center">
-                  <a class="link-secondary" href="{% url 'wms:update_atm' item.atm.id %}"><i class="bi bi-pencil-square"></i></a>
+                <td class="col-1 text-center align-middle">
+                  <a class="link-secondary" href="{% url 'wms:update_atm' item.atm.id %}"><i class="bi bi-pencil-square fs-5" title="Изменить"></i></a>
                 </td>
-                <td class="col-1 text-center">
-                  <a class="link-warning" href="{% url 'wms:delete_orderitem_from_list' item.id %}"><i class="bi bi-x-circle"></i></a>
+                <td class="col-1 text-center align-middle">
+                  <a class="link-primary" href="{% url 'wms:delete_orderitem_from_list' item.id %}"><i class="bi bi-x-circle fs-5" title="Исключить из заявки"></i></a>
                 </td>
               </tr>
             {% empty %}
               <tr>
-                <td>Не добавлено ни одного груза. Добавьте первый груз.</td>
+                <td class="text-center text-muted" colspan="10">Не добавлено ни одной позиции. Добавьте первый груз.</td>
               </tr>
             {% endfor %}
           </tbody>
@@ -64,7 +86,7 @@
   </div>
   <div class="row">
     <div class="col">
-      <h4>Поиск груза по базе для добавления</h4>
+      <h5 class="text-center fw-normal mt-3 mb-3">Поиск груза в системе для добавления в заявку</h5>
       <form method="get">
         <div class="input-group mb-3">
           {{myFilter.form.serial_num}}
@@ -78,44 +100,43 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
-      <table class="table table-hover table-sm table-bordered table-responsive text-center">
-        <thead class="thead-light">
-          <tr>
-            <th>Статус</th>
-            <th>Клиент</th>
-            <th>Склад</th>
-            <th>Наименование</th>
-            <th>S/N</th>
-            <th><i class="bi bi-list-nested"></i></th>
-            <th><i class="bi bi-box-arrow-right"></i></th>
+    <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light caption">
+      <caption class="fw-light">В данной таблице отображены все имеющиеся в системе грузы. Нажмите на кнопку <i class="bi bi-plus-circle"></i> для добавления позиции в Вашу заявку.</caption>
+      <thead class="table-light text-center text-muted">
+        <tr>
+          <th class="align-middle fw-normal">Склад</th>
+          <th class="align-middle fw-normal">Клиент</th>
+          <th class="align-middle fw-normal">Наименование</th>
+          <th class="align-middle fw-normal">s/n</th>
+          <th class="align-middle fw-normal">Статус</th>
+          <th class="align-middle fw-normal"><i class="bi bi-list-nested"></i></th>
+          <th class="align-middle fw-normal"><i class="bi bi-box-arrow-right"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for atm in atms_page_obj %}
+          <tr class="text-center fw-normal">
+            <td class="col-3 align-middle">{{ atm.storage }}</td>
+            <td class="col-2 align-middle">{{ atm.client }}</td>
+            <td class="col-2 align-middle">{{ atm.name }}</td>
+            <td class="col-2 align-middle">
+              <a class="text-decoration-none" href="{% url 'wms:atm' atm.id %}">{{ atm.serial_num }}</a>
+            </td>
+            <td class="col-1 align-middle">{{ atm.status }}</td>
+            <td class="col-1 align-middle">
+              <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}"><i class="bi bi-pencil-square fs-5" title="Изменить"></i></a>
+            </td>
+            <td class="col-1 align-middle">
+              <a class="link-success" href="{% url 'wms:new_order_item' order_id atm.id %}"><i class="bi bi-plus-circle fs-5" title="Добавить в заявку"></i></a>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {% for atm in atms_page_obj %}
-            <tr class="text-center">
-              <td class="col-2">{{ atm.status }}</td>
-              <td class="col-2">{{ atm.client }}</td>
-              <td class="col-2">{{ atm.storage }}</td>
-              <td class="col-2">{{ atm.name }}</td>
-              <td class="col-2">
-                <a class="text-decoration-none" href="{% url 'wms:atm' atm.id %}">{{ atm.serial_num }}</a>
-              </td>
-              <td class="col-1">
-                <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}"><i class="bi bi-pencil-square"></i></a>
-              </td>
-              <td class="col-1">
-                <a class="link-success" href="{% url 'wms:new_order_item' order_id atm.id %}"><i class="bi bi-plus-circle"></i></a>
-              </td>
-            </tr>
-          {% empty %}
-            <tr>
-              <td>Ничего не найдено.</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+        {% empty %}
+          <tr>
+            <td>Ничего не найдено.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
   <nav aria-label="Page navigation example">
     <ul class="pagination">

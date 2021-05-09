@@ -63,7 +63,7 @@ def contractor(request, contractor_id):
     # Выводит одного контрагента и все связанные с ним грузы
     contractor = Contractor.objects.get(id=contractor_id)
     storages = Storage.objects.get(id=contractor_id)
-    atms = storages.atm_set.order_by('-date_in')
+    atms = storages.atm_set.order_by('storage')
     context = {'contractor': contractor, 'storages': storages, 'atms': atms}
     return render(request, 'wms/contractor.html', context)
 
@@ -241,7 +241,7 @@ def orders(request):
 def order(request, order_id):
     # Выводит одну тему и все её записи
     order = Order.objects.get(id=order_id)
-    atms = Atm.objects.all().order_by('date_in')
+    atms = Atm.objects.all().order_by('storage')
     items = OrderItem.objects.filter(order=order)
     myFilter = AtmFilter(request.GET, queryset=atms)
     atms = myFilter.qs

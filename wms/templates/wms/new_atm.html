@@ -2,7 +2,7 @@
 
 {% block page_header %}
 
-<h4>Добавление нового груза</h4>
+<h4 class="text-center fw-normal">Добавление нового груза</h4>
 
 {% endblock page_header %}
 
@@ -15,48 +15,72 @@
       <div class="mb-3">
         <div class="mb-2">{{ form.storage.label }}</div>
       {{ form.storage }}
+      <div class="form-text">
+        Укажите на какой адрес был принят груз.
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
         <div class="mb-2">{{ form.client.label }}</div>
       {{ form.client }}
+      <div class="form-text">
+        Кому принадлежит груз?
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
         <div class="mb-2">{{ form.status.label }}</div>
       {{ form.status }}
+      <div class="form-text">
+        Задайте текущий статус груза.
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
         <div class="mb-2">{{ form.name.label }}</div>
       {{ form.name }}
+      <div class="form-text">
+        Укажите достаточно подробное наименование
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
         <div class="mb-2">{{ form.serial_num.label }}</div>
       {{ form.serial_num }}
+      <div class="form-text">
+        Введите серийный номер. При отсутствии необходимо задать на Ваше усмотрение в свободной форме.
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
         <div class="mb-2">{{ form.atm_id.label }}</div>
       {{ form.atm_id }}
+      <div class="form-text">
+        Введите инвентарный номер при наличии.
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
         <div class="mb-2">{{ form.commentary.label }}</div>
       {{ form.commentary }}
+      <div class="form-text">
+        Есть что добавить? Запишите комментарий.
+      </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="mb-3">
         <div class="mb-2">{{ form.size.label }}</div>
       {{ form.size }}
+      <div class="form-text">
+        Груз размещен на EUR-паллет или FIN-паллет? Паллета (поддон) – это транспортная тара для хранения и перемещения грузов. EUR-паллет имеет размеры 800х1200х145 мм, FIN-паллет – 1000×1200х145 мм.
+      </div>
       </div>
     </div>
   </div>

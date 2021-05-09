@@ -29,7 +29,7 @@ class Status(models.TextChoices):
     # Статус груза
     in_store = 'Принят', 'Принят'
     out = 'Отгружен', 'Отгружен'
-    in_reserve = 'В резерве', 'В резерве'
+    in_reserve = 'Резерв', 'Резерв'
 
 class Customer(models.Model):
     # Пользователь

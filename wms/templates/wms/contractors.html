@@ -1,28 +1,30 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4>Контрагенты</h4>
+  <h4 class="text-center fw-normal">Контрагенты</h4>
 {% endblock page_header %}
 
 
 {% block content %}
-<table class="table table-hover table-sm table-bordered table-responsive text-center w-100 d-block d-md-table">
-  <thead class="thead-light">
+<p class="d-flex justify-content-center form-text text-center">Ниже представлены все контрагенты, предоставляющие нашей системе услуги ответственного хранения по РФ. При переходе на страницу конкретного контрагента Вы можете посмотреть все связанные с контрагентом заявки, добавить договор или документ.</p>
+<div class="d-flex justify-content-center">
+  <a class="btn btn-success btn-sm mb-2 fw-normal" href="{% url 'wms:new_contractor' %}">Добавить нового контрагента</a>
+</div>
+<table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
+  <thead class="table-light text-center text-muted">
     <tr>
-      <th>Наименование</th>
-      <th>Дата добавления</th>
-      <th></th>
+      <th class="col align-middle fw-normal">Наименование</th>
+      <th class="col-1 align-middle fw-normal">Изменить</th>
     </tr>
   </thead>
   <tbody>
     {% for contractor in contractors %}
-    <tr>
-      <td class="col-5">
+    <tr class="text-center fw-normal">
+      <td class="text-left align-middle">
         <a class="text-decoration-none" href="{% url 'wms:contractor' contractor.id %}">{{ contractor.name }}</a>
       </td>
-      <td class="col-6">{{ contractor.pub_date|date:'d.m.Y H:m' }}</td>
       <td class="col-1">
-        <a class="link-secondary" href="{% url 'wms:update_contractor' contractor.id %}"><i class="bi bi-pencil-square" title="Изменить"></i></a>
+        <a class="link-secondary" href="{% url 'wms:update_contractor' contractor.id %}"><i class="bi bi-pencil-square fs-5" title="Изменить"></i></a>
       </td>
     </tr>
     {% empty %}
@@ -32,8 +34,4 @@
     {% endfor %}
   </tbody>
 </table>
-<div>
-  <a class="btn btn-outline-secondary" href="{% url 'wms:new_contractor' %}">Добавить нового контрагента</a>
-</div>
-<br>
 {% endblock content %}
