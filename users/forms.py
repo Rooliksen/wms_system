@@ -15,7 +15,7 @@ class CreateUserForm(UserCreationForm):
 
 	password1 = forms.CharField(
 		label=("Пароль"),
-		help_text=("Должен состоять из латинских букв и цифр, также содержать не менее 8 символов. Не может состоять только из цифр. Пример Q123456q"),
+		help_text=("Должен состоять из латинских букв и цифр, также содержать не менее 8 символов. Не может состоять только из цифр. Пример – Q123456q"),
 		widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control', 'placeholder': 'Придумайте пароль'}),
 	)
 	password2 = forms.CharField(
