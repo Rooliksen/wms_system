@@ -6,9 +6,16 @@ from django import forms
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
 class CreateUserForm(UserCreationForm):
+
+	error_messages = {
+		'password_mismatch': ("Введенные пароли не совпадают. Попробуйте ввести еще раз."),
+		'unique': 'Пользователь с таким логином уже существует',
+		'invalid': 'Некорректный логин. Допускается использование только букв, цифр и символов @/./+/-/_',
+		}
+
 	password1 = forms.CharField(
 		label=("Пароль"),
-		help_text=("Должен содержать не менее 8 символов, не может состоять только из цифр."),
+		help_text=("Должен состоять из латинских букв и цифр, также содержать не менее 8 символов. Не может состоять только из цифр. Пример Q123456q"),
 		widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control', 'placeholder': 'Придумайте пароль'}),
 	)
 	password2 = forms.CharField(
@@ -18,8 +25,7 @@ class CreateUserForm(UserCreationForm):
 	username = forms.CharField(
 		label=("Имя аккаунта"),
 		widget=forms.TextInput(attrs={'autocomplete': 'new-password', 'class': 'form-control', 'placeholder': 'Придумайте логин'}),
-		error_messages={'unique': 'Пользователь с таким логином уже существует', 'invalid': 'Некорректный логин. Допускается использование только букв, цифр и символов @/./+/-/_'}
-		
+		error_messages={'unique': 'Пользователь с таким именем уже существует. Придумайте другой логин.',}
 	)
 
 	email = forms.CharField(
@@ -33,7 +39,7 @@ class CreateUserForm(UserCreationForm):
 		model = User
 		fields = ['username', 'email', 'password1', 'password2']
 		help_texts = {
-			'username': 'Должен содержать не менее 8 символов. Допускается использование букв, цифр и символов @/./+/-/_',
+			'username': 'Допускается использование букв, цифр и символов @/./+/-/_',
 			'email': 'Формат адреса example@email.ru',
 		}
 

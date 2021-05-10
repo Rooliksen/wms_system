@@ -11,8 +11,8 @@ class MinimumLengthValidatorCustom(MinimumLengthValidator):
 		if len(password) < self.min_length:
 			raise ValidationError(
 				ngettext(
-					"Этот пароль слишком короткий. Он должен содержать не менее %(min_length)d символов.",
-					"Этот пароль слишком короткий. Он должен содержать минимум %(min_length)d символов.",
+					"Пароль слишком короткий. Он должен содержать не менее %(min_length)d символов.",
+					"Пароль слишком короткий. Он должен содержать минимум %(min_length)d символов.",
 					self.min_length
 				),
 				code='password_too_short',
@@ -55,7 +55,7 @@ class CommonPasswordValidatorCustom(CommonPasswordValidator):
 	def validate(self, password, user=None):
 		if password.lower().strip() in self.passwords:
 			raise ValidationError(
-				("Пароль слишком прост и небезопасен."),
+				("Пароль слишком прост для взлома. Пример сложного пароля – Q1234werty"),
 				code='password_too_common',
 			)
 

@@ -15,14 +15,16 @@
           <div class="mb-2">
             {{ field.label }}
           </div>
+          <div>
             {{ field }}
+          </div>
           {% if field.help_text %}
           <div class="form-text">
             {{ field.help_text }}
           </div>
           {% endif %}
           {% for error in field.errors %}
-          <div class="form-text">
+          <div class="form-text d-flex justify-content-center" style="color: red;">
             {{ error }}
           </div>
           {% endfor %}

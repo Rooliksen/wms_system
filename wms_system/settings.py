@@ -26,7 +26,7 @@ SECRET_KEY = '@v!&ycwvuf6f1@*#qs16$$t1vqguu!hmox+mv*894z0m(ouifu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wms-system-test.herokuapp.com', '62.217.186.183']
+ALLOWED_HOSTS = ['wms-system-test.herokuapp.com', '62.217.186.183', '127.0.0.1']
 
 
 # Application definition
@@ -139,3 +139,5 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 LOGIN_REDIRECT_URL = '/orders/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
