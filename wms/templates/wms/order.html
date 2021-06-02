@@ -6,41 +6,12 @@
 
 
 {% block content %}
+<div class="container">
+  <div class="row ">
 
-  <div class="row">
-    <div class="col mt-2">
-      <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block">
-        <tbody class="text-center fw-normal">
-          <tr>
-            <td class="text-left text-muted">№ заявки клиента:</td>
-            <td>{{ order.logistic_order }}</td>
-          </tr>
-          <tr>
-            <td class="text-left text-muted">Клиент:</td>
-            <td>{{ order.client }}</td>
-          </tr>
-          <tr>
-            <td class="text-left text-muted">Дата приема:</td>
-            <td>{{ order.date_in|date:'d.m.Y' }}</td>
-          </tr>
-          <tr>
-            <td class="text-left text-muted">Дата отгрузки:</td>
-            <td>{{ order.date_out|date:'d.m.Y' }}</td>
-          </tr>
-          <tr>
-            <td class="text-left text-muted">Статус:</td>
-            <td>{{ order.status }}</td>
-          </tr>
-          <tr>
-            <td class="text-left text-muted">Дата создания:</td>
-            <td>{{ order.date_created|date:'d.m.Y H:m' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-    <div class="row">
-      <div class="col">
+    <div class="col-6">
+
+      <div class="row bg-light text-dark border border-white border-3 rounded-3 mb-3">
         <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light caption">
           <h5 class="text-center fw-normal mt-3 mb-3">Список позиций</h5>
           <caption class="fw-light">Это список позиций в Вашей заявке. Вы можете добавить в список любой груз из системы.</caption>
@@ -50,7 +21,6 @@
               <th class="col-3 align-middle fw-normal text-muted">Наименование</th>
               <th class="col align-middle fw-normal text-muted">s/n</th>
               <th class="col-1 align-middle fw-normal text-muted">ID</th>
-              <th class="col-1 align-middle fw-normal"></th>
               <th class="col-1 align-middle fw-normal"></th>
             </tr>
           </thead>
@@ -68,9 +38,6 @@
                 <td class="col-1 text-center align-middle">{{ item.atm.atm_id }}</td>
                 {% endif %}
                 <td class="col-1 text-center align-middle">
-                  <a class="link-secondary" href="{% url 'wms:update_atm' item.atm.id %}"><i class="bi bi-pencil-square fs-5" title="Изменить"></i></a>
-                </td>
-                <td class="col-1 text-center align-middle">
                   <a class="link-primary" href="{% url 'wms:delete_orderitem_from_list' item.id %}"><i class="bi bi-x-circle fs-5" title="Исключить из заявки"></i></a>
                 </td>
               </tr>
@@ -82,71 +49,121 @@
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <h5 class="text-center fw-normal mt-3 mb-3">Поиск груза в системе для добавления в заявку</h5>
-      <form method="get">
-        <div class="input-group mb-3">
-          {{myFilter.form.serial_num}}
-          <button class="btn btn-outline-secondary" type="submit" id="button-addon1">Поиск</button>
-        </div>
-        <div class="input-group mb-3">
-          {{myFilter.form.storage}}
-          <button class="btn btn-outline-secondary" type="submit" id="button-addon1">Поиск</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="row">
-    <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light caption">
-      <caption class="fw-light">В данной таблице отображены все имеющиеся в системе грузы. Нажмите на кнопку <i class="bi bi-plus-circle"></i> для добавления позиции в Вашу заявку.</caption>
-      <thead class="table-light text-center text-muted">
-        <tr>
-          <th class="align-middle fw-normal">Склад</th>
-          <th class="align-middle fw-normal">Клиент</th>
-          <th class="align-middle fw-normal">Наименование</th>
-          <th class="align-middle fw-normal">s/n</th>
-          <th class="align-middle fw-normal">Статус</th>
-          <th class="align-middle fw-normal"><i class="bi bi-list-nested"></i></th>
-          <th class="align-middle fw-normal"><i class="bi bi-box-arrow-right"></i></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for atm in atms_page_obj %}
-          <tr class="text-center fw-normal">
-            <td class="col-3 align-middle">{{ atm.storage }}</td>
-            <td class="col-2 align-middle">{{ atm.client }}</td>
-            <td class="col-2 align-middle">{{ atm.name }}</td>
-            <td class="col-2 align-middle">
-              <a class="text-decoration-none" href="{% url 'wms:atm' atm.id %}">{{ atm.serial_num }}</a>
-            </td>
-            <td class="col-1 align-middle">{{ atm.status }}</td>
-            <td class="col-1 align-middle">
-              <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}"><i class="bi bi-pencil-square fs-5" title="Изменить"></i></a>
-            </td>
-            <td class="col-1 align-middle">
-              <a class="link-success" href="{% url 'wms:new_order_item' order_id atm.id %}"><i class="bi bi-plus-circle fs-5" title="Добавить в заявку"></i></a>
-            </td>
-          </tr>
-        {% empty %}
-          <tr>
-            <td>Ничего не найдено.</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-  {% if atms_page_obj.has_previous %}
-      <li class="page-item"><a class="page-link" href="?page={{ atms_page_obj.previous_page_number }}">Предыдущая</a></li>
-  {% endif %}
-  {% if atms_page_obj.has_next %}
-      <li class="page-item"><a class="page-link" href="?page={{ atms_page_obj.next_page_number }}">Следующая</a></li>
-  {% endif %}
-    </ul>
-  </nav>
 
+      <div class="row bg-light text-dark border border-white border-3 rounded-3">
+        <h5 class="text-center fw-normal mt-3 mb-3">Информация по заявке</h5>
+        <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block">
+          <tbody class="text-center fw-normal">
+            <tr class="text-left text-muted">
+              <p>№ заявки клиента:&nbsp;&nbsp;&nbsp;{{ order.logistic_order }}</p>
+              <p>Клиент:&nbsp;&nbsp;&nbsp;{{ order.client }}</p>
+              <p>Дата приема:&nbsp;&nbsp;&nbsp;{{ order.date_in|date:'d.m.Y' }}</p>
+              <p>Дата отгрузки:&nbsp;&nbsp;&nbsp;{{ order.date_out|date:'d.m.Y' }}</p>
+              <p>Статус:&nbsp;&nbsp;&nbsp;{{ order.status }}</p>
+              <p>Дата создания:&nbsp;&nbsp;&nbsp;{{ order.date_created|date:'d.m.Y H:m' }}</p>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="col-6">
+      <div class="container bg-light text-dark border border-white border-3 rounded-3">
+        <div class="row">
+          <div class="col">
+            <h5 class="text-center fw-normal mt-3 mb-3">Поиск груза в системе для добавления в заявку</h5>
+            <form method="get">
+              <div class="input-group mb-3">
+                {{myFilter.form.serial_num}}
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon1">Поиск</button>
+              </div>
+              <div class="input-group mb-3">
+                {{myFilter.form.storage}}
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon1">Поиск</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+          {% if atms_page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ atms_page_obj.previous_page_number }}">
+                  <i class="bi bi-arrow-bar-left fs-5 align-middle" title="Добавить в заявку"></i>Предыдущая страница
+                </a>
+              </li>
+          {% endif %}
+          {% if atms_page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ atms_page_obj.next_page_number }}">
+                  Следующая страница<i class="bi bi-arrow-bar-right fs-5 align-middle" title="Добавить в заявку"></i>
+                </a>
+              </li>
+          {% endif %}
+            </ul>
+          </nav>
+        </div>
+        <div class="row">
+          <div class="col">
+                  {% for atm in atms_page_obj %}
+
+                  <div class="row card mb-2 border-secondary border-1 rounded-3 lh-1">
+                    <div class="container">
+                    <div class="row">
+                      <div class="card-header col-8 bg-info bg-light">
+                        {{ atm.client }} || {{ atm.name }}
+                      </div>
+                      <div class="col align-self-center text-end card-header">
+                    
+                        <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}">
+                          <i class="bi bi-pencil-square fs-5" title="Изменить"></i>
+                        </a>
+
+                      </div>
+                      <div class="col align-self-center text-center card-header">
+
+                      
+                        <a class="link-success" href="{% url 'wms:new_order_item' order_id atm.id %}">
+                          <i class="bi bi-plus-circle fs-5" title="Добавить в заявку"></i>
+                        </a>
+                      
+                      </div>
+                    </div>
+                    </div>
+                    <div class="card-body">
+
+                      <div class="row">
+
+                        <div class="col-10">
+                          <p><span class="card-text text-muted">Адрес:&nbsp;</span><span>{{ atm.storage }}</span></p>
+                          <p><span class="card-text text-muted">Серийный номер:&nbsp;</span><span>{{ atm.serial_num }}</span></p>
+                          <p><span class="card-text text-muted">Статус:&nbsp;</span><span>{{ atm.status }}</span></p>
+                        </div>
+                      
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {% empty %}
+                  <div class="card">
+                    <div class="card-body">
+                      Ничего не найдено.
+                    </div>
+                  </div>
+                  {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+      
+    </div>
+
+    
+
+  </div>
+</div>
 {% endblock content %}

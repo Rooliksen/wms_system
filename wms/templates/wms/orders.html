@@ -25,7 +25,7 @@
       <th class="align-middle fw-normal">Удалить</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="col">
     {% for order in orders %}
       <tr class="text-center fw-normal">
         <td class="col-1 align-middle">{{ order.date_created|date:'d.m.Y H:m' }}</td>
@@ -54,9 +54,11 @@
         </td>
       </tr>
     {% empty %}
-      <tr class="col-12">
-        <td>Не добавлено ни одной заявки. Добавьте первую заявку.</td>
-      </tr>
+  <tfoot>
+    <tr class="text-center fw-normal">
+      <td class="col align-middle">Не найдено ни одной заявки. Добавьте новую заявку.</td>
+    <tr>
+  </tfoot>
     {% endfor %}
   </tbody>
 </table>

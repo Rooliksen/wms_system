@@ -111,14 +111,15 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     # Элемент заявки
-    atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, null=True)
+    atm = models.ForeignKey(Atm, on_delete=models.CASCADE, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
-class OrderPhoto(models.Model):
+class AtmPhoto(models.Model):
     # Фотография в заявке
+    description = models.CharField(max_length=200, blank=True, null=True)
     atm = models.ForeignKey(Atm, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    photo = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
 

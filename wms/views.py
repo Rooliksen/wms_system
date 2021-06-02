@@ -10,6 +10,10 @@ def index(request):
     # Домашняя страница приложения WMS
     return render(request, 'wms/index.html')
 
+def menu(request):
+    # Меню
+    return render(request, 'wms/menu.html')
+
 def clients(request):
     # Выводит список клиентов
     clients = Client.objects.all().order_by('pub_date')

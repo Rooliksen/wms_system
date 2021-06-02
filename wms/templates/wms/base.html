@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 </head>
 
-<body class="font-weight-normal" style="background-color: rgb(245, 245, 241);">
+<body class="font-weight-normal" style="background-color: rgba(28, 112, 0, 0.055);">
     <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
 
         <a class="navbar-brand" href="{% url 'wms:index' %}">WMS</a>
@@ -43,6 +43,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'wms:contractors' %}">Контрагенты</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'gallery:main' %}">Фотогалерея</a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
@@ -65,7 +68,7 @@
     </nav>
 
     <main role="main" class="container">
-        <div class="pg-2 mb-2 border-bottom">
+        <div class="pg-2 mb-2">
             {% block page_header %}{% endblock page_header %}
         </div>
         <div>

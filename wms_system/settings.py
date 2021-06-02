@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['wms-system-test.herokuapp.com', '62.217.186.183', '127.0.0.1']
 
 INSTALLED_APPS = [
     'wms',
+    'gallery',
     'users',
     'bootstrap4',
     'widget_tweaks',

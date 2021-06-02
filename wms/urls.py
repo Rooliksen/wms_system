@@ -71,7 +71,7 @@ urlpatterns = [
     path('delete_orderitem_from_list/<int:orderitem_id>/', views.delete_orderitem_from_list, name='delete_orderitem_from_list'),
     
     # Рабочая панель
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('menu/', views.menu, name='menu'),
     # Добавление нового элемента таблицы
     path('new_order_item/<int:order_id>/<int:atm_id>/', views.new_order_item, name='new_order_item'),
 ]
