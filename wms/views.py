@@ -1,3 +1,4 @@
+from django import template
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
@@ -5,6 +6,10 @@ from django.forms import ModelForm
 
 from .filters import AtmFilter
 from django.core.paginator import Paginator, EmptyPage
+
+from django.core.mail import EmailMessage, get_connection, send_mail
+from django.conf import settings
+from django.template.loader import render_to_string
 
 def index(request):
     # Домашняя страница приложения WMS
@@ -334,3 +339,38 @@ def dashboard(request):
     items = order.orderitem_set.order_by('-date_added')
     context = {'order': order, 'items': items}
     return render(request, 'wms/dashboard.html', context)
+
+def emailsuccess(request, order_id):
+    order = Order.objects.get(id=order_id)
+    atms = Atm.objects.all().order_by('storage')
+    items = OrderItem.objects.filter(order=order)
+    connection = get_connection(
+    host=settings.EMAIL_HOST,
+    port=settings.EMAIL_PORT,
+    username=settings.EMAIL_HOST_USER,
+    password=settings.EMAIL_HOST_PASSWORD,
+    use_ssl=True
+)
+    
+    template = render_to_string('wms/email_template.html', {'order': order, 'items': items})
+
+    order_date = order.date_in
+    order_date.isoformat()
+    new_format = "%Y-%m-%d"
+    order_date.strftime(new_format)
+
+    subject = f"Заявка № { order.logistic_order} на прием { order_date }"
+
+    email = EmailMessage(
+        subject,
+        template,
+        settings.EMAIL_HOST_USER,
+        ['murat.kuchukov@yandex.ru'],
+        connection=connection
+    )
+
+    email.fail_silently=False
+    email.content_subtype = 'html'
+    email.send()
+
+    return render(request, 'wms/success.html')

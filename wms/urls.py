@@ -74,4 +74,7 @@ urlpatterns = [
     path('menu/', views.menu, name='menu'),
     # Добавление нового элемента таблицы
     path('new_order_item/<int:order_id>/<int:atm_id>/', views.new_order_item, name='new_order_item'),
+
+    # Отправка почты
+    path('emailsuccess/<int:order_id>/', views.emailsuccess, name='emailsuccess'),
 ]

@@ -142,3 +142,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 LOGIN_REDIRECT_URL = '/orders/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'murat.kuchukov@yandex.ru'
+EMAIL_HOST_PASSWORD = 'mznlwxsltzczulqh'
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

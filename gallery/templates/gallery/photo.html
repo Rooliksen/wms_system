@@ -8,8 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Галерея</title>
 </head>
-<body>
-    
+<body class="m-5">
+    <div class="card-body">
+        <small>Номер заявки: {{photo.order.logistic_order}}</small><br>
+        <small>Серийный номер груза: {{photo.atm.serial_num}}</small><br>
+        <small>Описание: {{photo.description}}</small>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+
+                <a href="{% url 'gallery:main' %}" class="btn btn-dark my-3">Назад</a>
+
+                <div style="height: 90vh;">
+                    <img style="max-width: 100%; max-height: 100%;" src="{{photo.image.url}}">
+
+                    <p>{{photo.description}}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
 {% endblock content %}

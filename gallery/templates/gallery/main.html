@@ -45,7 +45,7 @@
                         {% endfor %}
 
 
-                        <a href="{% url 'gallery:add' %}" class="btn btn-dark btn-block btn-sm m-1">Add Photo</a>
+                        <a href="{% url 'gallery:add' %}" class="btn btn-dark btn-block btn-sm m-1">Добавить фото</a>
 
                     </ul>
                 </div>
@@ -65,11 +65,11 @@
                                 <small>Описание: {{photo.description}}</small>
                             </div>
 
-                            <a href="{% url 'gallery:photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                            <a href="{% url 'gallery:photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Просмотр</a>
                         </div>
                     </div>
                     {% empty %}
-                    <h3>No photos...</h3>
+                    <h3>Фотографии отсутствуют...</h3>
                     {% endfor %}
 
                 </div>
