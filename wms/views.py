@@ -11,6 +11,8 @@ from django.core.mail import EmailMessage, get_connection, send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
 
+from gallery.views import add_photo
+
 def index(request):
     # Домашняя страница приложения WMS
     return render(request, 'wms/index.html')
@@ -252,6 +254,9 @@ def order(request, order_id):
     order = Order.objects.get(id=order_id)
     atms = Atm.objects.all().order_by('storage')
     items = OrderItem.objects.filter(order=order)
+    photos = AtmPhoto.objects.filter(order__logistic_order=order)
+    
+
     myFilter = AtmFilter(request.GET, queryset=atms)
     atms = myFilter.qs
 
@@ -261,9 +266,11 @@ def order(request, order_id):
 
     atms_page_obj = atms_paginator.get_page(atms_page_number)
 
+    add_photo(request)
+
     context = {'order_id': order_id, 'order': order,
         'orders': orders, 'items': items, 'atms': atms,
-        'myFilter': myFilter, 'atms_page_obj': atms_page_obj}
+        'myFilter': myFilter, 'atms_page_obj': atms_page_obj, 'photos': photos}
     return render(request, 'wms/order.html', context)
 
 def new_order_item(request, atm_id, **kwargs):

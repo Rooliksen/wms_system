@@ -1,7 +1,7 @@
 {% extends "wms/base.html" %}
 
 {% block page_header %}
-  <h4 class="text-center fw-normal">Заявка</h4>
+  <h4 class="text-center fw-normal">Заявка № {{ order.logistic_order }}</h4>
 {% endblock page_header %}
 
 
@@ -11,7 +11,7 @@
 
     <div class="col-md-6">
 
-      <div class="row bg-light text-dark border border-white border-3 rounded-3 mb-3">
+      <div class="row bg-light text-dark border border-white border-3 rounded-3">
         <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light">
           <h5 class="text-center fw-normal mt-3 mb-3">Список позиций</h5>
           <thead class="table-light text-center">
@@ -37,7 +37,7 @@
                 <td class="col-1 text-center align-middle">{{ item.atm.atm_id }}</td>
                 {% endif %}
                 <td class="col-1 text-center align-middle">
-                  <a class="link-primary" href="{% url 'wms:delete_orderitem_from_list' item.id %}"><i class="bi bi-x-circle fs-5" title="Исключить из заявки"></i></a>
+                  <a class="link-primary" href="{% url 'wms:delete_orderitem_from_list' item.id %}"><i class="bi bi-x-circle fs-7" title="Исключить из заявки"></i></a>
                 </td>
               </tr>
             {% empty %}
@@ -49,28 +49,9 @@
         </table>
       </div>
 
-      <div class="row bg-light text-dark border border-white border-3 rounded-3">
-        <h5 class="text-center fw-normal mt-3 mb-3">Информация по заявке</h5>
-        <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block">
-          <tbody class="text-center fw-normal">
-            <tr class="text-left text-muted">
-              <p>№ заявки клиента:&nbsp;&nbsp;&nbsp;{{ order.logistic_order }}</p>
-              <p>Клиент:&nbsp;&nbsp;&nbsp;{{ order.client }}</p>
-              <p>Дата приема:&nbsp;&nbsp;&nbsp;{{ order.date_in|date:'d.m.Y' }}</p>
-              <p>Дата отгрузки:&nbsp;&nbsp;&nbsp;{{ order.date_out|date:'d.m.Y' }}</p>
-              <p>Статус:&nbsp;&nbsp;&nbsp;{{ order.status }}</p>
-              <p>Дата создания:&nbsp;&nbsp;&nbsp;{{ order.date_created|date:'d.m.Y H:m' }}</p>
-            </tr>
-          </tbody>
-        </table>
-        <a class="btn btn-outline-success mb-3" href="{% url 'wms:emailsuccess' order.id %}">Отправить письмо</a>
-      </div>
-      
+      <div class="row bg-light text-dark border border-white border-3 rounded-3 justify-content-center">
 
-    </div>
 
-    <div class="col-md-6 mb-3">
-      <div class="container bg-light text-dark border border-white border-3 rounded-3">
         <div class="row">
           <div class="col">
             <h5 class="text-center fw-normal mt-3 mb-3">Поиск груза в системе для добавления в заявку</h5>
@@ -112,18 +93,18 @@
 
                   <div class="row card mb-2 border-secondary border-1 rounded-3 lh-1">
                     <div class="container">
-                    <div class="row">
-                      <div class="card-header col-8 bg-info bg-light">
+                    <div class="card-header row">
+                      <div class="col-8 bg-info bg-light">
                         {{ atm.client }} || {{ atm.name }}
                       </div>
-                      <div class="col align-self-center text-end card-header">
+                      <div class="col align-self-center text-center">
                     
                         <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}">
                           <i class="bi bi-pencil-square fs-5" title="Изменить"></i>
                         </a>
 
                       </div>
-                      <div class="col align-self-center text-center card-header">
+                      <div class="col align-self-center text-center">
 
                       
                         <a class="link-success" href="{% url 'wms:new_order_item' order_id atm.id %}">
@@ -157,13 +138,106 @@
                   {% endfor %}
           </div>
         </div>
+
       </div>
 
+      
+
+            
+
+    </div>
+    <div class="col-md-6">
+
+
+      <div class="row bg-light text-dark border border-white border-3 rounded-3">
+        <h5 class="text-center fw-normal mt-3 mb-3">Информация по заявке</h5>
+        <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block">
+          <tbody class="text-center fw-normal">
+            <tr class="text-left text-muted">
+              <p>№ заявки клиента:&nbsp;&nbsp;&nbsp;{{ order.logistic_order }}</p>
+              <p>Клиент:&nbsp;&nbsp;&nbsp;{{ order.client }}</p>
+              <p>Дата приема:&nbsp;&nbsp;&nbsp;{{ order.date_in|date:'d.m.Y' }}</p>
+              <p>Дата отгрузки:&nbsp;&nbsp;&nbsp;{{ order.date_out|date:'d.m.Y' }}</p>
+              <p>Статус:&nbsp;&nbsp;&nbsp;{{ order.status }}</p>
+              <p>Дата создания:&nbsp;&nbsp;&nbsp;{{ order.date_created|date:'d.m.Y H:m' }}</p>
+            </tr>
+          </tbody>
+        </table>
+        <a class="btn btn-outline-success mb-3" href="{% url 'wms:emailsuccess' order.id %}">Отправить письмо</a>
+      </div>
+
+      <div class="row bg-light text-dark border border-white border-3 rounded-3 mb-3">
+        <div class="container">
+          <div class="row justify-content-center">
+            <h5 class="text-center fw-normal mt-3 mb-3">Фотографии по заявке</h5>
+            <div class="col">
+              <form method='POST' action="" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group m-3">
+                  <label>Номер заявки</label>
+                  <select name="order" class="form-control">
+                      
+                      <option value='{{order_id}}' selected>{{ order }}</option>
+
+                  </select>
+                </div>
+
+                <div class="form-group m-3">
+                    <label>Описание</label>
+                    <input required name="description" type="text" placeholder="Введите описание"
+                        class="form-control">
+                </div>
+
+                <div class="form-group m-3">
+                    <label>Груз</label>
+                    <select name="atm" class="form-control">
+                        <option value=''>Выберите груз...</option>
+
+                        {% for item in items %}
+                        <option value='{{ item.atm.id }}'>{{ item.atm }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group m-3">
+                    <label>Прикрепите фотографии</label>
+                    <input required name="images" type="file" multiple class="form-control-file">
+                </div>
+
+                <button type='submit' class="btn btn-primary m-3">Сохранить</button>
+
+              </form>
+            </div>
+
+            
+            <div class="col">
+              {% for photo in photos %}
+                    <div class="row-md-4">
+                        <div class="card my-2">
+                            <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <small>Номер заявки: {{photo.order.logistic_order}}</small><br>
+                                <small>Серийный номер груза: {{photo.atm.serial_num}}</small><br>
+                                <small>Описание: {{photo.description}}</small>
+                            </div>
+
+                            <a href="{% url 'gallery:photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Просмотр</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h3>Фотографии отсутствуют...</h3>
+                    {% endfor %}
+            </div>
+
+
+          </div>
+        </div>
+      </div>
 
       
     </div>
-
-    
 
   </div>
 </div>
