@@ -44,14 +44,16 @@
                         </li>
                         {% endfor %}
 
-
-                        <a href="{% url 'gallery:add' %}" class="btn btn-dark btn-block btn-sm m-1">Добавить фото</a>
+                        <div class="col">
+                            <a href="{% url 'gallery:add' %}" class="btn btn-dark btn-block btn-sm m-1">Добавить фото</a>
+                        </div>
+                        
 
                     </ul>
                 </div>
 
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 border border-1 pl-3 pr-3 pt-1 mb-2 bg-white bg-gradient rounded-3">
                 <div class="row">
 
                     {% for photo in photos %}
@@ -69,7 +71,7 @@
                         </div>
                     </div>
                     {% empty %}
-                    <h3>Фотографии отсутствуют...</h3>
+                    <h4>Фотографии отсутствуют...</h4>
                     {% endfor %}
 
                 </div>

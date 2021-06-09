@@ -10,15 +10,11 @@
 <div class="d-flex justify-content-center">
   <a class="btn btn-success btn-sm mb-2 fw-normal" href="{% url 'wms:new_order' %}">Добавить новую заявку</a>
 </div>
-<table class="table table-sm table-hover table-responsive table-borderless w-100 d-block table-bordered border-light caption">
+<table class="table table-sm table-hover table-responsive-sm table-borderless table-bordered border-light caption">
   <thead class="table-light text-center text-muted">
     <tr>
-      <th class="align-middle fw-normal">Создана</th>
       <th class="align-middle fw-normal">№ заявки</th>
       <th class="align-middle fw-normal">Клиент</th>
-      <th class="align-middle fw-normal">Принято</th>
-      <th class="align-middle fw-normal">Отгружено</th>
-      <th class="align-middle fw-normal">Пользователь</th>
       <th class="align-middle fw-normal">Статус</th>
       <th class="align-middle fw-normal">Подробнее</th>
       <th class="align-middle fw-normal">Изменить</th>
@@ -28,19 +24,11 @@
   <tbody class="col">
     {% for order in orders %}
       <tr class="text-center fw-normal">
-        <td class="col-1 align-middle">{{ order.date_created|date:'d.m.Y H:m' }}</td>
         <td class="col-1 align-middle">{{ order.logistic_order }}</td>
         {% if order.client == None %}
         <td class="col-1 align-middle"></td>
         {% else %}
         <td class="col-1 align-middle">{{ order.client }}</td>
-        {% endif %}
-        <td class="col-1 align-middle">{{ order.date_in|date:'d.m.Y' }}</td>
-        <td class="col-1 align-middle">{{ order.date_out|date:'d.m.Y' }}</td>
-        {% if order.customer == None %}
-        <td class="col-1 text-break align-middle"></td>
-        {% else %}
-        <td class="col-1 text-break align-middle">{{ order.customer }}</td>
         {% endif %}
         <td class="col-1 text-center align-middle">{{ order.status }}</td>
         <td class="col-1 text-center align-middle">
@@ -56,7 +44,7 @@
     {% empty %}
   <tfoot>
     <tr class="text-center fw-normal">
-      <td class="col align-middle">Не найдено ни одной заявки. Добавьте новую заявку.</td>
+      <td class="col align-middle" colspan="10">Не найдено ни одной заявки. Добавьте новую заявку.</td>
     <tr>
   </tfoot>
     {% endfor %}

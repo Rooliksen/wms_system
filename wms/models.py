@@ -61,7 +61,7 @@ class Storage(models.Model):
 
 class OrderStatus(models.TextChoices):
     # Статус заявки от клиента
-    in_process = 'В работе', 'В работе'
+    in_process = 'Активна', 'Активна'
     done = 'Закрыта', 'Закрыта'
     canceled = 'Отменена', 'Отменена'
     draft = 'Черновик', 'Черновик'

@@ -92,36 +92,39 @@
                   {% for atm in atms_page_obj %}
 
                   <div class="row card mb-2 border-secondary border-1 rounded-3 lh-1">
-                    <div class="container">
-                    <div class="card-header row">
-                      <div class="col-8 bg-info bg-light">
-                        {{ atm.client }} || {{ atm.name }}
-                      </div>
-                      <div class="col align-self-center text-center">
-                    
-                        <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}">
-                          <i class="bi bi-pencil-square fs-5" title="Изменить"></i>
-                        </a>
 
+                      <div class="card-header col">
+                        <div class="row">
+                          <div class="col-8 bg-info bg-light text-left">
+                            <span>{{ atm.client }}&nbsp;</span><span>{{ atm.name }}</span>
+                          </div>
+                          <div class="col align-self-center text-center">
+                        
+                            <a class="link-secondary" href="{% url 'wms:update_atm' atm.id %}">
+                              <i class="bi bi-pencil-square fs-5" title="Изменить"></i>
+                            </a>
+  
+                          </div>
+                          <div class="col align-self-center text-center">
+  
+                          
+                            <a class="link-success" href="{% url 'wms:new_order_item' order_id atm.id %}">
+                              <i class="bi bi-plus-circle fs-5" title="Добавить в заявку"></i>
+                            </a>
+                          
+                          </div>
+                        </div>
+                        
                       </div>
-                      <div class="col align-self-center text-center">
 
-                      
-                        <a class="link-success" href="{% url 'wms:new_order_item' order_id atm.id %}">
-                          <i class="bi bi-plus-circle fs-5" title="Добавить в заявку"></i>
-                        </a>
-                      
-                      </div>
-                    </div>
-                    </div>
                     <div class="card-body">
 
                       <div class="row">
 
-                        <div class="col-10">
-                          <p><span class="card-text text-muted">Адрес:&nbsp;</span><span>{{ atm.storage }}</span></p>
+                        <div class="col">
                           <p><span class="card-text text-muted">Серийный номер:&nbsp;</span><span>{{ atm.serial_num }}</span></p>
                           <p><span class="card-text text-muted">Статус:&nbsp;</span><span>{{ atm.status }}</span></p>
+                          <p><span class="card-text text-muted">Адрес:&nbsp;</span><span>{{ atm.storage }}</span></p>                                                  
                         </div>
                       
                       </div>
@@ -149,34 +152,37 @@
     <div class="col-md-6">
 
 
-      <div class="row bg-light text-dark border border-white border-3 rounded-3">
+      <div class="row bg-light text-dark border border-white border-3 rounded-3 p-2">
         <h5 class="text-center fw-normal mt-3 mb-3">Информация по заявке</h5>
-        <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block">
-          <tbody class="text-center fw-normal">
-            <tr class="text-left text-muted">
-              <p>№ заявки клиента:&nbsp;&nbsp;&nbsp;{{ order.logistic_order }}</p>
-              <p>Клиент:&nbsp;&nbsp;&nbsp;{{ order.client }}</p>
-              <p>Дата приема:&nbsp;&nbsp;&nbsp;{{ order.date_in|date:'d.m.Y' }}</p>
-              <p>Дата отгрузки:&nbsp;&nbsp;&nbsp;{{ order.date_out|date:'d.m.Y' }}</p>
-              <p>Статус:&nbsp;&nbsp;&nbsp;{{ order.status }}</p>
-              <p>Дата создания:&nbsp;&nbsp;&nbsp;{{ order.date_created|date:'d.m.Y H:m' }}</p>
-            </tr>
-          </tbody>
-        </table>
+        <div class="col border border-1 pl-3 pr-3 pt-1 mb-2 bg-white bg-gradient rounded-3">
+          <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block">
+            <tbody class="text-center fw-normal">
+              <tr class="text-left text-muted">
+                <p>№ заявки клиента:&nbsp;&nbsp;&nbsp;{{ order.logistic_order }}</p>
+                <p>Клиент:&nbsp;&nbsp;&nbsp;{{ order.client }}</p>
+                <p>Дата приема:&nbsp;&nbsp;&nbsp;{{ order.date_in|date:'d.m.Y' }}</p>
+                <p>Дата отгрузки:&nbsp;&nbsp;&nbsp;{{ order.date_out|date:'d.m.Y' }}</p>
+                <p>Статус:&nbsp;&nbsp;&nbsp;{{ order.status }}</p>
+                <p>Дата создания:&nbsp;&nbsp;&nbsp;{{ order.date_created|date:'d.m.Y H:m' }}</p>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
         <a class="btn btn-outline-success mb-3" href="{% url 'wms:emailsuccess' order.id %}">Отправить письмо</a>
       </div>
 
       <div class="row bg-light text-dark border border-white border-3 rounded-3 mb-3">
         <div class="container">
-          <div class="row justify-content-center">
+          <div class="col justify-content-center">
             <h5 class="text-center fw-normal mt-3 mb-3">Фотографии по заявке</h5>
-            <div class="col">
+            <div class="row">
               <form method='POST' action="" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div class="form-group m-3">
                   <label>Номер заявки</label>
-                  <select name="order" class="form-control">
+                  <select name="order" class="form-control" readonly>
                       
                       <option value='{{order_id}}' selected>{{ order }}</option>
 
@@ -211,24 +217,32 @@
             </div>
 
             
-            <div class="col">
-              {% for photo in photos %}
-                    <div class="row-md-4">
-                        <div class="card my-2">
-                            <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
+            <div class="row">
 
-                            <div class="card-body">
-                                <small>Номер заявки: {{photo.order.logistic_order}}</small><br>
-                                <small>Серийный номер груза: {{photo.atm.serial_num}}</small><br>
-                                <small>Описание: {{photo.description}}</small>
-                            </div>
+              <div class="col border border-1 pl-3 pr-3 pt-1 mb-2 bg-white bg-gradient rounded-3">
 
-                            <a href="{% url 'gallery:photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Просмотр</a>
+                {% for photo in photos %}
+                <div class="row-md-4">
+                    <div class="card my-2 bg-light bg-gradient">
+                        <img style="object-fit: cover" class="image-thumbail rounded d-block" src="{{photo.image.url}}" alt="Card image cap">
+
+                        <div class="card-body">
+                            <small>Номер заявки: {{photo.order.logistic_order}}</small><br>
+                            <small>Серийный номер груза: {{photo.atm.serial_num}}</small><br>
+                            <small>Описание: {{photo.description}}</small>
                         </div>
+
+                        <a href="{% url 'gallery:photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Просмотр</a>
                     </div>
-                    {% empty %}
-                    <h3>Фотографии отсутствуют...</h3>
-                    {% endfor %}
+                </div>
+                {% empty %}
+                <h4>Фотографии отсутствуют...</h4>
+                {% endfor %}
+
+              </div>
+
+                
+
             </div>
 
 
