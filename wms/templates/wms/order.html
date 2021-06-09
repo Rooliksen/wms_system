@@ -1,5 +1,15 @@
 {% extends "wms/base.html" %}
+<style>
+  .image-thumbail {
+      height: 200px;
+      object-fit: cover;
+  }
 
+  .list-group-item a {
+      text-decoration: none;
+      color: black;
+  }
+</style>
 {% block page_header %}
   <h4 class="text-center fw-normal">Заявка № {{ order.logistic_order }}</h4>
 {% endblock page_header %}
@@ -224,7 +234,7 @@
                 {% for photo in photos %}
                 <div class="row-md-4">
                     <div class="card my-2 bg-light bg-gradient">
-                        <img style="object-fit: cover" class="image-thumbail rounded d-block" src="{{photo.image.url}}" alt="Card image cap">
+                        <img class="image-thumbail rounded d-block" src="{{photo.image.url}}" alt="Card image cap">
 
                         <div class="card-body">
                             <small>Номер заявки: {{photo.order.logistic_order}}</small><br>
