@@ -2,7 +2,7 @@
 <style>
   .image-thumbail {
       height: 200px;
-      object-fit: cover;
+      object-fit: inherit;
   }
 
   .list-group-item a {
@@ -230,26 +230,28 @@
             <div class="row">
 
               <div class="col border border-1 pl-3 pr-3 pt-1 mb-2 bg-white bg-gradient rounded-3">
+                <div class="row">
 
-                {% for photo in photos %}
-                <div class="row-md-4">
-                    <div class="card my-2 bg-light bg-gradient">
-                        <img class="image-thumbail rounded d-block" src="{{photo.image.url}}" alt="Card image cap">
+                    {% for photo in photos %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <img style="height: 150px;" class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
 
-                        <div class="card-body">
-                            <small>Номер заявки: {{photo.order.logistic_order}}</small><br>
-                            <small>Серийный номер груза: {{photo.atm.serial_num}}</small><br>
-                            <small>Описание: {{photo.description}}</small>
+                            <div class="card-body">
+                                <small>Номер заявки: {{photo.order.logistic_order}}</small><br>
+                                <small>s/n: {{photo.atm.serial_num}}</small><br>
+                                <small>Описание: {{photo.description}}</small>
+                            </div>
+
+                            <a href="{% url 'gallery:photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Просмотр</a>
                         </div>
-
-                        <a href="{% url 'gallery:photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Просмотр</a>
                     </div>
-                </div>
-                {% empty %}
-                <h4>Фотографии отсутствуют...</h4>
-                {% endfor %}
+                    {% empty %}
+                    <h4>Фотографии отсутствуют...</h4>
+                    {% endfor %}
 
-              </div>
+                </div>
+            </div>
 
                 
 
