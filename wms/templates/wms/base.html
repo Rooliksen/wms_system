@@ -47,7 +47,7 @@
                     <a class="nav-link" href="{% url 'gallery:main' %}">Фотогалерея</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto text-center">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <span class="navbar-text mr-3">Привет, {{ user.username }}</span>

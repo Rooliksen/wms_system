@@ -2,7 +2,7 @@
 <style>
   .image-thumbail {
       height: 200px;
-      object-fit: inherit;
+      object-fit: object-fit;
   }
 
   .list-group-item a {
@@ -243,7 +243,7 @@
                                 <small>Описание: {{photo.description}}</small>
                             </div>
 
-                            <a href="{% url 'gallery:photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Просмотр</a>
+                            <a href="{% url 'wms:orderphoto' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Просмотр</a>
                         </div>
                     </div>
                     {% empty %}

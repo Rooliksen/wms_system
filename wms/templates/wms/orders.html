@@ -24,11 +24,11 @@
   <tbody class="col">
     {% for order in orders %}
       <tr class="text-center fw-normal">
-        <td class="col-1 align-middle">{{ order.logistic_order }}</td>
+        <td class="col-3 align-middle">{{ order.logistic_order }}</td>
         {% if order.client == None %}
-        <td class="col-1 align-middle"></td>
+        <td class="col-3 align-middle"></td>
         {% else %}
-        <td class="col-1 align-middle">{{ order.client }}</td>
+        <td class="col-3 align-middle">{{ order.client }}</td>
         {% endif %}
         <td class="col-1 text-center align-middle">{{ order.status }}</td>
         <td class="col-1 text-center align-middle">

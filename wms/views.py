@@ -158,7 +158,7 @@ def storages(request):
 def storage(request, storage_id):
     # Выводит один склад и связанные с ним грузы
     storage = Storage.objects.get(id=storage_id)
-    atms = storage.atm_set.order_by('-date_in')
+    atms = storage.atm_set.order_by('-serial_num')
     context = {'storage': storage, 'atms': atms}
     return render(request, 'wms/storage.html', context)
 
@@ -272,6 +272,10 @@ def order(request, order_id):
         'orders': orders, 'items': items, 'atms': atms,
         'myFilter': myFilter, 'atms_page_obj': atms_page_obj, 'photos': photos}
     return render(request, 'wms/order.html', context)
+
+def view_orderphoto(request, pk):
+    photo = AtmPhoto.objects.get(id=pk)
+    return render(request, 'wms/photo.html', {'photo': photo})
 
 def new_order_item(request, atm_id, **kwargs):
     # Создание нового элемента заявки

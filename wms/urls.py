@@ -59,6 +59,10 @@ urlpatterns = [
     path('orders/', views.orders, name='orders'),
     # Страница с детальной информацией по заявке
     path('order/<int:order_id>/', views.order, name='order'),
+    # Страница для просмотра фото в заявке
+    path('orderphoto/<str:pk>/', views.view_orderphoto, name='orderphoto'),
+
+
     # Страница для добавления новой заявки
     path('new_order/', views.new_order, name='new_order'),
     # Обновление данных по конкретной заявке
