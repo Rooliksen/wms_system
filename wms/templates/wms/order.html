@@ -168,11 +168,12 @@
           <table class="table table-sm table-hover table-responsive table-borderless w-100 d-block">
             <tbody class="text-center fw-normal">
               <tr class="text-left text-muted">
-                <p>№ заявки клиента:&nbsp;&nbsp;&nbsp;{{ order.logistic_order }}</p>
+                <p>Статус:&nbsp;&nbsp;&nbsp;{{ order.status }}</p>
                 <p>Клиент:&nbsp;&nbsp;&nbsp;{{ order.client }}</p>
                 <p>Дата приема:&nbsp;&nbsp;&nbsp;{{ order.date_in|date:'d.m.Y' }}</p>
                 <p>Дата отгрузки:&nbsp;&nbsp;&nbsp;{{ order.date_out|date:'d.m.Y' }}</p>
-                <p>Статус:&nbsp;&nbsp;&nbsp;{{ order.status }}</p>
+                <p>Водитель:&nbsp;&nbsp;&nbsp;{{ order.driver }}</p>
+                <p>Автомобиль:&nbsp;&nbsp;&nbsp;{{ order.driver_car }}</p>
                 <p>Дата создания:&nbsp;&nbsp;&nbsp;{{ order.date_created|date:'d.m.Y H:m' }}</p>
               </tr>
             </tbody>
